@@ -19,7 +19,7 @@
 | Yugyeong (YG) Lee     | ylee14@mail.sfsu.edu    | YGLEE1993           |
 | Zhuozhuo (Joy) Liu    | zliu15@mail.sfsu.edu    | liuzz10             |
 | Trenton Smith         | tsmith18@mail.sfsu.edu  | Trenton-Smith       |
-| member5               |                         |                     |
-| member6               |                         |                     |
+|                       |                         |                     |
+|                       |                         |                     |
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
