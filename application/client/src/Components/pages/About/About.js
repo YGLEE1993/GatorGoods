@@ -28,7 +28,7 @@ export default function About() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </Card.Text>
-              <Button variant="outline-dark">Go somewhere</Button>
+              <Button variant="outline-dark" href="/keith">Go somewhere</Button>
             </Card.Body>
           </Card>
         </Col>
@@ -42,7 +42,7 @@ export default function About() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </Card.Text>
-              <Button variant="outline-dark">Go somewhere</Button>
+              <Button variant="outline-dark" href="/yg">Go somewhere</Button>
             </Card.Body>
           </Card>
         </Col>
@@ -56,7 +56,7 @@ export default function About() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </Card.Text>
-              <Button variant="outline-dark">Go somewhere</Button>
+              <Button variant="outline-dark" href="/joy">Go somewhere</Button>
             </Card.Body>
           </Card>
         </Col>
@@ -70,7 +70,7 @@ export default function About() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </Card.Text>
-              <Button variant="outline-dark">Go somewhere</Button>
+              <Button variant="outline-dark" href="/trenton">Go somewhere</Button>
             </Card.Body>
           </Card>
         </Col>
