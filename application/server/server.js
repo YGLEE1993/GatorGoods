@@ -27,13 +27,15 @@ connection.connect(function (err) {
 app.listen(port, () => console.log(`Server up on port ${port}...`));
 
 // Get all developer
-app.get('/developer', (req, res) => {
-  connection.query('SELECT * FROM team8db.developer', (err, rows, fields)=>{
-    if (err) throw err;
-    else console.log(rows)
-    res.send(rows);
+app.get('/api/developer', (req, res) => {
+  connection.query('SELECT * FROM team8db.developer', (err, results, fields)=>{
+    if (err) res.send(err);
+    else 
+    // console.log(results)
+    res.send(results);
   })
 });
+
 
 // Delete a developer
 // app.delete('/developer/:id', (req, res) => {

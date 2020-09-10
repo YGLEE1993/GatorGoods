@@ -2,8 +2,25 @@ import React from "react";
 import { Jumbotron, Button, Card, Container, Row, Col } from "react-bootstrap";
 import "./About.css";
 import placeholder from "../../assets/placeholder.jpg";
+import axios from 'axios';
 
 export default function About() {
+  const allDevs = [];
+
+  React.useEffect(()=>{
+    fetchDevs();
+  }, [])
+  
+  const fetchDevs = () => {
+    axios.get('/api/developer')
+    .then( (res) => {
+      for(let i = 0; i < res.data.length; i++){
+        allDevs.push(res.data[i])
+      }
+      console.log(allDevs)
+    })
+  }
+  
   return (
     <div>
       <Jumbotron className="about-banner">
@@ -37,7 +54,7 @@ export default function About() {
               <Card.Img variant="top" src={placeholder} />
               <Card.Body>
               <span className="card-subtext">Backend Master</span>
-                <Card.Title>Yugyeong (YG) Lee</Card.Title>
+                <Card.Title>Yugyeong (YG) Lee </Card.Title>
                 <Card.Text>
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
