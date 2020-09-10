@@ -6,11 +6,13 @@ import YG from "./Components/pages/About/Individual/YG/YG";
 import Joy from "./Components/pages/About/Individual/Joy/Joy";
 import Keith from "./Components/pages/About/Individual/Keith/Keith";
 import Trenton from "./Components/pages/About/Individual/Trenton/Trenton";
+import Navigation from "./Components/pages/Navigation/Navigation";
 
 function App() {
   return (
     <div>
       <Router>
+        <Navigation />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/about" component={About} />

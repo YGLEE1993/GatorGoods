@@ -1,17 +1,18 @@
 import React from "react";
-import { Row, Col, Container, Button} from "react-bootstrap";
+import { Jumbotron, Button } from "react-bootstrap";
+import "./Landing.css";
 
 export default function Landing() {
-    return (
-        <section className="landing-header">
-        <Container>
-          <Row>
-            <Col>
-                <h1>Landing</h1>
-                <Button variant="outline-dark" href="/about">About Us</Button>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    )
+  return (
+    <>
+      <Jumbotron className="landing-banner">
+        <h1>Software Engineering class SFSU</h1>
+        <h3>Fall 2020</h3>
+        <h3>Team 8</h3>
+        <Button className="landing-button"variant="outline-dark" href="/about">
+          Meet Our Developers
+        </Button>
+      </Jumbotron>
+    </>
+  );
 }
