@@ -2,25 +2,60 @@ import React from "react";
 import { Jumbotron, Button, Card, Container, Row, Col } from "react-bootstrap";
 import "./About.css";
 import placeholder from "../../assets/placeholder.jpg";
-import axios from 'axios';
+import axios from "axios";
+import AboutCard from "../UI/AboutCard/AboutCard";
 
 export default function About() {
-  const allDevs = [];
+  const developers = [
+    {
+      role: "TEAM MASTER",
+      name: "Keith Eastman",
+      img: placeholder,
+      description:
+        "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      url: "/keith",
+    },
+    {
+      role: "Backend Master",
+      name: "Yugyeong (YG) Lee",
+      img: placeholder,
+      description:
+        "I am a senior student majoring in Computer Science at San Francisco State University.",
+      url: "/yg",
+    },
+    {
+      role: "Frontend Master",
+      name: "Zhuozhuo (Joy) Liu",
+      img: placeholder,
+      description:
+        "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      url: "/joy",
+    },
+    {
+      role: "Github Master",
+      name: "Trenton Smith",
+      img: placeholder,
+      description:
+        "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      url: "/trenton",
+    },
+  ];
 
-  React.useEffect(()=>{
-    fetchDevs();
-  }, [])
-  
-  const fetchDevs = () => {
-    axios.get('/api/developer')
-    .then( (res) => {
-      for(let i = 0; i < res.data.length; i++){
-        allDevs.push(res.data[i])
-      }
-      console.log(allDevs)
-    })
-  }
-  
+  // const allDevs = [];
+
+  // React.useEffect(() => {
+  //   fetchDevs();
+  // }, []);
+
+  // const fetchDevs = () => {
+  //   axios.get("/api/developer").then((res) => {
+  //     for (let i = 0; i < res.data.length; i++) {
+  //       allDevs.push(res.data[i]);
+  //     }
+  //     console.log(allDevs);
+  //   });
+  // };
+
   return (
     <div>
       <Jumbotron className="about-banner">
@@ -32,73 +67,16 @@ export default function About() {
 
       <Container>
         <Row>
-          <Col lg={3}>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={placeholder} />
-              <Card.Body>
-                <span className="card-subtext">TEAM MASTER</span>
-                <Card.Title>Keith Eastman</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-dark" href="/keith">
-                  Go somewhere
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col lg={3}>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={placeholder} />
-              <Card.Body>
-              <span className="card-subtext">Backend Master</span>
-                <Card.Title>Yugyeong (YG) Lee </Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-dark" href="/yg">
-                  Go somewhere
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col lg={3}>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={placeholder} />
-              <Card.Body>
-              <span className="card-subtext">Frontend Master</span>
-                <Card.Title>Zhuozhuo (Joy) Liu</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-dark" href="/joy">
-                  Go somewhere
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col lg={3}>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={placeholder} />
-              <Card.Body>
-              <span className="card-subtext">Github Master</span>
-                <Card.Title>Trenton Smith</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-dark" href="/trenton">
-                  Go somewhere
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+          {developers.map((dev, i) => (
+            <AboutCard
+              key={i}
+              role={dev.role}
+              name={dev.name}
+              img={dev.img}
+              description={dev.description}
+              url={dev.url}
+            />
+          ))}
         </Row>
       </Container>
     </div>
