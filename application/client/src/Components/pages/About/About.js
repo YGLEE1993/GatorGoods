@@ -70,11 +70,7 @@ export default function About() {
           {developers.map((dev, i) => (
             <AboutCard
               key={i}
-              role={dev.role}
-              name={dev.name}
-              img={dev.img}
-              description={dev.description}
-              url={dev.url}
+              {...dev}
             />
           ))}
         </Row>
