@@ -1,5 +1,5 @@
 import React from "react";
-import { Jumbotron, Button, Card, Container, Row, Col } from "react-bootstrap";
+import { Jumbotron, Container, Row} from "react-bootstrap";
 import "./About.css";
 import placeholder from "../../assets/placeholder.jpg";
 import axios from "axios";
