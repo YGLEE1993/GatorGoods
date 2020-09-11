@@ -10,19 +10,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Create connection DB
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "ygSQL",
-  password: `helloTeam8`,
-  port: "3306",
-  database: "team8db",
-});
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "ygSQL",
+//   password: `helloTeam8`,
+//   port: "3306",
+//   database: "team8db",
+// });
 
-// Connect DB
-connection.connect(function (err) {
-  if (err) throw err;
-  console.log("SQL Database Connected...");
-});
+// // Connect DB
+// connection.connect(function (err) {
+//   if (err) throw err;
+//   console.log("SQL Database Connected...");
+// });
 
 app.listen(port, () => console.log(`Server up on port ${port}...`));
 
