@@ -65,7 +65,7 @@ export default function About() {
         <h5>Fall 2020</h5>
         <h5>Team 8</h5>
       </Jumbotron>
-      
+
       <Container>
         <Row>
           {developers.map((dev, i) => (
