@@ -37,7 +37,7 @@ export default function About() {
       name: "Trenton Smith",
       img: placeholder,
       description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "I'm an alpaca. I love eating and being fluffy. Sometimes I write code.",
       url: "/about/trenton",
     },
   ];
