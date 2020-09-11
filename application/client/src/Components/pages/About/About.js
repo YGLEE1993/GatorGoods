@@ -1,5 +1,4 @@
 import React from "react";
-//import { Jumbotron, Button, Card, Container, Row, Col } from "react-bootstrap";
 import { Jumbotron, Container, Row} from "react-bootstrap";
 import "./Individual/css/About.css";
 import placeholder from "../../assets/placeholder.jpg";
@@ -72,11 +71,7 @@ export default function About() {
           {developers.map((dev, i) => (
             <AboutCard
               key={i}
-              role={dev.role}
-              name={dev.name}
-              img={dev.img}
-              description={dev.description}
-              url={dev.url}
+              {...dev}
             />
           ))}
         </Row>
