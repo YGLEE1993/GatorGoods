@@ -1,8 +1,10 @@
 import React from "react";
-import { Jumbotron, Button, Card, Container, Row, Col } from "react-bootstrap";
-import "./About.css";
+//import { Jumbotron, Button, Card, Container, Row, Col } from "react-bootstrap";
+import { Jumbotron, Container, Row} from "react-bootstrap";
+import "./Individual/css/About.css";
 import placeholder from "../../assets/placeholder.jpg";
-import axios from "axios";
+import keith from "../../assets/Keith.png"
+//import axios from "axios";
 import AboutCard from "../UI/AboutCard/AboutCard";
 
 export default function About() {
@@ -10,10 +12,10 @@ export default function About() {
     {
       role: "TEAM MASTER",
       name: "Keith Eastman",
-      img: placeholder,
+      img: keith,
       description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      url: "/keith",
+        "I'm a student veteran with a passion for moving fast and breaking things",
+      url: "/about/keith",
     },
     {
       role: "Backend Master",
@@ -21,7 +23,7 @@ export default function About() {
       img: placeholder,
       description:
         "I am a senior student majoring in Computer Science at San Francisco State University.",
-      url: "/yg",
+      url: "/about/yg",
     },
     {
       role: "Frontend Master",
@@ -29,7 +31,7 @@ export default function About() {
       img: placeholder,
       description:
         "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      url: "/joy",
+      url: "/about/joy",
     },
     {
       role: "Github Master",
@@ -37,7 +39,7 @@ export default function About() {
       img: placeholder,
       description:
         "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      url: "/trenton",
+      url: "/about/trenton",
     },
   ];
 
@@ -64,7 +66,7 @@ export default function About() {
         <h5>Fall 2020</h5>
         <h5>Team 8</h5>
       </Jumbotron>
-
+      
       <Container>
         <Row>
           {developers.map((dev, i) => (

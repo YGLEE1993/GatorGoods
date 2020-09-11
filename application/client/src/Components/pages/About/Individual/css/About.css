@@ -13,9 +13,20 @@
     color: black;
 }
 
+.card{
+    text-align: center;
+}
+
 .card-subtext{
     color: grey;
     letter-spacing: 2px;
     font-size: 11px;
     text-transform: uppercase;
+}
+
+.card-img, .card-img-top {
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+    object-fit: cover;
+    height: 285px;
 }

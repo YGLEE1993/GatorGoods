@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import "./YG.css";
-import placeholer from "../../../../assets/placeholder.jpg";
+import "./css/YG.css";
+import placeholer from "../../../assets/placeholder.jpg";
 export default function YG() {
   return (
     <div className="yg">
