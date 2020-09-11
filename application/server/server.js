@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-Create connection DB
+//Create connection DB
 const connection = mysql.createConnection({
   host: "localhost",
   user: "ygSQL",
