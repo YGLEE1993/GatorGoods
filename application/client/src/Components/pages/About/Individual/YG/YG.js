@@ -13,21 +13,22 @@ export default function YG() {
         <Row className="yg-textbox">
           <Col>
             <h3>Hi, I am YG, nice to meet you!</h3>
-            <br/>
+            <br />
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              I am a senior student majoring in Computer Science at San
+              Francisco State University. I was first fascinated by how one’s
+              writing (coding languages) can take shape and for people to use
+              them in daily life and now I am passionate about learning
+              full-stack development. In my free time, I enjoy photography and
+              listening to music. My goal is to be a great full-stack developer
+              and use my skills to support women and the LGBTQ community into
+              STEM fields.
             </p>
           </Col>
           <Button
             className="yg-btn"
             variant="outline-dark"
-            href="/"
+            href="https://www.linkedin.com/in/yg-lee/"
           >
             Connect with Me
           </Button>
