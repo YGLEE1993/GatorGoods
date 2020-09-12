@@ -3,6 +3,8 @@ import { Jumbotron, Container, Row} from "react-bootstrap";
 import "./Individual/css/About.css";
 import placeholder from "../../assets/placeholder.jpg";
 import keith from "../../assets/Keith.png"
+import joy from "../../assets/Joy.jpeg"
+
 //import axios from "axios";
 import AboutCard from "../UI/AboutCard/AboutCard";
 
@@ -27,9 +29,9 @@ export default function About() {
     {
       role: "Frontend Master",
       name: "Zhuozhuo (Joy) Liu",
-      img: placeholder,
+      img: joy,
       description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "I am a master student majoring in Computer Science at SFSU. I love my cat.",
       url: "/about/joy",
     },
     {
@@ -37,7 +39,7 @@ export default function About() {
       name: "Trenton Smith",
       img: placeholder,
       description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "I'm an alpaca. I love eating and being fluffy. Sometimes I write code.",
       url: "/about/trenton",
     },
   ];
