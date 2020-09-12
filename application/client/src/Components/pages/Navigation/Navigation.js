@@ -8,7 +8,7 @@ export default function Navigation() {
       <Navbar className="navigation-bar">
         <Navbar.Brand style={{marginLeft: '40px'}} href="/">T E A M 8</Navbar.Brand>
         <Nav className="ml-auto">
-        <Nav.Link  style={{marginRight: '40px'}} as={Link} to="/about">
+        <Nav.Link  style={{marginRight: '40px'}} href="/about">
           About us
         </Nav.Link>
         </Nav>
