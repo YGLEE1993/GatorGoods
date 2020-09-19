@@ -1,13 +1,14 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import "./css/YG.css";
-import placeholer from "../../../assets/placeholder.jpg";
+import placeholder from "../../../assets/Stock_img.png";
+
 export default function YG() {
   return (
     <div className="yg">
       <Container>
         <Row className="yg-img-container">
-          <Image className="yg-img" src={placeholer} roundedCircle />
+          <Image className="yg-img" src={placeholder} roundedCircle />
         </Row>
 
         <Row className="yg-textbox">

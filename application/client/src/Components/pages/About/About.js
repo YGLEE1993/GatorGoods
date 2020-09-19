@@ -1,9 +1,8 @@
 import React from "react";
 import { Jumbotron, Container, Row} from "react-bootstrap";
 import "./Individual/css/About.css";
-import placeholder from "../../assets/placeholder.jpg";
+import placeholder from "../../assets/Stock_img.png";
 import keith from "../../assets/Keith.png"
-import joy from "../../assets/Joy.jpeg"
 
 //import axios from "axios";
 import AboutCard from "../UI/AboutCard/AboutCard";
@@ -11,7 +10,7 @@ import AboutCard from "../UI/AboutCard/AboutCard";
 export default function About() {
   const developers = [
     {
-      role: "TEAM MASTER",
+      role: "Team Lead",
       name: "Keith Eastman",
       img: keith,
       description:
@@ -19,7 +18,7 @@ export default function About() {
       url: "/about/keith",
     },
     {
-      role: "Backend Master",
+      role: "Back-end Lead",
       name: "Yugyeong (YG) Lee",
       img: placeholder,
       description:
@@ -27,19 +26,19 @@ export default function About() {
       url: "/about/yg",
     },
     {
-      role: "Frontend Master",
+      role: "Front-end Lead",
       name: "Zhuozhuo (Joy) Liu",
-      img: joy,
+      img: placeholder,
       description:
         "I am a master student majoring in Computer Science at SFSU. I love my cat.",
       url: "/about/joy",
     },
     {
-      role: "Github Master",
+      role: "Github Lead",
       name: "Trenton Smith",
       img: placeholder,
       description:
-        "I'm an alpaca. I love eating and being fluffy. Sometimes I write code.",
+        "I'm a military veteran, Computer Science major, and avid learner devoted to personal growth.",
       url: "/about/trenton",
     },
   ];
