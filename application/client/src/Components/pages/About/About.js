@@ -34,7 +34,7 @@ export default function About() {
       url: "/about/joy",
     },
     {
-      role: "Github Lead",
+      role: "Github Master | Editor",
       name: "Trenton Smith",
       img: placeholder,
       description:
