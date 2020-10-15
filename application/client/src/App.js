@@ -1,10 +1,10 @@
 import React from "react";
-import Navigation from "./Components/pages/Navigation/Navigation";
-import Routes from './Routes';
+import Navigation from "./Components/views/Navigation/Navigation";
+import Routes from "./Routes";
 
 function App() {
   return (
-    <div className = "App">
+    <div className="App">
       <Navigation />
       <Routes />
     </div>
