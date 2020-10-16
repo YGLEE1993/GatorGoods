@@ -51,17 +51,14 @@ export default function Landing() {
   };
 
   return (
-    <>
+    <div>
       <Jumbotron className="landing-banner">
         <h1>Software Engineering class SFSU</h1>
         <h3>Fall 2020</h3>
         <h3>Team 8</h3>
 
         {/* Search Bar */}
-        <InputGroup
-          style={{ marginLeft: "25%", marginTop: "50px", width: "800px" }}
-          className="mb-3"
-        >
+        <InputGroup className="mx-auto" style={{ width: "800px" }}>
           <DropdownButton
             variant="outline-secondary"
             title="Category"
@@ -84,6 +81,6 @@ export default function Landing() {
           </InputGroup.Append>
         </InputGroup>
       </Jumbotron>
-    </>
+    </div>
   );
 }
