@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Card, Col, Row } from "react-bootstrap";
 
 export default function Test(props) {
-  // NEED TO FIX IMAGE!
-  // const getBufferImage = () => {
-  //   productListings.map((productListing) => {
-  //     const newImage = new Buffer.from(productListing.image.data).toString(
-  //       "base64"
-  //     );
-  //     productListing.image.data = newImage;
-  //   });
-  //   setProductListings(productListings);
-  // };
+  const [productListings, setProductListings] = useState([]);
+
+  useEffect(() => {
+    setProductListings(props.location.state.productListings);
+    props.location.state.productListings.map((productListing) => {
+      const newImage = new Buffer.from(productListing.image.data).toString(
+        "base64"
+      );
+      productListing.image.data = newImage;
+    });
+  }, []);
 
   return (
     <Container style={{ marginTop: "100px" }}>
@@ -22,12 +23,12 @@ export default function Test(props) {
       </h3>
 
       <Row style={{ marginTop: "50px" }}>
-        {props.location.state.productListings.map((productListing) => (
+        {productListings.map((productListing) => (
           <Col lg={3} key={productListing.id}>
             <Card style={{ width: "18rem" }}>
               <Card.Img
                 variant="top"
-                src={`data:image/jpeg;,${productListing.image.data}`}
+                src={`data:image/jpeg;base64, ${productListing.image.data}`}
               />
               <Card.Body>
                 <span className="card-subtext">{productListing.category}</span>

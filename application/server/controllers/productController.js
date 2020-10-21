@@ -8,7 +8,6 @@ exports.createProduct = (req, res) => {
   const description = req.body.description;
   const price = req.body.price;
   const category = req.body.category;
-  const image = req.body.image;
   const query =
     "INSERT INTO  team8db.product_listing(id, title, price, description, image, category) VALUES ?";
   const values = [[id, title, price, description, image, category]];

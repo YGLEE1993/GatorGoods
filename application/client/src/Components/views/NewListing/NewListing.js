@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Col, Button, Container } from "react-bootstrap";
 // import Dropzone from 'react-dropzone';
 import axios from "axios";
@@ -13,11 +13,11 @@ export default function NewListing(props) {
   };
   const [eachEntry, setEachEntry] = useState(initialInputState);
   const { title, description, category, image, price } = eachEntry;
-
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
 
+  console.log(image);
   const submitListing = () => {
     axios
       .post("/api/product/createProduct", {
