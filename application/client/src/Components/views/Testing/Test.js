@@ -18,7 +18,9 @@ export default function Test(props) {
     <Container style={{ marginTop: "100px" }}>
       <h1>Vertical Prototype Testing Result Home</h1>
       <h3>
-        {props.location.state.category} {props.location.state.searchTerm}{" "}
+        <span style={{ color: "#e67a00" }}>
+          {props.location.state.category} {props.location.state.searchTerm}{" "}
+        </span>
         results..
       </h3>
 

@@ -5,9 +5,8 @@ import {
   Jumbotron,
   Button,
   InputGroup,
-  DropdownButton,
   FormControl,
-  Dropdown,
+  Form,
 } from "react-bootstrap";
 import "./Landing.css";
 
@@ -34,7 +33,7 @@ export default function Landing() {
   }, [searchTerm, category]);
 
   const handleCategoryChange = (e) => {
-    setCategory(e);
+    setCategory(e.target.value);
   };
 
   const handleInputChange = (e) => {
@@ -58,27 +57,35 @@ export default function Landing() {
         <h3>Team 8</h3>
 
         {/* Search Bar */}
-        <InputGroup className="mx-auto" style={{ width: "800px" }}>
-          <DropdownButton
-            variant="outline-secondary"
-            title="Category"
-            onSelect={handleCategoryChange}
-          >
-            <Dropdown.Item eventKey="Book">Book</Dropdown.Item>
-            <Dropdown.Item eventKey="Furniture">Furniture</Dropdown.Item>
-            <Dropdown.Item eventKey="Electronic">Electronic</Dropdown.Item>
-          </DropdownButton>
+        <InputGroup className="mx-auto" style={{ width: "820px" }}>
+          <Form.Group style={{ width: "15%" }}>
+            <Form.Control
+              as="select"
+              name="category"
+              value={category}
+              onChange={handleCategoryChange}
+            >
+              <option>Category</option>
+              <option>Book</option>
+              <option>Furniture</option>
+              <option>Electronic</option>
+            </Form.Control>
+          </Form.Group>
 
-          <FormControl
-            placeholder="Search.."
-            value={searchTerm}
-            onChange={handleInputChange}
-          />
-          <InputGroup.Append>
-            <Button variant="outline-secondary" onClick={onSearch}>
-              Search
-            </Button>
-          </InputGroup.Append>
+          <Form.Group style={{ width: "75%" }}>
+            <FormControl
+              placeholder="Search.."
+              value={searchTerm}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <InputGroup.Append>
+              <Button variant="outline-secondary" onClick={onSearch}>
+                Search
+              </Button>
+            </InputGroup.Append>
+          </Form.Group>
         </InputGroup>
       </Jumbotron>
     </div>
