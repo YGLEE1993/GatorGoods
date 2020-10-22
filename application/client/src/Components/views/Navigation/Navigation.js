@@ -10,10 +10,10 @@ export default function Navigation() {
         </Navbar.Brand>
         <Nav className="ml-auto">
           <Nav.Link style={{ marginRight: "40px" }} href="/newListing">
-            Create a Post
+            Create Listing
           </Nav.Link>
           <Nav.Link style={{ marginRight: "40px" }} href="/about">
-            About us
+            About
           </Nav.Link>
         </Nav>
       </Navbar>
