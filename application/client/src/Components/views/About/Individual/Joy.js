@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import "./css/YG.css";
-import placeholer from "../../../assets/Joy.jpeg";
+import placeholer from "../../../assets/Stock_img.png";
 export default function Joy() {
   return (
     <div className="yg">
