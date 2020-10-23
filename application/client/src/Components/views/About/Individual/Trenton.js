@@ -1,28 +1,24 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import "./css/Trenton.css";
-import placeholder from "../../../assets/Stock_img.png";
+import placeholer from "../../../assets/placeholder.jpg";
 
 export default function Trenton() {
     return (
         <div className="trenton">
             <Container>
                 <Row className="trenton-img-container">
-                    <Image className="trenton-img" src={placeholder} roundedCircle />
+                    <Image className="trenton-img" src={placeholer} roundedCircle />
                 </Row>
 
                 <Row className="trenton-textbox">
                     <Col>
-                        <h3>Hey I'm Trenton Smith, thanks for stopping by!</h3>
+                        <h3>Hello! I'm Trenton, nice to meet you!</h3>
                         <br />
                         <p>
-                            I'm a United States Air Force veteran who spent six years forecasting weather and leading
-                            highly specialized and diverse teams around the country. After separating from the military,
-                            I became a full-time student at San Francisco State University where I'm currently studying
-                            computer science. I have a passion for software development and solving real-world problems
-                            with technology. When I'm not coding however, you can find me pursuing my other interests:
-                            art, music, fitness, sports, sustainable living, and science to name a few. I strive for
-                            self-improvement, and fully embrace lifelong learning! Stay kind, love life, and be well!
+                            I'm a full-time student at San Francisco State University studying computer science.
+                            When I'm not coding, you can find me driving cars, riding motorcycles, and draining my
+                            savings for gas money.
                         </p>
                     </Col>
                     <Button
