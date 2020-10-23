@@ -12,7 +12,7 @@ export default function Test(props) {
       );
       productListing.image.data = newImage;
     });
-  }, []);
+  });
 
   return (
     <Container style={{ marginTop: "100px" }}>
