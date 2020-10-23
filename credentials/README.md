@@ -15,7 +15,7 @@
 4. Database URL or IP and port used.
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
 5. Database username ygSQL
-6. Database password helloteam8
+6. Database password helloCSC648team8
 7. Database name (basically the name that contains all your tables)
 8. Instructions on how to use the above information.
 
