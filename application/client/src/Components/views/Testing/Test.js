@@ -11,9 +11,8 @@ export default function Test(props) {
         "base64"
       );
       productListing.image.data = newImage;
-      return console.log(props.location.state.productListings);
     });
-  }, [props.location.state.productListings]);
+  }, []);
 
   return (
     <Container style={{ marginTop: "100px" }}>
