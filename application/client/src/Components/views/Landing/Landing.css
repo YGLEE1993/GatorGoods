@@ -1,0 +1,18 @@
+.landing-banner {
+  font-family: Poppins;
+  text-align: center;
+  background-color: #f7f5f4;
+  height: 920px;
+}
+
+.landing-banner h1 {
+  font-family: Lora;
+  font-size: 3rem;
+  margin-top: 10rem;
+  padding: 2rem;
+}
+
+.landing-button{
+    margin: 3rem;
+    padding: 1rem;
+}
