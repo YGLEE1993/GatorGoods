@@ -20,7 +20,7 @@ export default function Routes() {
         <Route exact path="/about/keith" component={Keith} />
         <Route exact path="/about/trenton" component={Trenton} />
         <Route exact path="/test" component={Test} />
-        <Route exact path="/newListing" component={NewListing} />
+        <Route path="/newListing" component={NewListing} />
       </Switch>
     </Router>
   );

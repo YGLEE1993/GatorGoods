@@ -1,8 +1,17 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import "./css/YG.css";
+<<<<<<< HEAD
 import placeholder from "../../../assets/Stock_img.png";
 
+=======
+<<<<<<<< HEAD:application/client/src/Components/views/About/Individual/Joy.js
+import placeholer from "../../../assets/Stock_img.png";
+========
+import placeholder from "../../../assets/Stock_img.png";
+
+>>>>>>>> VP_YG:application/client/src/Components/pages/About/Individual/Joy.js
+>>>>>>> VP_YG
 export default function Joy() {
   return (
     <div className="yg">
