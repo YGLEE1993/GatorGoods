@@ -10,6 +10,7 @@ import "bootswatch/dist/pulse/bootstrap.min.css";
 function App() {
   return (
     <div className="App">
+      <WarningBanner />
       <Navigation />
       <Routes />
     </div>

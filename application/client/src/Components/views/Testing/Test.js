@@ -11,9 +11,15 @@ export default function Test(props) {
         "base64"
       );
       productListing.image.data = newImage;
+<<<<<<< HEAD
       return console.log(props.location.state.productListings);
     });
   }, [props.location.state.productListings]);
+=======
+      return console.log(productListings);
+    });
+  }, [props.location.state.productListings, productListings]);
+>>>>>>> VP_YG
 
   return (
     <Container style={{ marginTop: "100px" }}>

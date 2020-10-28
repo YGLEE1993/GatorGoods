@@ -14,7 +14,7 @@ export default function Navigation() {
         </Nav.Item>
         <Nav className="ml-auto">
           <Nav.Link style={{ marginRight: "40px" }} href="/newListing">
-            Create a Post
+            Create Listing
           </Nav.Link>
           <Nav.Link style={{ marginRight: "40px" }} href="/">
             Log in
