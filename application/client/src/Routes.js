@@ -8,12 +8,16 @@ import Keith from "./Components/views/About/Individual/Keith";
 import Trenton from "./Components/views/About/Individual/Trenton";
 import Test from "./Components/views/Testing/Test";
 import NewListing from "./Components/views/NewListing/NewListing";
+import Home from "./Components/Home";
+import Category from "./Components/Category";
+import Result from "./Components/Result";
+import ProductListing from "./Components/ProductListing";
 
 export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Landing} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/about/yg" component={YG} />
         <Route exact path="/about/joy" component={Joy} />
@@ -21,6 +25,9 @@ export default function Routes() {
         <Route exact path="/about/trenton" component={Trenton} />
         <Route exact path="/test" component={Test} />
         <Route exact path="/newListing" component={NewListing} />
+        <Route exact path="/category" component={Category} />
+        <Route exact path="/result" component={Result} />
+        <Route exact path="/productlisting" component={ProductListing} />
       </Switch>
     </Router>
   );
