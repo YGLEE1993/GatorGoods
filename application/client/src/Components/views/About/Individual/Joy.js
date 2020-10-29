@@ -1,7 +1,9 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import "./css/YG.css";
+
 import placeholder from "../../../assets/Stock_img.png";
+
 
 export default function Joy() {
   return (
