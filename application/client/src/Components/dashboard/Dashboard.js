@@ -7,7 +7,7 @@ import LazyModal from "../LazyModal"
 export default function Dashboard() {
     return (
         <Container className="dashboard container" style={{paddingTop: "5rem"}}>
-            <h3>My Dashboard</h3>
+            <h3>My New Dashboard</h3>
             <Tabs defaultActiveKey="listings" transition={false} id="noanim-tab-example">
                 <Tab eventKey="listings" title="Listings">
                     <DashboardListings />
