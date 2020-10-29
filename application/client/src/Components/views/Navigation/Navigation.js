@@ -1,13 +1,14 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import Searchbox from "../../Searchbox"
+import logo from "../../assets/logo.png"
 
 export default function Navigation() {
   return (
     <div>
       <Navbar className="navigation-bar" variant="light">
         <Navbar.Brand style={{ marginLeft: "40px" }} href="/">
-          T E A M 8
+          <img src={logo} width="150" height="40" alt="" />
         </Navbar.Brand>
         <Nav.Item style={{marginLeft: "40px"}}>
           <Searchbox />
