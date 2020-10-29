@@ -27,8 +27,8 @@ export default function Home() {
                         <Button variant="secondary" href="/category">See more</Button>{' '}
                     </Col>
                 </Row>
-                <Row style={{marginTop: '2rem', marginLeft: '1rem', marginRight: '1rem'}}>
-                    <CardDeck >
+                <Row style={{marginTop: '2rem', marginLeft: '1rem', marginRight: '1rem', paddingBottom: '1rem'}}>
+                    <CardDeck style={{paddingBottom: '1rem'}}>
                         <Card>
                             <Card.Img variant="top" src="holder.js/100px160" />
                             <Card.Body>
