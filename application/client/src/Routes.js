@@ -8,6 +8,7 @@ import Keith from "./Components/views/About/Individual/Keith";
 import Trenton from "./Components/views/About/Individual/Trenton";
 import Test from "./Components/views/Testing/Test";
 import NewListing from "./Components/views/NewListing/NewListing";
+import Dashboard from "./Components/dashboard/Dashboard";
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
         <Route exact path="/about/trenton" component={Trenton} />
         <Route exact path="/test" component={Test} />
         <Route exact path="/newListing" component={NewListing} />
+        <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
   );
