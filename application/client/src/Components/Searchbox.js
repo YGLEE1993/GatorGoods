@@ -51,7 +51,7 @@ export default function Searchbox() {
   return (
     <div>
         {/* Search Bar */}
-        <InputGroup className="mx-auto" style={{ width: "820px" }}>
+        <InputGroup className="mx-auto" style={{ width: "50rem" }}>
           <Form.Group style={{ width: "15%" }}>
             <Form.Control
               as="select"
