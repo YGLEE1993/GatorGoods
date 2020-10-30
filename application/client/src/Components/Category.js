@@ -26,7 +26,66 @@ export default function Home() {
                   <Filter />
                 </Col>
                 <Col lg={10}>
-                  <CardGroup className="cardgroup">
+                  <CardDeck className="carddeck">
+
+                      <Card style={{margin: "0.5rem"}}>
+                          <Card.Img variant="top" src="holder.js/100px160" />
+                          <Card.Body>
+                              <Card.Title>Listing title</Card.Title>
+                              <Card.Text>
+                                  <Row className="price-condition">
+                                      <Col lg={5}>$10</Col>
+                                      <Col lg={7}>Very Good</Col>
+                                  </Row>
+                              </Card.Text>
+                              <Card.Text>This is a description of the product.</Card.Text>
+                          </Card.Body>
+                      </Card>
+
+                      <Card style={{margin: "0.5rem"}}>
+                          <Card.Img variant="top" src="holder.js/100px160" />
+                          <Card.Body>
+                              <Card.Title>Listing title</Card.Title>
+                              <Card.Text>
+                                  <Row className="price-condition">
+                                      <Col>$10</Col>
+                                      <Col lg="auto">Very Good</Col>
+                                  </Row>
+                              </Card.Text>
+                              <Card.Text>This is a description of the product.</Card.Text>
+                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
+                          </Card.Body>
+                      </Card>
+                      <Card>
+                          <Card.Img variant="top" src="holder.js/100px160" />
+                          <Card.Body>
+                              <Card.Title>Listing title</Card.Title>
+                              <Card.Text>
+                                  <Row className="price-condition">
+                                      <Col>$10</Col>
+                                      <Col lg="auto">Very Good</Col>
+                                  </Row>
+                              </Card.Text>
+                              <Card.Text>This is a description of the product.</Card.Text>
+                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
+                          </Card.Body>
+                      </Card>
+                      <Card>
+                          <Card.Img variant="top" src="holder.js/100px160" />
+                          <Card.Body>
+                              <Card.Title>Listing title</Card.Title>
+                              <Card.Text>
+                                  <Row className="price-condition">
+                                      <Col>$10</Col>
+                                      <Col lg="auto">Very Good</Col>
+                                  </Row>
+                              </Card.Text>
+                              <Card.Text>This is a description of the product.</Card.Text>
+                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
+                          </Card.Body>
+                      </Card>
+                  </CardDeck>
+                  <CardDeck className="carddeck">
                       <Card>
                           <Card.Img variant="top" src="holder.js/100px160" />
                           <Card.Body>
@@ -83,65 +142,7 @@ export default function Home() {
                               <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
                           </Card.Body>
                       </Card>
-                  </CardGroup>
-                  <CardGroup className="cardgroup">
-                      <Card>
-                          <Card.Img variant="top" src="holder.js/100px160" />
-                          <Card.Body>
-                              <Card.Title>Listing title</Card.Title>
-                              <Card.Text>
-                                  <Row className="price-condition">
-                                      <Col>$10</Col>
-                                      <Col lg="auto">Very Good</Col>
-                                  </Row>
-                              </Card.Text>
-                              <Card.Text>This is a description of the product.</Card.Text>
-                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
-                          </Card.Body>
-                      </Card>
-                      <Card>
-                          <Card.Img variant="top" src="holder.js/100px160" />
-                          <Card.Body>
-                              <Card.Title>Listing title</Card.Title>
-                              <Card.Text>
-                                  <Row className="price-condition">
-                                      <Col>$10</Col>
-                                      <Col lg="auto">Very Good</Col>
-                                  </Row>
-                              </Card.Text>
-                              <Card.Text>This is a description of the product.</Card.Text>
-                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
-                          </Card.Body>
-                      </Card>
-                      <Card>
-                          <Card.Img variant="top" src="holder.js/100px160" />
-                          <Card.Body>
-                              <Card.Title>Listing title</Card.Title>
-                              <Card.Text>
-                                  <Row className="price-condition">
-                                      <Col>$10</Col>
-                                      <Col lg="auto">Very Good</Col>
-                                  </Row>
-                              </Card.Text>
-                              <Card.Text>This is a description of the product.</Card.Text>
-                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
-                          </Card.Body>
-                      </Card>
-                      <Card>
-                          <Card.Img variant="top" src="holder.js/100px160" />
-                          <Card.Body>
-                              <Card.Title>Listing title</Card.Title>
-                              <Card.Text>
-                                  <Row className="price-condition">
-                                      <Col>$10</Col>
-                                      <Col lg="auto">Very Good</Col>
-                                  </Row>
-                              </Card.Text>
-                              <Card.Text>This is a description of the product.</Card.Text>
-                              <Button variant="primary"><i class="fas fa-angle-double-right"></i> &nbsp; See Details</Button>
-                          </Card.Body>
-                      </Card>
-                  </CardGroup>
+                  </CardDeck>
                 </Col>
               </Row>
           </Col>
