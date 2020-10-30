@@ -1,6 +1,11 @@
 .yg {
   background-color: #f7f5f4;
 }
+.yg h1 {
+  font-family: Lora;
+  color: #6c757d;
+  font-size: large;
+}
 .yg h3 {
   font-family: Lora;
 }
