@@ -8,11 +8,11 @@ import ListingCard from "./ListingCard"
 export default function Home() {
   return (
     <div>
-        <Jumbotron className="Jumbotron">
-            <div style={{paddingLeft: "10rem"}}>
+        <Jumbotron>
+            <div className="Jumbotron">
                 <h1>Hello, Gators! </h1>
                 <p>
-                    Welcome to the online marketplace specifically designed and limited to students, faculty and staff at SFSU.
+                    Welcome to the online marketplace specifically designed for students, faculty and staff at SFSU.
                 </p>
             </div>
         </Jumbotron>
@@ -21,9 +21,9 @@ export default function Home() {
 
         <Container style={{marginTop: "2rem", paddingLeft: 0, paddingRight: 0}}>
             <Col>
-                <Row>
+                <Row >
                     <Col><h3>Books</h3></Col>
-                    <Col lg={7}><p>45 listings for this category</p></Col>
+                    <Col lg={9}><p>45 listings for this category</p></Col>
                     <Col className="text-right">
                         <Button variant="secondary" href="/category">See more</Button>{' '}
                     </Col>

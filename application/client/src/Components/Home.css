@@ -1,5 +1,14 @@
 .Jumbotron {
-    padding-left: 10em;
+    padding-left: 5rem;
+}
+
+.Jumbotron h1 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.Jumbotron p {
+    font-size: 1.5rem;
 }
 
 .category {
