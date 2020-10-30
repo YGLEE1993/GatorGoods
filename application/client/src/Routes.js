@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./Components/views/About/About";
-import Landing from "./Components/views/Landing/Landing";
 import YG from "./Components/views/About/Individual/YG";
 import Joy from "./Components/views/About/Individual/Joy";
 import Keith from "./Components/views/About/Individual/Keith";
