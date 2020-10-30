@@ -7,15 +7,18 @@ export default function YG() {
   return (
     <div className="yg">
       <Container>
-        <Row className="yg-img-container">
+        <Row>
           <Image className="yg-img" src={placeholder} roundedCircle />
         </Row>
 
-        <Row className="yg-textbox">
-          <Col>
-            <h3>Hi, I am YG, nice to meet you!</h3>
-            <br />
-            <p>
+        <Container className="yg-textbox">
+          <Row>
+            <Col>
+              <h3>Hi, I am YG, nice to meet you!</h3>
+            </Col>
+          </Row>
+          <Row className="text-container">
+            <Col lg={{ span: 8, offset: 2 }}>
               I am a senior student majoring in Computer Science at San
               Francisco State University. I was first fascinated by how one’s
               writing (coding languages) can take shape and for people to use
@@ -24,16 +27,21 @@ export default function YG() {
               listening to music. My goal is to be a great full-stack developer
               and use my skills to support women and the LGBTQ community into
               STEM fields.
-            </p>
-          </Col>
-          <Button
-            className="yg-btn"
-            variant="outline-dark"
-            href="https://www.linkedin.com/in/yg-lee/"
-          >
-            Connect with Me
-          </Button>
-        </Row>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Button
+                className="yg-btn"
+                variant="primary"
+                href="https://www.linkedin.com/in/yg-lee/"
+              >
+                Connect with Me
+              </Button>
+            </Col>
+          </Row>
+        </Container>
       </Container>
     </div>
   );
