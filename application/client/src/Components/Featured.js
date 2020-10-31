@@ -4,8 +4,8 @@ import { Container, CardDeck, Card } from "react-bootstrap";
 export default function Featured() {
     return (
         <div>
-            <Container style={{marginTop: "2rem", paddingLeft: 0, paddingRight: 0}}>
-                <h3>Featured Categories</h3>
+            <Container style={{marginTop: "2rem"}}>
+                <h2>Featured Categories</h2>
                 <CardDeck style={{padding: "2rem"}}>
                     <Card style={{border: 0}}>
                         <Card.Img variant="top" src="holder.js/100px160" />

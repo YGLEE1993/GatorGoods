@@ -24,7 +24,7 @@ export default function Landing() {
           category: category,
         })
         .then((response) => {
-          // console.log(response.data);
+          // console.log(response);
           setProductListings(response.data);
         });
     };
