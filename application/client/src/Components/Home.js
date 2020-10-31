@@ -16,17 +16,15 @@ export default function Home() {
                         Welcome to the online marketplace specifically designed for students, faculty and staff at SFSU.
                     </p>
                 </div>
-            </Jumbotron>
-            
+            </Jumbotron>            
             <Featured />
-
             <Container style={{marginTop: "2rem", paddingLeft: 0, paddingRight: 0}}>
                 <Col>
                     <Row >
-                        <Col><h3>Books</h3></Col>
-                        <Col lg={9}><p>45 listings for this category</p></Col>
-                        <Col className="text-right">
-                            <Button variant="secondary" href="/category">See more</Button>{' '}
+                        <Col lg="auto"><h2>Books</h2></Col>
+                        <Col lg="auto"><p>45 listings for this category</p></Col>
+                        <Col className="text-right" >
+                            <Button variant="secondary" href="/books">See more</Button>{' '}
                         </Col>
                     </Row>
                     <Row className="card-container">

@@ -9,7 +9,10 @@ import Test from "./Components/views/Testing/Test";
 import NewListing from "./Components/views/NewListing/NewListing";
 import Dashboard from "./Components/dashboard/Dashboard";
 import Home from "./Components/Home";
-import Category from "./Components/Category";
+import Books from "./Components/Books";
+import Furniture from "./Components/Furniture";
+import Electronics from "./Components/Electronics";
+import Others from "./Components/Others";
 import Result from "./Components/Result";
 import ProductListing from "./Components/ProductListing";
 
@@ -27,7 +30,10 @@ export default function Routes() {
         <Route exact path="/test" component={Test} />
         <Route exact path="/newListing" component={NewListing} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/category" component={Category} />
+        <Route exact path="/books" component={Books} />
+        <Route exact path="/furniture" component={Furniture} />
+        <Route exact path="/Electronics" component={Electronics} />
+        <Route exact path="/others" component={Others} />
         <Route exact path="/result" component={Result} />
         <Route exact path="/productlisting" component={ProductListing} />
       </Switch>

@@ -11,16 +11,19 @@
     font-size: 1.5rem;
 }
 
-.category {
-    padding: "50px";
-}
-
-.price-condition {
-    font-weight: 600;
+.category-container {
+    margin-top: 2rem;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .card-container {
     margin-top: 2rem;
     padding-bottom: 1rem;
 }
+
+.vertical-center .row {
+    display: flex;
+    align-items: center;
+  }
 

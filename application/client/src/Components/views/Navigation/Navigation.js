@@ -8,7 +8,7 @@ export default function Navigation() {
     <div>
       <Navbar className="navigation-bar" variant="light">
         <Navbar.Brand style={{ marginLeft: "40px" }} href="/">
-          <img src={logo} width="150" height="40" alt="" />
+          <img src={logo} width="150" height="40" alt="logo" />
         </Navbar.Brand>
         <Nav.Item style={{marginLeft: "40px"}}>
           <Searchbox />
@@ -22,7 +22,7 @@ export default function Navigation() {
           </Nav.Link>
         </Nav>
       </Navbar>
-      <Navbar style={{marginLeft: "33px", paddingTop: "0px"}}>
+      <Navbar style={{marginLeft: "50px", paddingTop: "0px"}}>
         <Nav className="mr-auto">
           <Nav.Link style={{ marginRight: "40px" }} href=" ">Books</Nav.Link>
           <Nav.Link style={{ marginRight: "40px" }} href=" ">Furniture</Nav.Link>

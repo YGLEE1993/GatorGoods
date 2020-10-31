@@ -18,8 +18,7 @@ export default function ListingCard () {
                     <Card.Title>Listing title</Card.Title>
                     <Card.Text>
                         <Row className='price-condition'>
-                            <Col>$10</Col>
-                            <Col lg="auto">Very Good</Col>
+                            <Col>$10 · Very Good</Col>
                         </Row>
                     </Card.Text>
                     <Card.Text>This is a description of the product.</Card.Text>
