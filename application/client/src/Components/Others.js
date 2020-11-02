@@ -12,7 +12,7 @@ export default function Books() {
       <Container style={{marginTop: "2rem"}}>
           <Col>
               <Row>
-                  <Col><h2>Books</h2></Col>
+                  <Col><h2>Others</h2></Col>
                   <Col lg={6}><p>45 listings in this category</p></Col>
                   <Col  className="text-right">
                     <DropdownButton id="dropdown-basic-button" variant="secondary" title="Sort by">

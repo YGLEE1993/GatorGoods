@@ -24,10 +24,10 @@ export default function Navigation() {
       </Navbar>
       <Navbar style={{marginLeft: "50px", paddingTop: "0px"}}>
         <Nav className="mr-auto">
-          <Nav.Link style={{ marginRight: "40px" }} href=" ">Books</Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href=" ">Furniture</Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href=" ">Electronics</Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href=" ">Others</Nav.Link>
+          <Nav.Link style={{ marginRight: "40px" }} href="./books">Books</Nav.Link>
+          <Nav.Link style={{ marginRight: "40px" }} href="./furniture">Furniture</Nav.Link>
+          <Nav.Link style={{ marginRight: "40px" }} href="./electronics">Electronics</Nav.Link>
+          <Nav.Link style={{ marginRight: "40px" }} href="./others">Others</Nav.Link>
           <Nav.Link style={{ marginRight: "40px" }} href="/about">About Team</Nav.Link>
         </Nav>
       </Navbar>
