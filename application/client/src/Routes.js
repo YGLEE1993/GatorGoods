@@ -15,7 +15,7 @@ import Electronics from "./Components/Electronics";
 import Others from "./Components/Others";
 import Result from "./Components/Result";
 import ProductListing from "./Components/ProductListing";
-
+import Auth from "./Components/views/UI/AuthModal/AuthModal";
 
 export default function Routes() {
   return (
@@ -36,6 +36,7 @@ export default function Routes() {
         <Route exact path="/others" component={Others} />
         <Route exact path="/result" component={Result} />
         <Route exact path="/productlisting" component={ProductListing} />
+        <Route path="/authentication" component={Auth} />
       </Switch>
     </Router>
   );

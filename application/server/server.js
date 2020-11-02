@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/product", require("./routers/productRouter"));
 app.use("/api/search", require("./routers/searchRouter"));
+app.use("/api/auth", require("./routers/authRouter"));
 app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));

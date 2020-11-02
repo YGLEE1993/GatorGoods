@@ -1,23 +1,13 @@
 const mysql = require("mysql");
 
-// Create connection DB
-// const connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "ygSQL",
-//   password: "helloCSC648team8",
-//   port: "3306",
-//   database: "team8db",
-// });
-
 //Create connection to remote DB
 const connection = mysql.createConnection({
   host: "ec2-54-215-242-73.us-west-1.compute.amazonaws.com",
   user: "remoteUser",
   password: "duckets",
   port: "3306",
-  database: "team8db",
+  database: "gatorgoods",
 });
-
 
 // Connect DB
 connection.connect((err) => {
