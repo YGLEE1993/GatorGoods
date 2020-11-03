@@ -76,8 +76,6 @@ export default function Home() {
     getListings();
   }, []);
 
-  console.log(bookListings);
-  console.log(furnitureListings);
   return (
     <div>
       <Jumbotron>

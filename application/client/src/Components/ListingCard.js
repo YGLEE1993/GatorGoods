@@ -4,10 +4,12 @@ import "./ListingCard.css";
 import { useHistory } from "react-router-dom";
 
 export default function ListingCard(props) {
+    console.log(props.bookListings);
   const history = useHistory();
   function handleClick() {
-    history.push("/productlisting");
-    // history.push("/{props.name}");
+    history.push ("/productlisting", {
+        productListing: props.productListing
+    });
   }
 
   return (

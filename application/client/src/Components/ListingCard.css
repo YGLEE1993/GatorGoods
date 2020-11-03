@@ -1,8 +1,8 @@
 .listingcard {
-  max-width: 70% !important;
-  margin-top: 1rem;
-  /*   
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-  margin-bottom: 1rem !important; */
+    width: 70%;
+    margin-top: 1rem;
+}
+
+.listingcard:hover {
+    background-color: rgb(252, 248, 255);
 }
