@@ -16,6 +16,9 @@ import ListingCard from "./ListingCard";
 export default function Home() {
   const [bookListings, setBookListings] = useState([]);
   const [furnitureListings, setFurnitureListings] = useState([]);
+  const [electronicsListings, setElectronicsListings] = useState([]);
+  const [othersListings, setOthersListings] = useState([]);
+
 
   useEffect(() => {
     const getListings = () => {
@@ -45,6 +48,34 @@ export default function Home() {
     getListings();
   }, []);
 
+  useEffect(() => {
+    const getListings = () => {
+      axios
+        .post("/api/search/searchProducts", {
+          searchTerm: "",
+          category: "electronics",
+        })
+        .then((response) => {
+          setElectronicsListings(response.data);
+        });
+    };
+    getListings();
+  }, []);
+
+  useEffect(() => {
+    const getListings = () => {
+      axios
+        .post("/api/search/searchProducts", {
+          searchTerm: "",
+          category: "others",
+        })
+        .then((response) => {
+          setOthersListings(response.data);
+        });
+    };
+    getListings();
+  }, []);
+
   console.log(bookListings);
   console.log(furnitureListings);
   return (
@@ -61,8 +92,9 @@ export default function Home() {
       <Featured bookListings={bookListings} />
       <Container>
    
-        {/* Books showcase */}
-          <Row className="category-title">
+        {/* Books */}
+        <Container className="category-title">
+          <Row className="text-left">
             <Col lg="auto">
               <h2>Books</h2>
             </Col>
@@ -84,11 +116,11 @@ export default function Home() {
                 </CardDeck>
             </Container>
           </Row>
+          </Container>
 
-        
-        {/* Furnitures showcase */}
-        <Col>
-          <Row className="category-title">
+        {/* Furniture */}
+        <Container className="category-title">
+            <Row className="category-title"  className="text-left">
             <Col lg="auto">
               <h2>Furniture</h2>
             </Col>
@@ -102,13 +134,68 @@ export default function Home() {
             </Col>
           </Row>
           <Row className="card-container">
-            <CardDeck className="justify-content-lg-center">
-              {furnitureListings.map((furnitureListing, i) => (
-                <ListingCard key={i} {...furnitureListing} />
-              ))}
-            </CardDeck>
+            <Container>
+                <CardDeck className="justify-content-lg-center">
+                {furnitureListings.map((furnitureListing, i) => (
+                    <ListingCard key={i} {...furnitureListing} />
+                ))}
+                </CardDeck>
+            </Container>
           </Row>
-        </Col>
+        </Container>
+
+        {/* Furniture */}
+        <Container className="category-title">
+            <Row className="category-title"  className="text-left">
+            <Col lg="auto">
+              <h2>Electronics</h2>
+            </Col>
+            <Col lg="auto">
+              <p>{electronicsListings.length} listings for this category</p>
+            </Col>
+            <Col className="text-right">
+              <Button variant="secondary" href="/electronics">
+                See more
+              </Button>{" "}
+            </Col>
+          </Row>
+          <Row className="card-container">
+            <Container>
+                <CardDeck className="justify-content-lg-center">
+                {electronicsListings.map((electronicsListing, i) => (
+                    <ListingCard key={i} {...electronicsListing} />
+                ))}
+                </CardDeck>
+            </Container>
+          </Row>
+        </Container>
+        
+        {/* Others */}
+        <Container className="category-title">
+            <Row className="category-title"  className="text-left">
+            <Col lg="auto">
+              <h2>Others</h2>
+            </Col>
+            <Col lg="auto">
+              <p>{othersListings.length} listings for this category</p>
+            </Col>
+            <Col className="text-right">
+              <Button variant="secondary" href="/others">
+                See more
+              </Button>{" "}
+            </Col>
+          </Row>
+          <Row className="card-container">
+            <Container>
+                <CardDeck className="justify-content-lg-center">
+                {othersListings.map((othersListing, i) => (
+                    <ListingCard key={i} {...othersListing} />
+                ))}
+                </CardDeck>
+            </Container>
+          </Row>
+        </Container>
+
       </Container>
     </div>
   );
