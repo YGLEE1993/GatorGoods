@@ -7,6 +7,7 @@ export default function ListingCard(props) {
   const history = useHistory();
   function handleClick() {
     history.push("/productlisting");
+    // history.push("/{props.name}");
   }
 
   return (
@@ -16,7 +17,7 @@ export default function ListingCard(props) {
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
           <Row className="price-condition">
-            <Col>{props.price}</Col>
+            <Col>${props.price}</Col>
           </Row>
         </Card.Text>
         <Card.Text>{props.description}</Card.Text>

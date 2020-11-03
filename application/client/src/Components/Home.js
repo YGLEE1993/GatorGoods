@@ -15,6 +15,7 @@ import ListingCard from "./ListingCard";
 
 export default function Home() {
   const [bookListings, setBookListings] = useState([]);
+  const [furnitureListings, setFurnitureListings] = useState([]);
 
   useEffect(() => {
     const getListings = () => {
@@ -30,7 +31,22 @@ export default function Home() {
     getListings();
   }, []);
 
+  useEffect(() => {
+    const getListings = () => {
+      axios
+        .post("/api/search/searchProducts", {
+          searchTerm: "",
+          category: "furniture",
+        })
+        .then((response) => {
+          setFurnitureListings(response.data);
+        });
+    };
+    getListings();
+  }, []);
+
   console.log(bookListings);
+  console.log(furnitureListings);
   return (
     <div>
       <Jumbotron>
@@ -43,14 +59,15 @@ export default function Home() {
         </div>
       </Jumbotron>
       <Featured bookListings={bookListings} />
-      <Container style={{ marginTop: "2rem", paddingLeft: 0, paddingRight: 0 }}>
-        <Col>
-          <Row>
+      <Container>
+   
+        {/* Books showcase */}
+          <Row className="category-title">
             <Col lg="auto">
               <h2>Books</h2>
             </Col>
             <Col lg="auto">
-              <p>45 listings for this category</p>
+              <p>{bookListings.length} listings for this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" href="/books">
@@ -58,21 +75,37 @@ export default function Home() {
               </Button>{" "}
             </Col>
           </Row>
+          <Row className="card-container">
+            <Container>
+                <CardDeck className="justify-content-lg-center">
+                {bookListings.map((bookListing, i) => (
+                    <ListingCard key={i} {...bookListing} />
+                ))}
+                </CardDeck>
+            </Container>
+          </Row>
 
+        
+        {/* Furnitures showcase */}
+        <Col>
+          <Row className="category-title">
+            <Col lg="auto">
+              <h2>Furniture</h2>
+            </Col>
+            <Col lg="auto">
+              <p>{furnitureListings.length} listings for this category</p>
+            </Col>
+            <Col className="text-right">
+              <Button variant="secondary" href="/furniture">
+                See more
+              </Button>{" "}
+            </Col>
+          </Row>
           <Row className="card-container">
             <CardDeck className="justify-content-lg-center">
-              {bookListings.map((bookListing, i) => (
-                <ListingCard key={i} {...bookListing} />
+              {furnitureListings.map((furnitureListing, i) => (
+                <ListingCard key={i} {...furnitureListing} />
               ))}
-
-              {/* <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard />
-              <ListingCard /> */}
             </CardDeck>
           </Row>
         </Col>
