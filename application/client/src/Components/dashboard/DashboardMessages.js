@@ -1,55 +1,55 @@
 import React from "react";
-import { Tab, ListGroup, Row, Col } from "react-bootstrap";
+import { Tab, ListGroup, Row, Col, Container } from "react-bootstrap";
+import "./Dashboard.css"
 
 export default function DashboardMessages() {
     return (
-        <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
-            <Row style={{paddingTop: "2.5rem"}}>
-                <Col sm={4}>
-                    <ListGroup>
-                        <ListGroup.Item action href="#offer1">
-                            Listing Title | BuyerName | Contact Info
+        <Tab.Container id="list-group-tabs-example" defaultActiveKey="#offer1">
+            <Container style={{paddingTop: "2.5rem"}}>
+                <Row>
+                <Col lg={3} >
+                    <ListGroup className="list-group list-group-flush">
+                        <ListGroup.Item action href="#offer1" className="message-list" >
+                            Ikea Lamp · user001
                         </ListGroup.Item>
-                        <ListGroup.Item action href="#offer2">
-                            Listing Title | BuyerName | Contact Info
+                        <ListGroup.Item action href="#offer2" className="message-list" >
+                            Ikea Lamp · user002
+                        </ListGroup.Item>
+                        <ListGroup.Item action href="#offer3" className="message-list" >
+                            Algorithm CLRS 5th edition (textbook) · user003
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
                 <Col sm={8}>
                     <Tab.Content>
                         <Tab.Pane eventKey="#offer1">
+                            <h4>Ikea Lamp</h4>
                             <p>
-                                Just pretend you are a whisper floating across a mountain. You can do it. We artists
-                                are a different breed of people. We're a happy bunch. I will take some magic white,
-                                and a little bit of Vandyke brown and a little touch of yellow. Talk to trees, look at
-                                the birds. Whatever it takes.
-
-                                The little tiny Tim easels will let you down. We don't really know where this goes -
-                                and I'm not sure we really care. You can get away with a lot. Play with the angles.
-                                Every time you practice, you learn more. Trees grow however makes them happy. Once you
-                                learn the technique, ohhh! Turn you loose on the world; you become a tiger. Let's make
-                                some happy little clouds in our world.
+                                Mauris commodo quis imperdiet massa tincidunt nunc. Id ornare arcu odio ut sem nulla pharetra diam sit. Amet aliquam id diam maecenas ultricies mi eget mauris. Aliquam ultrices sagittis orci a scelerisque purus semper eget duis. Ipsum suspendisse ultrices gravida dictum fusce. Quis blandit turpis cursus in hac habitasse platea dictumst quisque. Fermentum dui faucibus in ornare quam viverra orci sagittis eu. Aliquam id diam maecenas ultricies mi. Varius quam quisque id diam vel quam elementum pulvinar. Quis imperdiet massa tincidunt nunc. Porttitor rhoncus dolor purus non enim praesent. Dignissim enim sit amet venenatis urna cursus eget. Augue ut lectus arcu bibendum at varius.
                             </p>
+                            <p>Contact me: (408)-666-6666</p>
+                            <p>Sent from: user001</p>
                         </Tab.Pane>
                         <Tab.Pane eventKey="#offer2">
+                            <h4>Ikea Lamp</h4>
                             <p>
-                                You need to have a very firm paint to do this. Exercising the imagination,
-                                experimenting with talents, being creative; these things, to me, are truly the windows
-                                to your soul. I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent
-                                Red, and a little bit of Prussian Blue. You've got to learn to fight the temptation to
-                                resist these things. Just let them happen. It just happens - whether or not you worried
-                                about it or tried to plan it. We wash our brush with odorless thinner. Maybe, just to
-                                play a little, we'll put a little tree here. Just let go - and fall like a little
-                                waterfall.
-
-                                You have to allow the paint to break to make it beautiful. Be so very light. Be a
-                                gentle whisper. And right there you got an almighty cloud. Use what you see, don't
-                                plan it.
+                                Cursus sit amet dictum sit amet. Vulputate mi sit amet mauris commodo quis. Amet volutpat consequat mauris nunc. Neque viverra justo nec ultrices dui sapien. Vitae elementum curabitur vitae nunc sed velit dignissim sodales. Donec ultrices tincidunt arcu non. Bibendum ut tristique et egestas quis ipsum. Ut faucibus pulvinar elementum integer enim neque volutpat. Faucibus scelerisque eleifend donec pretium vulputate sapien nec. Iaculis nunc sed augue lacus viverra vitae. Mattis molestie a iaculis at erat pellentesque.
                             </p>
+                            <p>Contact me: user002@gmail.com</p>
+                            <p>Sent from: user002</p>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="#offer3">
+                            <h4>Algorithm CLRS 5th edition(textbook)</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p>Contact me: (408)-777-7777</p>
+                            <p>Sent from: user003</p>
                         </Tab.Pane>
                     </Tab.Content>
                 </Col>
-            </Row>
+                </Row>
+            </Container>
         </Tab.Container>
     );
 }
