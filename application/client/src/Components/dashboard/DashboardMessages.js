@@ -9,7 +9,7 @@ export default function DashboardMessages() {
                 <Row>
                 <Col lg={3} >
                     <ListGroup className="list-group list-group-flush">
-                        <ListGroup.Item action href="#offer1" className="message-list" >
+                        <ListGroup.Item action href="#offer1" className="message-list">
                             Ikea Lamp · user001
                         </ListGroup.Item>
                         <ListGroup.Item action href="#offer2" className="message-list" >
