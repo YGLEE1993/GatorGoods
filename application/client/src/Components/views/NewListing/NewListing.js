@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Button, Container } from "react-bootstrap";
+import { Form, Row, Button, Container, InputGroup } from "react-bootstrap";
 // import Dropzone from 'react-dropzone';
 import axios from "axios";
 
@@ -35,8 +35,9 @@ export default function NewListing(props) {
   return (
     <div style={{ marginTop: "50px" }}>
       <Container style={{ width: "800px" }}>
-        <h3>Create Listing</h3>
+        <h3>Create a Listing</h3>
         <br />
+        
         <Form>
           <Form.Group>
             <Form.File
@@ -47,6 +48,7 @@ export default function NewListing(props) {
               onChange={handleInputChange}
             />
           </Form.Group>
+          
           <Form.Group>
             <Form.Label>Title</Form.Label>
             <Form.Control
@@ -55,35 +57,86 @@ export default function NewListing(props) {
               value={title}
               onChange={handleInputChange}
             />
+            <Form.Text className="text-muted">
+              Please limit to 40 characters.
+            </Form.Text>
           </Form.Group>
 
-          <Form.Row>
-            <Col>
-              <Form.Group>
-                <Form.Label>Category</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="category"
-                  value={category}
-                  onChange={handleInputChange}
-                >
-                  <option>Choose</option>
-                  <option>Book</option>
-                  <option>Furniture</option>
-                  <option>Electronic</option>
-                </Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Label>Price</Form.Label>
+          <Form.Group>
+            <Form.Label>Category</Form.Label>
               <Form.Control
-                placeholder="$10.00"
-                name="price"
-                value={price}
+                as="select"
+                name="category"
+                value={category}
                 onChange={handleInputChange}
-              />
-            </Col>
-          </Form.Row>
+              >
+                <option>Choose</option>
+                <option>Book</option>
+                <option>Furniture</option>
+                <option>Electronic</option>
+              </Form.Control>
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Price</Form.Label>
+                <InputGroup className="mb-2">
+                <InputGroup.Prepend>
+                  <InputGroup.Text>$</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  placeholder="10.00"
+                  name="price"
+                  value={price}
+                  onChange={handleInputChange}
+                />
+              </InputGroup>
+            </Form.Group>
+            
+            <Form.Group>
+              <Form.Label>
+                Condition
+              </Form.Label>
+              <InputGroup className="mb-2">
+                <Form.Check
+                  inline 
+                  type="radio"
+                  label="Like New"
+                  name="formHorizontalRadios"
+                  id="condition-like-new"
+                />
+                <Form.Check
+                  inline 
+                  type="radio"
+                  label="Very Good"
+                  name="formHorizontalRadios"
+                  id="condition-very-good"
+                />
+                <Form.Check
+                  inline 
+                  type="radio"
+                  label="Good"
+                  name="formHorizontalRadios"
+                  id="condition-good"
+                />
+                <Form.Check
+                  inline 
+                  type="radio"
+                  label="Acceptable"
+                  name="formHorizontalRadios"
+                  id="condition-acceptable"
+                />
+                </InputGroup>
+            </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Transaction Location</Form.Label>
+              <InputGroup className="mb-2">
+              <Form.Check inline label="Library"/>
+              <Form.Check inline label="Building 1"/>
+              <Form.Check inline label="Building 2"/>
+              <Form.Check inline label="Building 3"/>
+            </InputGroup>
+          </Form.Group>
 
           <Form.Group>
             <Form.Label>Description</Form.Label>
@@ -96,7 +149,7 @@ export default function NewListing(props) {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" onClick={submitListing}>
+          <Button variant="primary" className="btn-lg" type="submit" onClick={submitListing}>
             Submit
           </Button>
         </Form>

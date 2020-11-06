@@ -17,11 +17,11 @@ export default function DashboardListingCard() {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </Card.Text>
                     <Row className="justify-content-lg-center">
-                        <Col lg="4">
-                            <Button variant="btn btn-outline-secondary" href="/newListing">Edit</Button>
+                        <Col >
+                            <Button variant="btn btn-outline-secondary" className="button" href="/newListing">Edit</Button>
                         </Col>
-                        <Col lg="4">
-                            <Button variant="secondary" onClick={handleShow}>Delete</Button>
+                        <Col >
+                            <Button variant="secondary" className="button" onClick={handleShow}>Delete</Button>
                             <Modal show={show} onHide={handleClose}>
                                 <Modal.Header closeButton>
                                 <Modal.Title>Delete a Listing</Modal.Title>
