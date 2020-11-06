@@ -66,13 +66,15 @@ export default function Searchbox() {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group style={{ width: "75%" }}>
+        <Form.Group inline style={{ width: "35rem" }}>
           <FormControl
             placeholder="Search.."
+            className="mr-sm-2"
             value={searchTerm}
             onChange={handleInputChange}
           />
         </Form.Group>
+
         <Form.Group>
           <InputGroup.Append>
             <Button variant="outline-secondary" onClick={onSearch}>

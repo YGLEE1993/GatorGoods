@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Row, Button, Container, InputGroup } from "react-bootstrap";
+import { Form, Row, Col, Button, Container, InputGroup } from "react-bootstrap";
 // import Dropzone from 'react-dropzone';
 import axios from "axios";
 
@@ -148,10 +148,19 @@ export default function NewListing(props) {
               onChange={handleInputChange}
             />
           </Form.Group>
-
+          
+          <Row style={{ marginTop: "2rem" }}>
+            <Col lg={2}>
+          <Button variant="secondary" className="btn-lg" type="submit" onClick={submitListing}>
+            Cancel
+          </Button>
+          </Col>
+          <Col>
           <Button variant="primary" className="btn-lg" type="submit" onClick={submitListing}>
             Submit
           </Button>
+          </Col>
+          </Row>
         </Form>
       </Container>
     </div>

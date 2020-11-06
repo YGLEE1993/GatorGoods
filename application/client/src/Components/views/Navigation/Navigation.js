@@ -7,17 +7,17 @@ export default function Navigation() {
   return (
     <div>
       <Navbar className="navigation-bar" variant="light">
-        <Navbar.Brand style={{ marginLeft: "40px" }} href="/">
+        <Navbar.Brand style={{ marginLeft: "2rem" }} href="/">
           <img src={logo} width="150" height="40" alt="logo" />
         </Navbar.Brand>
-        <Nav.Item style={{ marginLeft: "40px" }}>
+        <Nav.Item style={{ marginLeft: "2rem" }}>
           <Searchbox />
         </Nav.Item>
         <Nav className="ml-auto">
-          <Nav.Link style={{ marginRight: "40px" }} href="/newListing">
+          <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">
             Create Listing
           </Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href="/">
+          <Nav.Link style={{ marginRight: "2rem" }} href="/">
             Log in
           </Nav.Link>
         </Nav>
