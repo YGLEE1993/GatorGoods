@@ -3,6 +3,7 @@ import { Jumbotron, Container, Row} from "react-bootstrap";
 import "./Individual/css/About.css";
 import placeholder from "../../assets/Stock_img.png";
 import keith from "../../assets/Keith.png"
+import joy from "../../assets/Joy.png"
 
 //import axios from "axios";
 import AboutCard from "../UI/AboutCard/AboutCard";
@@ -28,7 +29,7 @@ export default function About() {
     {
       role: "Front-end Lead",
       name: "Zhuozhuo (Joy) Liu",
-      img: placeholder,
+      img: joy,
       description:
         "I am a master student majoring in Computer Science at SFSU. I love my cat.",
       url: "/about/joy",

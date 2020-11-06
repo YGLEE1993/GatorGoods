@@ -151,7 +151,7 @@ export default function NewListing(props) {
           
           <Row style={{ marginTop: "2rem" }}>
             <Col lg={2}>
-          <Button variant="secondary" className="btn-lg" type="submit" onClick={submitListing}>
+          <Button variant="secondary" className="btn-lg" type="submit" href="/">
             Cancel
           </Button>
           </Col>
