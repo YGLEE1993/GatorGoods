@@ -4,7 +4,7 @@ import { Button, Card, Col } from "react-bootstrap";
 export default function AboutCard(props) {
   return (
     <Col lg={3}>
-      <Card style={{ width: "18rem" }}>
+      <Card>
         <Card.Img variant="top" src={props.img} />
         <Card.Body>
           <span className="card-subtext">{props.role}</span>
