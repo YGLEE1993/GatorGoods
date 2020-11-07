@@ -9,6 +9,8 @@ import {
   Form,
 } from "react-bootstrap";
 
+
+
 export default function Searchbox() {
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
@@ -51,8 +53,8 @@ export default function Searchbox() {
   return (
     <div>
       {/* Search Bar */}
-      <InputGroup className="mx-auto" style={{ width: "50rem" }}>
-        <Form.Group style={{ width: "15%" }}>
+      <InputGroup className="mx-auto" >
+        <Form.Group style={{ width: "8rem" }}>
           <Form.Control
             as="select"
             name="category"
@@ -66,7 +68,7 @@ export default function Searchbox() {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group inline style={{ width: "35rem" }}>
+        <Form.Group inline style={{ width: "20rem" }}>
           <FormControl
             placeholder="Search.."
             className="mr-sm-2"

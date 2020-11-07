@@ -12,69 +12,62 @@ import {
 import "./Home.css";
 import Featured from "./Featured";
 import ListingCard from "./ListingCard";
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
   const [bookListings, setBookListings] = useState([]);
   const [furnitureListings, setFurnitureListings] = useState([]);
   const [electronicsListings, setElectronicsListings] = useState([]);
   const [othersListings, setOthersListings] = useState([]);
+  const history = useHistory();
 
-
-  useEffect(() => {
-    const getListings = () => {
-      axios
-        .post("/api/search/searchProducts", {
-          searchTerm: "",
-          category: "book",
-        })
-        .then((response) => {
-          setBookListings(response.data);
-        });
-    };
-    getListings();
-  }, []);
+  const handleBooks = () => {
+    history.push("/books", {
+      bookListings: bookListings,
+    });
+  };
 
   useEffect(() => {
-    const getListings = () => {
-      axios
-        .post("/api/search/searchProducts", {
-          searchTerm: "",
-          category: "furniture",
-        })
-        .then((response) => {
-          setFurnitureListings(response.data);
-        });
-    };
-    getListings();
+    // const getListings = () => {
+        axios
+            .post("/api/search/searchProducts", {
+            searchTerm: "",
+            category: "book",
+            })
+            .then((response) => {
+            setBookListings(response.data);
+            });
+
+        axios
+            .post("/api/search/searchProducts", {
+            searchTerm: "",
+            category: "furniture",
+            })
+            .then((response) => {
+            setFurnitureListings(response.data);
+            });
+
+
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "electronic",
+            })
+            .then((response) => {
+                setElectronicsListings(response.data);
+            });
+
+        axios
+            .post("/api/search/searchProducts", {
+            searchTerm: "",
+            category: "others",
+            })
+            .then((response) => {
+            setOthersListings(response.data);
+            });
   }, []);
 
-  useEffect(() => {
-    const getListings = () => {
-      axios
-        .post("/api/search/searchProducts", {
-          searchTerm: "",
-          category: "electronics",
-        })
-        .then((response) => {
-          setElectronicsListings(response.data);
-        });
-    };
-    getListings();
-  }, []);
-
-  useEffect(() => {
-    const getListings = () => {
-      axios
-        .post("/api/search/searchProducts", {
-          searchTerm: "",
-          category: "others",
-        })
-        .then((response) => {
-          setOthersListings(response.data);
-        });
-    };
-    getListings();
-  }, []);
+  console.log(bookListings);
 
   return (
     <div>
@@ -100,7 +93,7 @@ export default function Home() {
               <p>{bookListings.length} listings for this category</p>
             </Col>
             <Col className="text-right">
-              <Button variant="secondary" href="/books">
+              <Button variant="secondary" onClick={handleBooks}>
                 See more
               </Button>{" "}
             </Col>

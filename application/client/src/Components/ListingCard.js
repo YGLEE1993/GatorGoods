@@ -8,7 +8,7 @@ export default function ListingCard(props) {
   const history = useHistory();
   function handleClick() {
     history.push ("/productlisting", {
-        productListing: props.productListing
+        productListing: props.bookListing
     });
   }
 
