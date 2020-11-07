@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   Container,
   CardDeck,
-  Card,
   Col,
   Row,
   Jumbotron,
@@ -12,21 +11,12 @@ import {
 import "./Home.css";
 import Featured from "./Featured";
 import ListingCard from "./ListingCard";
-import { useHistory } from "react-router-dom";
 
 export default function Home() {
   const [bookListings, setBookListings] = useState([]);
   const [furnitureListings, setFurnitureListings] = useState([]);
   const [electronicsListings, setElectronicsListings] = useState([]);
   const [othersListings, setOthersListings] = useState([]);
-  const history = useHistory();
-
-  const handleBooks = () => {
-    history.push("/books", {
-      productListings: bookListings,
-    });
-  };
-
 
   useEffect(() => {
     // const getListings = () => {
@@ -94,7 +84,7 @@ export default function Home() {
               <p>{bookListings.length} listings in this category</p>
             </Col>
             <Col className="text-right">
-              <Button variant="secondary" onClick={handleBooks}>
+              <Button variant="secondary" href="./books">
                 See more
               </Button>{" "}
             </Col>
@@ -103,7 +93,7 @@ export default function Home() {
             <Container>
                 <CardDeck className="justify-content-lg-center">
                 {bookListings.map((bookListing, i) => (
-                    <ListingCard key={i} {...bookListing} />
+                    <ListingCard key={i} {...bookListing}/>
                 ))}
                 </CardDeck>
             </Container>

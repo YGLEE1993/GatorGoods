@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Container,
   CardDeck,
@@ -12,8 +13,20 @@ import Filter from "./Filter";
 import Featured from "./Featured";
 import ListingCard from "./ListingCard";
 
-export default function Books(props) {
-  console.log(props.location.state.productListings);
+export default function Books() {
+  const [bookListings, setBookListings] = useState([]);
+  useEffect(() => {
+    // const getListings = () => {
+        axios
+            .post("/api/search/searchProducts", {
+            searchTerm: "",
+            category: "book",
+            })
+            .then((response) => {
+            setBookListings(response.data);
+            });
+  }, []);
+
   return (
     <div>
       <Featured />
@@ -49,8 +62,8 @@ export default function Books(props) {
             <Col lg={9}>
               <CardDeck className="justify-content-lg-center">
                 <CardDeck className="justify-content-lg-center">
-                  {props.location.state.productListings.map((productListing, i) => (
-                    <ListingCard key={i} {...productListing} />
+                  {bookListings.map((bookListing, i) => (
+                    <ListingCard key={i} {...bookListing} />
                   ))}
                 </CardDeck>
               </CardDeck>
