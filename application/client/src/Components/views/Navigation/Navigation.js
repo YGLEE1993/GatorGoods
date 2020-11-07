@@ -17,7 +17,7 @@ export default function Navigation() {
           <Nav.Link style={{ marginRight: "40px" }} href="/newListing">
             Create Listing
           </Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href="/">
+          <Nav.Link style={{ marginRight: "40px" }} href="/authentication">
             Log in
           </Nav.Link>
         </Nav>

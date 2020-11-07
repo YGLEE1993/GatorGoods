@@ -1,42 +1,83 @@
 import React, { useState } from "react";
 import { Modal, Button, Col, Row, Form } from "react-bootstrap";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-function AuthModal(props) {
+export default function AuthModal(props) {
+  const history = useHistory();
   const initialInputState = {
     username: "",
     email: "",
     password: "",
     passwordCheck: "",
+    loginEmail: "",
+    loginPassword: "",
   };
   const [eachEntry, setEachEntry] = useState(initialInputState);
-  const { username, email, password, passwordCheck } = eachEntry;
+  const [modalShow, setModalShow] = React.useState(true);
+  const {
+    loginEmail,
+    loginPassword,
+    username,
+    email,
+    password,
+    passwordCheck,
+  } = eachEntry;
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
 
-  // SIGN UP - TODO:
-  // Need to check (password == passwordCheck),
-  // email already exist on the databse
-  // password validation(8-20 characters..etc)
-  // sfsu email validation(does email sfsu?)
-
+  /*
+    Testing account:
+      email: admin@sfsu.edu
+      password: Team8Admin
+  */
   // ****** Sign Up ****** //
-  const handleRegister = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (email.includes("sfsu.edu") === false) {
+      alert("Email MUST be sfsu email address.");
+    } else if (password !== passwordCheck) {
+      alert("Passwords do not match. Try again.");
+    } else if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+    } else {
+      axios
+        .post("/api/auth/signup", {
+          username: username,
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          // testing
+          console.log("--------SIGN UP--------");
+          console.log(response);
+          alert(`You are successfully registered.`);
+          history.push("/");
+        });
+    }
+  };
+
+  // ****** Login ****** //
+  const handleLogin = (e) => {
+    e.preventDefault();
     axios
-      .post("/api/auth/signup", {
-        username: username,
-        email: email,
-        password: password,
+      .post("/api/auth/login", {
+        email: loginEmail,
+        password: loginPassword,
       })
-      .then(() => {
-        alert("successfully registered.");
+      .then((response) => {
+        //test
+        alert(response.data);
+        console.log(response.data);
+        console.log("Login sucess!");
+        history.push("/");
       });
   };
 
   return (
     <Modal
-      {...props}
+      show={modalShow}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -44,6 +85,7 @@ function AuthModal(props) {
       <Modal.Header
         closeButton
         style={{ marginLeft: "2rem", marginRight: "2rem" }}
+        onHide={() => setModalShow(false)}
       >
         <Modal.Title id="contained-modal-title-vcenter">
           Please log in or register to continue!
@@ -62,12 +104,26 @@ function AuthModal(props) {
             <h4>Need to log in?</h4>
             <Form>
               <Form.Group controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control required type="text" placeholder="Username" />
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="email"
+                  name="loginEmail"
+                  value={loginEmail}
+                  onChange={handleInputChange}
+                />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control required type="password" placeholder="Password" />
+                <Form.Control
+                  required
+                  type="password"
+                  name="loginPassword"
+                  placeholder="Password"
+                  value={loginPassword}
+                  onChange={handleInputChange}
+                />
                 <Form.Text className="text-muted">
                   {/* <a href="#">forgot your password?</a> */}
                 </Form.Text>
@@ -80,7 +136,7 @@ function AuthModal(props) {
                 >
                   Cancel
                 </Button>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={handleLogin}>
                   Log in!
                 </Button>
               </div>
@@ -91,7 +147,7 @@ function AuthModal(props) {
           <Col style={{ paddingLeft: "2.5rem" }}>
             <h4>You can register below!</h4>
             <Form>
-              <Form.Group controlId="formBasicUsername">
+              <Form.Group>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   required
@@ -102,7 +158,7 @@ function AuthModal(props) {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group>
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
                   required
@@ -116,7 +172,7 @@ function AuthModal(props) {
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   required
@@ -132,7 +188,7 @@ function AuthModal(props) {
                   or emoji.
                 </small>
               </Form.Group>
-              <Form.Group controlId="formBasicPassword">
+              <Form.Group>
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                   required
@@ -155,6 +211,7 @@ function AuthModal(props) {
                   variant="secondary"
                   type="reset"
                   style={{ marginRight: "1rem" }}
+                  onClick={() => setModalShow(false)}
                 >
                   Cancel
                 </Button>
@@ -174,16 +231,16 @@ function AuthModal(props) {
   );
 }
 
-export default function LazyModal() {
-  const [modalShow, setModalShow] = React.useState(false);
+// export default function LazyModal() {
+//   const [modalShow, setModalShow] = React.useState(false);
 
-  return (
-    <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Login | Signup
-      </Button>
+//   return (
+//     <>
+//       <Button variant="primary" onClick={() => setModalShow(true)}>
+//         Login | Signup
+//       </Button>
 
-      <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
-    </>
-  );
-}
+//       <AuthModal show={modalShow} onHide={() => setModalShow(false)} />
+//     </>
+//   );
+// }
