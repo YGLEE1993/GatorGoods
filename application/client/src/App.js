@@ -6,6 +6,7 @@ import WarningBanner from "./Components/WarningBanner";
 import Landing from "./Components/views/Landing/Landing"
 import Searchbox from "./Components/Searchbox"
 import "bootswatch/dist/pulse/bootstrap.min.css";
+import Footer from "./Components/Footer"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <WarningBanner />
       <Navigation />
       <Routes />
+      <Footer />
     </div>
   );
 }

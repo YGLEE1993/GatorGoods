@@ -4,9 +4,12 @@ import "./ListingCard.css";
 import { useHistory } from "react-router-dom";
 
 export default function ListingCard(props) {
+    console.log(props.productListings);
   const history = useHistory();
   function handleClick() {
-    history.push("/productlisting");
+    history.push ("/productlisting", {
+        productListing: props
+    });
   }
 
   return (
@@ -16,7 +19,7 @@ export default function ListingCard(props) {
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
           <Row className="price-condition">
-            <Col>{props.price}</Col>
+            <Col>${props.price}</Col>
           </Row>
         </Card.Text>
         <Card.Text>{props.description}</Card.Text>

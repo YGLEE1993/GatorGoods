@@ -6,8 +6,9 @@ import AuthModal from "../views/UI/AuthModal/AuthModal";
 
 export default function Dashboard() {
   return (
-    <Container className="dashboard container" style={{ paddingTop: "5rem" }}>
-      <h3>My New Dashboard</h3>
+    <Container className="dashboard container" style={{ marginTop: "2rem" }}>
+      <h3>My Dashboard</h3>
+      <Container style={{ paddingTop: "2rem" }}>
       <Tabs
         defaultActiveKey="listings"
         transition={false}
@@ -20,6 +21,7 @@ export default function Dashboard() {
           <DashboardMessages />
         </Tab>
       </Tabs>
+      </Container>
       <AuthModal />
     </Container>
   );
