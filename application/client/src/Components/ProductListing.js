@@ -6,6 +6,7 @@ export default function ProductListing(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [productListing, setProductListing] = useState(props.location.state.productListing);
 
     console.log(props.location.state.productListing);
 
@@ -17,8 +18,8 @@ export default function ProductListing(props) {
                         <Image src="holder.js/100px160" roundedCircle />
                     </Col>
                     <Col lg={6}>
-                        <h3>{props.title}</h3>
-                        <h2 className="price">${props.price}</h2>
+                        <h3>{productListing.title}</h3>
+                        <h2 className="price">${productListing.price}</h2>
                         <Container className="container-description">
                             <p><i class="fas fa-history"></i> &nbsp; Condition: Very good</p>
                             <p><i class="fas fa-map-marker-alt"></i> &nbsp; Transaction location: Library, Building 1, Building 2</p>

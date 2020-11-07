@@ -23,9 +23,10 @@ export default function Home() {
 
   const handleBooks = () => {
     history.push("/books", {
-      bookListings: bookListings,
+      productListings: bookListings,
     });
   };
+
 
   useEffect(() => {
     // const getListings = () => {
@@ -80,7 +81,7 @@ export default function Home() {
           </p>
         </div>
       </Jumbotron>
-      <Featured bookListings={bookListings} />
+      <Featured productListings={bookListings} />
       <Container>
    
         {/* Books */}

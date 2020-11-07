@@ -13,7 +13,7 @@ import Featured from "./Featured";
 import ListingCard from "./ListingCard";
 
 export default function Books(props) {
-  console.log(props.location.state.bookListings);
+  console.log(props.location.state.productListings);
   return (
     <div>
       <Featured />
@@ -49,8 +49,8 @@ export default function Books(props) {
             <Col lg={9}>
               <CardDeck className="justify-content-lg-center">
                 <CardDeck className="justify-content-lg-center">
-                  {props.location.state.bookListings.map((bookListing, i) => (
-                    <ListingCard key={i} {...bookListing} />
+                  {props.location.state.productListings.map((productListing, i) => (
+                    <ListingCard key={i} {...productListing} />
                   ))}
                 </CardDeck>
               </CardDeck>

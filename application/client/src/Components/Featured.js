@@ -15,7 +15,7 @@ export default function Featured(props) {
 
   const handleBook = () => {
     history.push("/books", {
-      bookListings: props.bookListings,
+      bookListings: props.productListings,
     });
   };
 
