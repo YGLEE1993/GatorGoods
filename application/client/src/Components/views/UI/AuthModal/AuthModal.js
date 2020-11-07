@@ -4,7 +4,6 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function AuthModal(props) {
-  const history = useHistory();
   const initialInputState = {
     username: "",
     email: "",
@@ -32,6 +31,7 @@ export default function AuthModal(props) {
       email: admin@sfsu.edu
       password: Team8Admin
   */
+
   // ****** Sign Up ****** //
   const handleRegister = (e) => {
     e.preventDefault();
@@ -50,7 +50,6 @@ export default function AuthModal(props) {
         })
         .then((response) => {
           // testing
-          console.log("--------SIGN UP--------");
           // console.log(response);
           alert(response.data);
         });
@@ -69,7 +68,6 @@ export default function AuthModal(props) {
         //test
         alert(response.data);
         console.log(response.data);
-        // console.log("Login sucess!");
       });
   };
 

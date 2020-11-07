@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // Signup
-// TODO:  Need to check if email already exist.
+// TODO: need to redirect to home page after signed up
 exports.signup = (req, res) => {
   const user_id = 0;
   const full_name = req.body.username;
@@ -36,7 +36,8 @@ exports.signup = (req, res) => {
 };
 
 // Login
-// TODO: need to work on webtoken for login user.
+// TODO: need to work on webtoken for login user
+//       need to redirect to home page after login
 exports.login = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -52,7 +53,7 @@ exports.login = (req, res) => {
           if (match) {
             res.send(result[0].email);
             console.log("Matched");
-            res.redirect("/");
+            // res.redirect("/");
             // alert("password matched");
             // const token = result[0].user_id.generateJwtToken();
             // res.status(200).json({ token });
