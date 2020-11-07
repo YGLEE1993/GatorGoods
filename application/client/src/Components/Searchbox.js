@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {
-  Jumbotron,
-  Button,
-  InputGroup,
-  FormControl,
-  Form,
-} from "react-bootstrap";
+import { Button, InputGroup, FormControl, Form } from "react-bootstrap";
 
 export default function Searchbox() {
   const [searchTerm, setSearchTerm] = useState("");

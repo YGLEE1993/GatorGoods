@@ -17,7 +17,7 @@ exports.searchProducts = (req, res) => {
   }
   connection.query(query, (err, result) => {
     if (err) res.send(err);
-    else console.log(result);
-    res.send(result);
+    // console.log(result);
+    else res.send(result);
   });
 };

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import Searchbox from "../../Searchbox";
 import logo from "../../assets/logo.png";
+import AuthModal from "../UI/AuthModal/AuthModal";
 
-export default function Navigation() {
+export default function Navigation({ modal }) {
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <div>
       <Navbar className="navigation-bar" variant="light">
@@ -17,7 +19,10 @@ export default function Navigation() {
           <Nav.Link style={{ marginRight: "40px" }} href="/newListing">
             Create Listing
           </Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href="/">
+          <Nav.Link
+            style={{ marginRight: "40px" }}
+            onClick={() => setModalShow(true)}
+          >
             Log in
           </Nav.Link>
         </Nav>
@@ -41,6 +46,7 @@ export default function Navigation() {
           </Nav.Link>
         </Nav>
       </Navbar>
+      <AuthModal modal={modalShow} />;
     </div>
   );
 }
