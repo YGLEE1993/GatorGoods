@@ -51,7 +51,7 @@ exports.login = (req, res) => {
         .then((match) => {
           console.log(match);
           if (match) {
-            res.send(result[0].email);
+            res.send(`Welcome ${result[0].email}!`);
             console.log("Matched");
             // res.redirect("/");
             // alert("password matched");
