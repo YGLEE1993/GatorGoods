@@ -90,7 +90,7 @@ export default function Home() {
               <h2>Books</h2>
             </Col>
             <Col lg="auto">
-              <p>{bookListings.length} listings for this category</p>
+              <p>{bookListings.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" onClick={handleBooks}>
@@ -116,7 +116,7 @@ export default function Home() {
               <h2>Furniture</h2>
             </Col>
             <Col lg="auto">
-              <p>{furnitureListings.length} listings for this category</p>
+              <p>{furnitureListings.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" href="/furniture">
@@ -142,7 +142,7 @@ export default function Home() {
               <h2>Electronics</h2>
             </Col>
             <Col lg="auto">
-              <p>{electronicsListings.length} listings for this category</p>
+              <p>{electronicsListings.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" href="/electronics">
@@ -168,7 +168,7 @@ export default function Home() {
               <h2>Others</h2>
             </Col>
             <Col lg="auto">
-              <p>{othersListings.length} listings for this category</p>
+              <p>{othersListings.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" href="/others">
