@@ -51,9 +51,8 @@ export default function AuthModal(props) {
         .then((response) => {
           // testing
           console.log("--------SIGN UP--------");
-          console.log(response);
-          alert(`You are successfully registered.`);
-          history.push("/");
+          // console.log(response);
+          alert(response.data);
         });
     }
   };
@@ -70,8 +69,7 @@ export default function AuthModal(props) {
         //test
         alert(response.data);
         console.log(response.data);
-        console.log("Login sucess!");
-        history.push("/");
+        // console.log("Login sucess!");
       });
   };
 
@@ -88,7 +86,7 @@ export default function AuthModal(props) {
         onHide={() => setModalShow(false)}
       >
         <Modal.Title id="contained-modal-title-vcenter">
-          Please log in or register to continue!
+          Please login or join us to continue our service!
         </Modal.Title>
       </Modal.Header>
       <Modal.Body
@@ -101,7 +99,7 @@ export default function AuthModal(props) {
         <Row>
           {/*   Log In    */}
           <Col className="border-right" style={{ paddingRight: "2.5rem" }}>
-            <h4>Need to log in?</h4>
+            <h4>Login</h4>
             <Form>
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Email</Form.Label>
@@ -133,11 +131,12 @@ export default function AuthModal(props) {
                   variant="secondary"
                   type="reset"
                   style={{ marginRight: "1rem" }}
+                  onClick={() => setModalShow(false)}
                 >
                   Cancel
                 </Button>
                 <Button variant="primary" type="submit" onClick={handleLogin}>
-                  Log in!
+                  Log in
                 </Button>
               </div>
             </Form>
@@ -145,7 +144,7 @@ export default function AuthModal(props) {
 
           {/*   Sign Up    */}
           <Col style={{ paddingLeft: "2.5rem" }}>
-            <h4>You can register below!</h4>
+            <h4>Register</h4>
             <Form>
               <Form.Group>
                 <Form.Label>Username</Form.Label>
@@ -220,7 +219,7 @@ export default function AuthModal(props) {
                   type="submit"
                   onClick={handleRegister}
                 >
-                  Sign me up!
+                  Sign up
                 </Button>
               </div>
             </Form>

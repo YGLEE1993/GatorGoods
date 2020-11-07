@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import Searchbox from "../../Searchbox";
 import logo from "../../assets/logo.png";
+import AuthModal from "../UI/AuthModal/AuthModal";
 
 export default function Navigation() {
   return (

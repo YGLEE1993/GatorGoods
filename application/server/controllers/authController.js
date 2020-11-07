@@ -9,17 +9,28 @@ exports.signup = (req, res) => {
   const full_name = req.body.username;
   const email = req.body.email;
   const password = bcrypt.hashSync(req.body.password, 12);
-  const query =
-    "INSERT INTO  gatorgoods.User(user_id, full_name, email, password) VALUES ?";
-  const values = [[user_id, full_name, email, password]];
-  connection.query(query, [values], (err, result) => {
+  const checkUserquery = `SELECT * FROM gatorgoods.User WHERE email ="${email}"`;
+  console.log(email);
+  connection.query(checkUserquery, (err, result) => {
+    console.log(result);
     if (err) {
       console.log(err);
-      res.send(err);
+    }
+    if (result.length == 0) {
+      const query =
+        "INSERT INTO  gatorgoods.User(user_id, full_name, email, password) VALUES ?";
+      const values = [[user_id, full_name, email, password]];
+      connection.query(query, [values], (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        } else {
+          res.send("Sucessfully registered.");
+          // res.redirect("/");
+        }
+      });
     } else {
-      console.log("-------sign up -------");
-      console.log(result);
-      res.send(result);
+      res.send("User already exist. Try another email.");
     }
   });
 };
@@ -41,6 +52,7 @@ exports.login = (req, res) => {
           if (match) {
             res.send(result[0].email);
             console.log("Matched");
+            res.redirect("/");
             // alert("password matched");
             // const token = result[0].user_id.generateJwtToken();
             // res.status(200).json({ token });
@@ -57,3 +69,4 @@ exports.login = (req, res) => {
 //     expiresIn: process.env.JWT_EXPIRES,
 //   });
 // };
+//
