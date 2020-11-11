@@ -9,7 +9,8 @@ import {
     DropdownButton,
     Dropdown,
     Button,
-    Form, CardColumns
+    Form,
+    CardColumns
 } from "react-bootstrap";
 import "./Category.css"
 import Filter from "./Filter";
@@ -17,17 +18,17 @@ import Featured from "./Featured"
 import ListingCard from "./ListingCard"
 import axios from "axios";
 
-export default function Furniture () {
-    const [furnitureListings, setFurnitureListings] = useState([]);
+export default function Other() {
+    const [otherListings, setOtherListings] = useState([]);
     useEffect(() => {
         // const getListings = () => {
         axios
             .post("/api/search/searchProducts", {
                 searchTerm: "",
-                category: "2", //furniture
+                category: "4", //other
             })
             .then((response) => {
-                setFurnitureListings(response.data);
+                setOtherListings(response.data);
             });
     }, []);
 
@@ -38,10 +39,10 @@ export default function Furniture () {
                 <Col>
                     <Row>
                         <Col>
-                            <h2>Furniture</h2>
+                            <h2>Other</h2>
                         </Col>
                         <Col lg={6}>
-                            <p>{furnitureListings.length} listings in this category</p>
+                            <p>{otherListings.length} listings in this category</p>
                         </Col>
                         <Col className="text-right">
                             <DropdownButton
@@ -65,8 +66,8 @@ export default function Furniture () {
                         </Col>
                         <Col lg={9}>
                             <CardColumns className="row">
-                                    {furnitureListings.map((furnitureListing, i) => (
-                                        <ListingCard key={i} {...furnitureListing} />
+                                    {otherListings.map((otherListing, i) => (
+                                        <ListingCard key={i} {...otherListing} />
                                     ))}
                             </CardColumns>
                         </Col>

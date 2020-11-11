@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   Container,
   CardDeck,
+  CardColumns,
   Col,
   Row,
   Jumbotron,
@@ -14,47 +15,90 @@ import ListingCard from "./ListingCard";
 
 export default function Home() {
   const [bookListings, setBookListings] = useState([]);
+  const [bookCount, setBookCounts] = useState([]);
   const [furnitureListings, setFurnitureListings] = useState([]);
+  const [furnitureCount, setFurnitureCounts] = useState([]);
   const [electronicsListings, setElectronicsListings] = useState([]);
-  const [othersListings, setOthersListings] = useState([]);
+  const [electronicsCount, setElectronicsCounts] = useState([]);
+  const [otherListings, setOtherListings] = useState([]);
+  const [otherCount, setOtherCounts] = useState([]);
 
   useEffect(() => {
     // const getListings = () => {
-        axios
-            .post("/api/search/searchProducts", {
-            searchTerm: "",
-            category: "book",
-            })
-            .then((response) => {
-            setBookListings(response.data);
-            });
-
-        axios
-            .post("/api/search/searchProducts", {
-            searchTerm: "",
-            category: "furniture",
-            })
-            .then((response) => {
-            setFurnitureListings(response.data);
-            });
-
-
+      //___________________ books category and search total ____________________
         axios
             .post("/api/search/searchProducts", {
                 searchTerm: "",
-                category: "electronic",
+                category: "1", //books
+                homepage: "1", //limit response to 4
+            })
+            .then((response) => {
+                setBookListings(response.data);
+            });
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "1", //books
+            })
+            .then((response) => {
+                setBookCounts(response.data);
+            });
+
+      //___________________ furniture category and search total ____________________
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "2", //furniture
+                homepage: "1", //limit response to 4
+            })
+            .then((response) => {
+                setFurnitureListings(response.data);
+            });
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "2", //furniture
+            })
+            .then((response) => {
+                setFurnitureCounts(response.data);
+            });
+
+      //___________________ electronics category and search total ____________________
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "3", //electronics
+                homepage: "1", //limit response to 4
             })
             .then((response) => {
                 setElectronicsListings(response.data);
             });
-
         axios
             .post("/api/search/searchProducts", {
-            searchTerm: "",
-            category: "others",
+                searchTerm: "",
+                category: "3", //electronics
             })
             .then((response) => {
-            setOthersListings(response.data);
+                setElectronicsCounts(response.data);
+            });
+
+      //___________________ other category and search total ____________________
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "4", //other
+                homepage: "1", //limit response to 4
+            })
+            .then((response) => {
+                setOtherListings(response.data);
+            });
+        axios
+            .post("/api/search/searchProducts", {
+                searchTerm: "",
+                category: "4", //other
+            })
+            .then((response) => {
+                setOtherCounts(response.data);
             });
   }, []);
 
@@ -81,22 +125,20 @@ export default function Home() {
               <h2>Books</h2>
             </Col>
             <Col lg="auto">
-              <p>{bookListings.length} listings in this category</p>
+              <p style={{ paddingTop: "11.6px" }}>{bookCount.length} listings in this category</p>
             </Col>
             <Col className="text-right">
-              <Button variant="secondary" href="./books">
+              <Button variant="secondary" href="/books">
                 See more
               </Button>{" "}
             </Col>
           </Row>
           <Row className="card-container">
-            <Container>
-                <CardDeck className="justify-content-lg-center">
+              <CardColumns className="row">
                 {bookListings.map((bookListing, i) => (
                     <ListingCard key={i} {...bookListing}/>
                 ))}
-                </CardDeck>
-            </Container>
+              </CardColumns>
           </Row>
           </Container>
 
@@ -107,7 +149,7 @@ export default function Home() {
               <h2>Furniture</h2>
             </Col>
             <Col lg="auto">
-              <p>{furnitureListings.length} listings in this category</p>
+              <p style={{ paddingTop: "11.6px" }}>{furnitureCount.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" href="/furniture">
@@ -116,24 +158,22 @@ export default function Home() {
             </Col>
           </Row>
           <Row className="card-container">
-            <Container>
-                <CardDeck className="justify-content-lg-center">
+              <CardColumns className="row">
                 {furnitureListings.map((furnitureListing, i) => (
                     <ListingCard key={i} {...furnitureListing} />
                 ))}
-                </CardDeck>
-            </Container>
+              </CardColumns>
           </Row>
         </Container>
 
-        {/* Furniture */}
+        {/* Electronics */}
         <Container className="category-title">
             <Row className="category-title"  className="text-left">
             <Col lg="auto">
               <h2>Electronics</h2>
             </Col>
             <Col lg="auto">
-              <p>{electronicsListings.length} listings in this category</p>
+              <p style={{ paddingTop: "11.6px" }}>{electronicsCount.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <Button variant="secondary" href="/electronics">
@@ -142,39 +182,35 @@ export default function Home() {
             </Col>
           </Row>
           <Row className="card-container">
-            <Container>
-                <CardDeck className="justify-content-lg-center">
+            <CardColumns className="row">
                 {electronicsListings.map((electronicsListing, i) => (
                     <ListingCard key={i} {...electronicsListing} />
                 ))}
-                </CardDeck>
-            </Container>
+            </CardColumns>
           </Row>
         </Container>
         
-        {/* Others */}
+        {/* Other */}
         <Container className="category-title">
             <Row className="category-title"  className="text-left">
             <Col lg="auto">
-              <h2>Others</h2>
+              <h2>Other</h2>
             </Col>
             <Col lg="auto">
-              <p>{othersListings.length} listings in this category</p>
+              <p style={{ paddingTop: "11.6px" }}>{otherCount.length} listings in this category</p>
             </Col>
             <Col className="text-right">
-              <Button variant="secondary" href="/others">
+              <Button variant="secondary" href="/other">
                 See more
               </Button>{" "}
             </Col>
           </Row>
           <Row className="card-container">
-            <Container>
-                <CardDeck className="justify-content-lg-center">
-                {othersListings.map((othersListing, i) => (
-                    <ListingCard key={i} {...othersListing} />
+                <CardColumns className="row">
+                {otherListings.map((otherListing, i) => (
+                    <ListingCard key={i} {...otherListing} />
                 ))}
-                </CardDeck>
-            </Container>
+                </CardColumns>
           </Row>
         </Container>
 

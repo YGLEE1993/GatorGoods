@@ -21,9 +21,9 @@ export default function ProductListing(props) {
                         <h3>{productListing.title}</h3>
                         <h2 className="price">${productListing.price}</h2>
                         <Container className="container-description">
-                            <p><i class="fas fa-history"></i> &nbsp; Condition: Very good</p>
-                            <p><i class="fas fa-map-marker-alt"></i> &nbsp; Transaction location: Library, Building 1, Building 2</p>
-                            <p><i class="fas fa-info-circle"></i> &nbsp; Details: - Basic Ikea lamp, black base and frosted shade. - Small dent in the base as pictured. Clean and works well.</p>
+                            <p><i class="fas fa-history"></i> &nbsp; Condition: {productListing.condition}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> &nbsp; Transaction location: {productListing.location}</p>
+                            <p><i class="fas fa-info-circle"></i> &nbsp; Details: {productListing.description}</p>
                             
                         </Container>
                         <Button variant="primary" size="lg" onClick={handleShow}><i class="far fa-comment-dots"></i> &nbsp; Contact seller</Button>{' '}

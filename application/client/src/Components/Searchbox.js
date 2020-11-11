@@ -37,9 +37,9 @@ export default function Searchbox() {
 
   // onSearch -> redirect to result page
   const onSearch = () => {
-    history.push("/test", {
+    history.push("/searchresults", {
       productListings: productListings,
-      category: category,
+      category: category.valueOf(),
       searchTerm: searchTerm,
     });
   };
@@ -56,9 +56,9 @@ export default function Searchbox() {
             onChange={handleCategoryChange}
           >
             <option>Category</option>
-            <option>Book</option>
-            <option>Furniture</option>
-            <option>Electronic</option>
+            <option value={"1"}>Books</option>
+            <option value={"2"}>Furniture</option>
+            <option value={"3"}>Electronics</option>
           </Form.Control>
         </Form.Group>
 

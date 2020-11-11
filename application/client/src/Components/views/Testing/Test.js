@@ -6,13 +6,13 @@ export default function Test(props) {
 
   useEffect(() => {
     setProductListings(props.location.state.productListings);
-    props.location.state.productListings.map((productListing) => {
-      const newImage = new Buffer.from(productListing.image.data).toString(
-        "base64"
-      );
-      productListing.image.data = newImage;
-      return console.log(productListings);
-    });
+    // props.location.state.productListings.map((productListing) => {
+    //   const newImage = new Buffer.from(productListing.image.data).toString(
+    //     "base64"
+    //   );
+    //   productListing.image.data = newImage;
+    //   return console.log(productListings);
+    // });
   }, [props.location.state.productListings, productListings]);
 
   return (
@@ -31,10 +31,11 @@ export default function Test(props) {
             <Card style={{ width: "18rem" }}>
               <Card.Img
                 variant="top"
-                src={`data:image/jpeg;base64, ${productListing.image.data}`}
+                src="holder.js/100px160"
+                // src={`data:image/jpeg;base64, ${productListing.image.data}`}
               />
               <Card.Body>
-                <span className="card-subtext">{productListing.category}</span>
+                {/*<span className="card-subtext">{productListing.category}</span>*/}
                 <Card.Title>{productListing.title}</Card.Title>
                 <Card.Text>{productListing.description}</Card.Text>
                 <Card.Text>${productListing.price}</Card.Text>

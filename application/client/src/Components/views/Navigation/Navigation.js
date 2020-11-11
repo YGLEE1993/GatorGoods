@@ -38,8 +38,8 @@ export default function Navigation({ modal }) {
           <Nav.Link style={{ marginRight: "40px" }} href="./electronics">
             Electronics
           </Nav.Link>
-          <Nav.Link style={{ marginRight: "40px" }} href="./others">
-            Others
+          <Nav.Link style={{ marginRight: "40px" }} href="./other">
+            Other
           </Nav.Link>
           <Nav.Link style={{ marginRight: "40px" }} href="/about">
             About Team

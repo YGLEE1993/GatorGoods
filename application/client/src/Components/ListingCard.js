@@ -13,7 +13,7 @@ export default function ListingCard(props) {
   }
 
   return (
-    <Card onClick={handleClick} className="listingcard">
+    <Card onClick={handleClick} className="listingcard" style={{ height: '30rem', width: '15rem'}}>
       <Card.Img variant="top" src="holder.js/100px160" />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>

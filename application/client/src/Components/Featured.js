@@ -9,15 +9,19 @@ import others from "./assets/others.jpeg";
 
 export default function Featured(props) {
   const history = useHistory();
-  function handleClick() {
+
+  function handleBook() {
+    history.push("/books")
+  }
+  function handleFurniture() {
     history.push("/furniture");
   }
-
-  const handleBook = () => {
-    history.push("/books", {
-      bookListings: props.productListings,
-    });
-  };
+  function handleElectronics() {
+    history.push("/electronics")
+  }
+  function handleOther() {
+    history.push("/other")
+  }
 
   return (
     <div>
@@ -30,22 +34,22 @@ export default function Featured(props) {
               <Card.Title>Books</Card.Title>
             </Card.Body>
           </Card>
-          <Card onClick={handleClick} style={{ border: 0 }} className="category-card">
+          <Card onClick={handleFurniture} style={{ border: 0 }} className="category-card">
             <Card.Img variant="top" src={furniture} />
             <Card.Body>
               <Card.Title>Furniture</Card.Title>
             </Card.Body>
           </Card>
-          <Card onClick={handleClick} style={{ border: 0 }} className="category-card">
+          <Card onClick={handleElectronics} style={{ border: 0 }} className="category-card">
             <Card.Img variant="top" src={electronics} />
             <Card.Body>
               <Card.Title>Electronics</Card.Title>
             </Card.Body>
           </Card>
-          <Card onClick={handleClick} style={{ border: 0 }} className="category-card">
+          <Card onClick={handleOther} style={{ border: 0 }} className="category-card">
             <Card.Img variant="top" src={others} />
             <Card.Body>
-              <Card.Title>Others</Card.Title>
+              <Card.Title>Other</Card.Title>
             </Card.Body>
           </Card>
         </CardDeck>

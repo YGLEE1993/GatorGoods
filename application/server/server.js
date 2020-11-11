@@ -13,7 +13,7 @@ app.use("/api/search", require("./routers/searchRouter"));
 app.use("/api/auth", require("./routers/authRouter"));
 app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../client", "public", "index.html"));
 });
 
 const port = process.env.PORT || 5000;

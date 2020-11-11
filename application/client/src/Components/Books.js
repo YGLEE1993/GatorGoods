@@ -3,6 +3,8 @@ import axios from "axios";
 import {
   Container,
   CardDeck,
+  CardColumns,
+  CardGroup,
   Col,
   Row,
   DropdownButton,
@@ -19,11 +21,11 @@ export default function Books() {
     // const getListings = () => {
         axios
             .post("/api/search/searchProducts", {
-            searchTerm: "",
-            category: "book",
+              searchTerm: "",
+              category: "1", //books
             })
             .then((response) => {
-            setBookListings(response.data);
+              setBookListings(response.data);
             });
   }, []);
 
@@ -37,7 +39,7 @@ export default function Books() {
               <h2>Books</h2>
             </Col>
             <Col lg={6}>
-              <p>45 listings in this category</p>
+              <p>{bookListings.length} listings in this category</p>
             </Col>
             <Col className="text-right">
               <DropdownButton
@@ -60,13 +62,11 @@ export default function Books() {
               <Filter />
             </Col>
             <Col lg={9}>
-              <CardDeck className="justify-content-lg-center">
-                <CardDeck className="justify-content-lg-center">
+              <CardColumns className="row">
                   {bookListings.map((bookListing, i) => (
                     <ListingCard key={i} {...bookListing} />
                   ))}
-                </CardDeck>
-              </CardDeck>
+              </CardColumns>
             </Col>
           </Row>
         </Col>

@@ -1,35 +1,47 @@
-import React, {useEffect, useState} from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
     Container,
     CardDeck,
-    CardGroup,
-    Card,
+    CardColumns,
     Col,
     Row,
     DropdownButton,
     Dropdown,
-    Button,
-    Form, CardColumns
 } from "react-bootstrap";
-import "./Category.css"
-import Filter from "./Filter";
-import Featured from "./Featured"
-import ListingCard from "./ListingCard"
-import axios from "axios";
+import "../../Category.css";
+import Filter from "../../Filter";
+import Featured from "../../Featured";
+import ListingCard from "../../ListingCard";
 
-export default function Furniture () {
-    const [furnitureListings, setFurnitureListings] = useState([]);
+export default function SearchResults(props) {
+    const [productListings, setProductListings] = useState([]);
+
     useEffect(() => {
-        // const getListings = () => {
-        axios
-            .post("/api/search/searchProducts", {
-                searchTerm: "",
-                category: "2", //furniture
-            })
-            .then((response) => {
-                setFurnitureListings(response.data);
-            });
-    }, []);
+        setProductListings(props.location.state.productListings);
+        // props.location.state.productListings.map((productListing) => {
+        //   const newImage = new Buffer.from(productListing.image.data).toString(
+        //     "base64"
+        //   );
+        //   productListing.image.data = newImage;
+        //   return console.log(productListings);
+        // });
+    }, [props.location.state.productListings, productListings]);
+
+    function categoryRender() {
+        let cat;
+        switch(props.location.state.category){
+            case "1":
+                cat = "Books";
+                break;
+            case "2":
+                cat = "Furniture";
+                break;
+            case "3":
+                cat = "Electronics";
+        }
+        return cat;
+    }
 
     return (
         <div>
@@ -38,10 +50,15 @@ export default function Furniture () {
                 <Col>
                     <Row>
                         <Col>
-                            <h2>Furniture</h2>
+                            <h3>
+                            <span style={{ color: "#e67a00" }}>
+                                {categoryRender()} {props.location.state.searchTerm}{" "}
+                            </span>
+                                Results
+                            </h3>
                         </Col>
                         <Col lg={6}>
-                            <p>{furnitureListings.length} listings in this category</p>
+                            <p>{productListings.length} listings found</p>
                         </Col>
                         <Col className="text-right">
                             <DropdownButton
@@ -65,8 +82,8 @@ export default function Furniture () {
                         </Col>
                         <Col lg={9}>
                             <CardColumns className="row">
-                                    {furnitureListings.map((furnitureListing, i) => (
-                                        <ListingCard key={i} {...furnitureListing} />
+                                    {productListings.map((productListing, i) => (
+                                        <ListingCard key={i} {...productListing} />
                                     ))}
                             </CardColumns>
                         </Col>
