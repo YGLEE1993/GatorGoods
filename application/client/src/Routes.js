@@ -5,7 +5,6 @@ import YG from "./Components/views/About/Individual/YG";
 import Joy from "./Components/views/About/Individual/Joy";
 import Keith from "./Components/views/About/Individual/Keith";
 import Trenton from "./Components/views/About/Individual/Trenton";
-import Test from "./Components/views/Testing/Test";
 import NewListing from "./Components/views/NewListing/NewListing";
 import Dashboard from "./Components/dashboard/Dashboard";
 import Home from "./Components/Home";
@@ -17,10 +16,12 @@ import Result from "./Components/Result";
 import ProductListing from "./Components/ProductListing";
 import Auth from "./Components/views/UI/AuthModal/AuthModal";
 import SearchResults from "./Components/views/Testing/SearchResults";
+import Navigation from "./Components/views/Navigation/Navigation";
 
 export default function Routes() {
   return (
     <Router>
+      <Navigation />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
