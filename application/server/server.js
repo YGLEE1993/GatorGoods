@@ -3,10 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/api/product", require("./routers/productRouter"));
 app.use("/api/search", require("./routers/searchRouter"));

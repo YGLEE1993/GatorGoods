@@ -52,10 +52,9 @@ export default function AuthModal(props) {
           password: password,
         })
         .then((response) => {
-          // testing
-          // console.log(response);
+          console.log(response.data);
+          alert(response.data.message);
           setModalShow(false);
-          alert(response.data);
         });
     }
   };
@@ -69,10 +68,13 @@ export default function AuthModal(props) {
         password: loginPassword,
       })
       .then((response) => {
-        //test
-        setModalShow(false);
-        alert(response.data);
+        alert(response.data.message);
+        console.log(response);
         console.log(response.data);
+        console.log(response.data.message);
+        const jwt_token = response.data.jwtToken;
+        console.log(jwt_token);
+        setModalShow(false);
       });
   };
 
