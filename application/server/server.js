@@ -4,11 +4,30 @@ const cors = require("cors");
 const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
-app.use(cors());
+app.use(
+  cors({
+    orgin: ["/"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  session({
+    key: "user_id",
+    secret: "authentication",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      expires: 60 * 60 * 24, //24hrs
+    },
+  })
+);
 
 app.use("/api/product", require("./routers/productRouter"));
 app.use("/api/search", require("./routers/searchRouter"));

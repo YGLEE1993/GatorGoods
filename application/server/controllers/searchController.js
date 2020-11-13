@@ -8,7 +8,7 @@ exports.searchProducts = (req, res) => {
   // 1. get All product
   let query = `SELECT * FROM gatorgoods.Product_Listing WHERE visible="1"`;
   // 2. get products by Category
-  if (searchTerm === "" && category !== "" && homepage === "1"){
+  if (searchTerm === "" && category !== "" && homepage === "1") {
     query = `SELECT * FROM gatorgoods.Product_Listing WHERE category="${category}" AND visible="1" LIMIT 0, 4`;
     // search below is first attempts at connecting fk from product_listing to image_blob - pulls but does not render image
     // query = `SELECT

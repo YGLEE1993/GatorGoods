@@ -66,17 +66,11 @@ exports.login = (req, res) => {
           console.log(match);
           if (match) {
             console.log("Matched");
-            const token = jwt.sign({ data: result[0].user_id }, "secretToken", {
-              expiresIn: "1h",
-            });
-            res
-              .cookie("jwt", token)
-              .status(200)
-              .json({
-                sucess: true,
-                jwtToken: token,
-                message: `Welcome ${result[0].full_name}!`,
-              });
+            req.session.user = result;
+            res.send(result);
+
+            console.log(` login result => ${JSON.stringify(result)}`);
+            console.log(` session.user => ${JSON.stringify(req.session.user)}`);
           } else {
             res.json({
               sucess: false,
@@ -85,5 +79,22 @@ exports.login = (req, res) => {
           }
         });
     }
+  });
+};
+
+exports.authenticate = (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.redirect("/");
   });
 };

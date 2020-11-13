@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import About from "./Components/views/About/About";
 import YG from "./Components/views/About/Individual/YG";
 import Joy from "./Components/views/About/Individual/Joy";
@@ -14,32 +14,41 @@ import Electronics from "./Components/Electronics";
 import Other from "./Components/Other";
 import Result from "./Components/Result";
 import ProductListing from "./Components/ProductListing";
-import Auth from "./Components/views/UI/AuthModal/AuthModal";
+import Login from "./Components/views/UI/AuthModal/AuthModal";
 import SearchResults from "./Components/views/Testing/SearchResults";
-import Navigation from "./Components/views/Navigation/Navigation";
+import Auth from "../src/utils/auth";
 
 export default function Routes() {
+  // Null - Anyone Can go inside
+  // True - Only logged in user can go inside
+  // False - Logged in user can't go inside
+
   return (
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/about/yg" component={YG} />
-        <Route exact path="/about/joy" component={Joy} />
-        <Route exact path="/about/keith" component={Keith} />
-        <Route exact path="/about/trenton" component={Trenton} />
-        <Route exact path="/searchresults" component={SearchResults} />
-        <Route exact path="/newListing" component={NewListing} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/books" component={Books} />
-        <Route exact path="/furniture" component={Furniture} />
-        <Route exact path="/electronics" component={Electronics} />
-        <Route exact path="/other" component={Other} />
-        <Route exact path="/result" component={Result} />
-        <Route exact path="/productlisting" component={ProductListing} />
-        <Route path="/authentication" component={Auth} />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/about" component={Auth(About, null)} />
+      <Route exact path="/about/yg" component={Auth(YG, true)} />
+      <Route exact path="/about/joy" component={Auth(Joy, null)} />
+      <Route exact path="/about/keith" component={Auth(Keith, null)} />
+      <Route exact path="/about/trenton" component={Auth(Trenton, null)} />
+      <Route
+        exact
+        path="/searchresults"
+        component={Auth(SearchResults, null)}
+      />
+      <Route exact path="/books" component={Auth(Books, null)} />
+      <Route exact path="/furniture" component={Auth(Furniture, null)} />
+      <Route exact path="/electronics" component={Auth(Electronics, null)} />
+      <Route exact path="/other" component={Auth(Other, null)} />
+      <Route exact path="/result" component={Auth(Result, null)} />
+      <Route
+        exact
+        path="/productlisting"
+        component={Auth(ProductListing, null)}
+      />
+      <Route exact path="/login" component={Auth(Login, false)} />
+      <Route exact path="/newListing" component={Auth(NewListing, true)} />
+      <Route exact path="/dashboard" component={Auth(Dashboard, true)} />
+    </Switch>
   );
 }
