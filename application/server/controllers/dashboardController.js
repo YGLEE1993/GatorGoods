@@ -1,4 +1,7 @@
 const connection = require("../models/dbconnection");
+//===========================================
+//        Dashboard Controller
+//===========================================
 
 exports.getMyProducts = (req, res) => {
   const query = `SELECT * FROM gatorgoods.Product_Listing WHERE user= ${req.body.user_id}`;

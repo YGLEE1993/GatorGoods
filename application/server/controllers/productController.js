@@ -1,6 +1,10 @@
 // const productModel = require("../models/productModel");
 const connection = require("../models/dbconnection");
 
+//===========================================
+//              Product Controller
+//===========================================
+
 // Create product listing
 exports.createProduct = (req, res) => {
   const id = 0;
