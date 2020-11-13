@@ -1,5 +1,9 @@
 const connection = require("../models/dbconnection");
 
+//===========================================
+//              Search Controller
+//===========================================
+
 exports.searchProducts = (req, res) => {
   const searchTerm = req.body.searchTerm;
   const category = req.body.category;

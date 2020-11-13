@@ -7,7 +7,7 @@ const {
 } = require("../controllers/dashboardController");
 
 //===========================================
-//                 User
+//                 Dashboard
 //===========================================
 
 router.post("/getMyProducts", getMyProducts);
