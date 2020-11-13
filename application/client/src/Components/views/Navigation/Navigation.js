@@ -5,28 +5,14 @@ import logo from "../../assets/logo.png";
 import axios from "axios";
 
 export default function Navigation() {
-  /**
-  Todo:   
-    Loggedin -> createlisting, dashboard, logout
-    Not Loggedin -> only login 
-
-**/
-
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // useEffect(() => {
-  //   axios.defaults.withCredentials = true;
-  //   axios.get("/api/auth/authenticate").then(async (response) => {
-  //     if (response.data.loggedIn == true) {
-  //       console.log(response);
-  //       console.log(
-  //         `Authmodal Authenticate => ${JSON.stringify(response.data)}`
-  //       );
-  //       await setIsLoggedIn(response.data.loggedIn);
-  //     }
-  //   });
-  //   console.log("------is logged in----- --");
-  //   console.log(isLoggedIn);
-  // }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.get("/api/auth/authenticate").then(async (response) => {
+      await setIsLoggedIn(response.data.loggedIn);
+    });
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
 
   // const handleLogout = () => {
   //   axios.get("/api/auth/logout").then((response) => {
@@ -43,7 +29,7 @@ export default function Navigation() {
         <Nav.Item style={{ marginLeft: "2rem" }}>
           <Searchbox />
         </Nav.Item>
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <Nav className="ml-auto">
             <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">
               Create Listing
@@ -51,9 +37,9 @@ export default function Navigation() {
             <Nav.Link style={{ marginRight: "2rem" }} href="/dashboard">
               DashBoard
             </Nav.Link>
-            <Nav.Link style={{ marginRight: "2rem" }} onClick={handleLogout}>
+            {/* <Nav.Link style={{ marginRight: "2rem" }} onClick={handleLogout}>
               Logout
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         ) : (
           <Nav className="ml-auto">
@@ -61,9 +47,9 @@ export default function Navigation() {
               Login
             </Nav.Link>
           </Nav>
-        )} */}
+        )}
 
-        <Nav className="ml-auto">
+        {/* <Nav className="ml-auto">
           <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">
             Create Listing
           </Nav.Link>
@@ -73,7 +59,7 @@ export default function Navigation() {
           <Nav.Link style={{ marginRight: "2rem" }} href="/login">
             Login
           </Nav.Link>
-        </Nav>
+        </Nav> */}
       </Navbar>
       <Navbar style={{ marginLeft: "50px", paddingTop: "0px" }}>
         <Nav className="mr-auto">

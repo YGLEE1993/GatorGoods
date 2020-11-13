@@ -3,7 +3,7 @@ import { Modal, Button, Col, Row, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-export default function AuthModal(props) {
+export default function AuthModal() {
   const [modalShow, setModalShow] = useState(false);
   const history = useHistory();
 
@@ -71,13 +71,14 @@ export default function AuthModal(props) {
         password: loginPassword,
       })
       .then((response) => {
-        if (response.data.sucess == false) {
+        if (response.data.sucess === false) {
           alert(response.data.message);
         } else {
           // alert(response.data[0].full_name);
           alert("Welcome! You are now logged in");
           setModalShow(false);
           history.push("/");
+          window.location.reload();
         }
         console.log(`LOGIN AUTHMODAL => ${JSON.stringify(response.data)}`);
       });

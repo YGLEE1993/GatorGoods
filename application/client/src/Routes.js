@@ -19,9 +19,9 @@ import SearchResults from "./Components/views/Testing/SearchResults";
 import Auth from "../src/utils/auth";
 
 export default function Routes() {
-  // Null - Anyone Can go inside
-  // True - Only logged in user can go inside
-  // False - Logged in user can't go inside
+  // null - Anyone Can go inside
+  // true - Only logged in user can go inside
+  // false - Logged in user can't go inside
 
   return (
     <Switch>
