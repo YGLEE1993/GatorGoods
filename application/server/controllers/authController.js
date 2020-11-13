@@ -66,7 +66,7 @@ exports.login = (req, res) => {
           console.log(match);
           if (match) {
             console.log("Matched");
-            req.session.user = result;
+            req.session.user = result[0].user_id;
             res.send(result);
 
             console.log(` login result => ${JSON.stringify(result)}`);
