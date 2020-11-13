@@ -1,6 +1,5 @@
 const connection = require("../models/dbconnection");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 //===========================================
 //              Auth Controller
