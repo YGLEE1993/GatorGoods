@@ -74,8 +74,7 @@ export default function AuthModal() {
         if (response.data.sucess === false) {
           alert(response.data.message);
         } else {
-          // alert(response.data[0].full_name);
-          alert("Welcome! You are now logged in");
+          console.log("Welcome! You are now logged in");
           setModalShow(false);
           history.push("/");
           window.location.reload();
