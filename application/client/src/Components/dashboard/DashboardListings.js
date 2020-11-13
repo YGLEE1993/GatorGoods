@@ -14,6 +14,7 @@ export default function DashboardListings(props) {
         setProductListings(response.data);
       });
   }, [props]);
+
   return (
     <CardDeck style={{ padding: "2.5rem" }}>
       {productListings.map((productListing, i) => (

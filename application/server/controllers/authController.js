@@ -68,8 +68,8 @@ exports.login = (req, res) => {
             req.session.user = result[0].user_id;
             res.send(result);
 
-            console.log(` login result => ${JSON.stringify(result)}`);
-            console.log(` session.user => ${JSON.stringify(req.session.user)}`);
+            // console.log(` login result => ${JSON.stringify(result)}`);
+            // console.log(` session.user => ${JSON.stringify(req.session.user)}`);
           } else {
             res.json({
               sucess: false,

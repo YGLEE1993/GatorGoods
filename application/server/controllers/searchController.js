@@ -44,7 +44,6 @@ exports.searchProducts = (req, res) => {
               WHERE title LIKE '%${searchTerm}%'
               )`;
   }
-
   connection.query(query, (err, result) => {
     if (err) res.send(err);
     // console.log(result);
