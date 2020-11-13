@@ -4,12 +4,13 @@ exports.getMyProducts = (req, res) => {
   const query = `SELECT * FROM gatorgoods.Product_Listing WHERE user= ${req.body.user_id}`;
 
   connection.query(query, (err, result) => {
-    console.log(result);
+    // console.log(result);
     if (err) {
-      res.json({
-        sucess: false,
-        message: "Something went wrong. Please try again.",
-      });
+      // res.json({
+      //   sucess: false,
+      //   message: "Something went wrong. Please try again.",
+      // });
+      console.log(err);
     } else {
       res.send(result);
     }
