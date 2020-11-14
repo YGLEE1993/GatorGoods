@@ -55,7 +55,7 @@ export default function Searchbox() {
             value={category}
             onChange={handleCategoryChange}
           >
-            <option>Category</option>
+            <option value={""}>Category</option>
             <option value={"1"}>Books</option>
             <option value={"2"}>Furniture</option>
             <option value={"3"}>Electronics</option>

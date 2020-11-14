@@ -1,9 +1,10 @@
 const connection = require("../models/dbconnection");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
-// Signup
-// TODO: need to redirect to home page after signed up
+//===========================================
+//              Auth Controller
+//===========================================
+
 exports.signup = (req, res) => {
   const user_id = 0;
   const full_name = req.body.username;
@@ -12,9 +13,11 @@ exports.signup = (req, res) => {
   const checkUserquery = `SELECT * FROM gatorgoods.User WHERE email ="${email}"`;
   console.log(email);
   connection.query(checkUserquery, (err, result) => {
-    console.log(result);
     if (err) {
-      console.log(err);
+      res.json({
+        sucess: false,
+        message: "Something went wrong. Please try again.",
+      });
     }
     if (result.length == 0) {
       const query =
@@ -22,52 +25,75 @@ exports.signup = (req, res) => {
       const values = [[user_id, full_name, email, password]];
       connection.query(query, [values], (err, result) => {
         if (err) {
-          console.log(err);
-          res.send(err);
+          res.json({
+            sucess: false,
+            message: "Something went wrong. Please try again.",
+          });
         } else {
-          res.send("Sucessfully registered.");
-          // res.redirect("/");
+          res
+            .status(200)
+            .json({
+              sucess: true,
+              message: `Welcome! You are sucessfully registered.`,
+            })
+            .redirect("/");
         }
       });
     } else {
-      res.send("User already exist. Try another email.");
+      res.json({
+        sucess: false,
+        message: "User already exist. Try another email.",
+      });
     }
   });
 };
 
-// Login
-// TODO: need to work on webtoken for login user
-//       need to redirect to home page after login
 exports.login = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const query = `SELECT * FROM gatorgoods.User WHERE email = "${email}"`;
   connection.query(query, async (err, result) => {
     if (err) {
-      res.send("Something went wrong login.. Try again.");
+      res.json({
+        sucess: false,
+        message: "Something went wrong. Please try again.",
+      });
     } else {
       const match = await bcrypt
         .compare(password, result[0].password)
         .then((match) => {
           console.log(match);
           if (match) {
-            res.send(`Welcome ${result[0].email}!`);
             console.log("Matched");
-            // res.redirect("/");
-            // alert("password matched");
-            // const token = result[0].user_id.generateJwtToken();
-            // res.status(200).json({ token });
-            // console.log(token);
+            req.session.user = result[0].user_id;
+            res.send(result);
+
+            // console.log(` login result => ${JSON.stringify(result)}`);
+            // console.log(` session.user => ${JSON.stringify(req.session.user)}`);
           } else {
-            res.send("WRONG PASSWORD or EMAIL");
+            res.json({
+              sucess: false,
+              message: "Wrong email or password. Try again!",
+            });
           }
         });
     }
   });
 };
-// const generateJwtToken = () => {
-//   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-//     expiresIn: process.env.JWT_EXPIRES,
-//   });
-// };
-//
+
+exports.authenticate = (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.redirect("/");
+  });
+};

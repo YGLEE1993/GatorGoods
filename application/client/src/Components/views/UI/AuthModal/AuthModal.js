@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Col, Row, Form } from "react-bootstrap";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-export default function AuthModal(props) {
-  const [modalShow, setModalShow] = React.useState(false);
+export default function AuthModal() {
+  const [modalShow, setModalShow] = useState(false);
+  const history = useHistory();
+
   useEffect(() => {
-    setModalShow(props.modal);
-  }, [props]);
+    setModalShow(true);
+  }, []);
+
   const initialInputState = {
     username: "",
     email: "",
@@ -52,10 +55,9 @@ export default function AuthModal(props) {
           password: password,
         })
         .then((response) => {
-          // testing
-          // console.log(response);
+          console.log(response.data);
+          alert(response.data.message);
           setModalShow(false);
-          alert(response.data);
         });
     }
   };
@@ -69,10 +71,15 @@ export default function AuthModal(props) {
         password: loginPassword,
       })
       .then((response) => {
-        //test
-        setModalShow(false);
-        alert(response.data);
-        console.log(response.data);
+        if (response.data.sucess === false) {
+          alert(response.data.message);
+        } else {
+          console.log("Welcome! You are now logged in");
+          setModalShow(false);
+          history.push("/");
+          window.location.reload();
+        }
+        console.log(`LOGIN AUTHMODAL => ${JSON.stringify(response.data)}`);
       });
   };
 
