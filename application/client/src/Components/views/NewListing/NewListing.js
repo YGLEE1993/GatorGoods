@@ -64,11 +64,12 @@ export default function NewListing(props) {
             <Form.Control
               type="title"
               name="title"
+              maxLength="30"
               value={title}
               onChange={handleInputChange}
             />
             <Form.Text className="text-muted">
-              Please limit to 40 characters.
+              Please limit to 30 characters.
             </Form.Text>
           </Form.Group>
 
@@ -94,44 +95,47 @@ export default function NewListing(props) {
                 <InputGroup.Text>$</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                placeholder="10.00"
-                name="price"
-                value={price}
-                onChange={handleInputChange}
+                  placeholder="10.00"
+                  name="price"
+                  maxLength="10"
+                  value={price}
+                  onChange={handleInputChange}
               />
             </InputGroup>
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Condition</Form.Label>
+            <Form.Label>
+              Condition
+            </Form.Label>
             <InputGroup className="mb-2">
               <Form.Check
-                inline
-                type="radio"
-                label="Like New"
-                name="formHorizontalRadios"
-                id="condition-like-new"
+                  inline
+                  type="radio"
+                  label="Like New"
+                  name="formHorizontalRadios"
+                  id="condition-like-new"
               />
               <Form.Check
-                inline
-                type="radio"
-                label="Very Good"
-                name="formHorizontalRadios"
-                id="condition-very-good"
+                  inline
+                  type="radio"
+                  label="Very Good"
+                  name="formHorizontalRadios"
+                  id="condition-very-good"
               />
               <Form.Check
-                inline
-                type="radio"
-                label="Good"
-                name="formHorizontalRadios"
-                id="condition-good"
+                  inline
+                  type="radio"
+                  label="Good"
+                  name="formHorizontalRadios"
+                  id="condition-good"
               />
               <Form.Check
-                inline
-                type="radio"
-                label="Acceptable"
-                name="formHorizontalRadios"
-                id="condition-acceptable"
+                  inline
+                  type="radio"
+                  label="Acceptable"
+                  name="formHorizontalRadios"
+                  id="condition-acceptable"
               />
             </InputGroup>
           </Form.Group>

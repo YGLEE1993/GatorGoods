@@ -47,6 +47,9 @@ export default function ProductListing(props) {
             <Button variant="primary" size="lg" onClick={handleShow}>
               <i class="far fa-comment-dots"></i> &nbsp; Contact seller
             </Button>{" "}
+
+            {/*CONTACT  /  MESSAGE MODAL*/}
+
             <Modal
               show={show}
               onHide={handleClose}

@@ -106,20 +106,24 @@ export default function Home() {
     <div>
       <Jumbotron>
         <div className="Jumbotron">
+          <Container>
           <h1>Hello, Gators! </h1>
           <p>
             Welcome to the online marketplace specifically designed for
             students, faculty and staff at SFSU.
           </p>
+          </Container>
         </div>
       </Jumbotron>
-      <Featured productListings={bookListings} />
+      <Container className="featured-category-container">
+        <Featured productListings={bookListings} />
+      </Container>
       <Container>
         {/* Books */}
         <Container className="category-title">
           <Row className="text-left">
             <Col lg="auto">
-              <h2>Books</h2>
+              <h2><a href="/books" className="h2-link">Books</a></h2>
             </Col>
             <Col lg="auto">
               <p style={{ paddingTop: "11.6px" }}>
@@ -145,7 +149,7 @@ export default function Home() {
         <Container className="category-title">
           <Row className="category-title" className="text-left">
             <Col lg="auto">
-              <h2>Furniture</h2>
+              <h2><a href="/furniture" className="h2-link">Furniture</a></h2>
             </Col>
             <Col lg="auto">
               <p style={{ paddingTop: "11.6px" }}>
@@ -171,7 +175,7 @@ export default function Home() {
         <Container className="category-title">
           <Row className="category-title" className="text-left">
             <Col lg="auto">
-              <h2>Electronics</h2>
+              <h2><a href="/electronics" className="h2-link">Electronics</a></h2>
             </Col>
             <Col lg="auto">
               <p style={{ paddingTop: "11.6px" }}>
@@ -197,7 +201,7 @@ export default function Home() {
         <Container className="category-title">
           <Row className="category-title" className="text-left">
             <Col lg="auto">
-              <h2>Other</h2>
+              <h2><a href="/other" className="h2-link">Other</a></h2>
             </Col>
             <Col lg="auto">
               <p style={{ paddingTop: "11.6px" }}>

@@ -27,7 +27,7 @@ export default function Routes() {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={Auth(About, null)} />
-      <Route exact path="/about/yg" component={Auth(YG, true)} />
+      <Route exact path="/about/yg" component={Auth(YG, null)} />
       <Route exact path="/about/joy" component={Auth(Joy, null)} />
       <Route exact path="/about/keith" component={Auth(Keith, null)} />
       <Route exact path="/about/trenton" component={Auth(Trenton, null)} />

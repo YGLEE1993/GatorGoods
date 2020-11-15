@@ -24,7 +24,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      expires: 60 * 60 * 24, //24hrs
+      maxAge: 60 * 1000 * 30, //user has 5 minutes after browser close until getting kicked out
     },
   })
 );

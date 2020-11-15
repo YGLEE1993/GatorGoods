@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Searchbox from "../../Searchbox";
 import logo from "../../assets/logo.png";
 import axios from "axios";
+import AuthModal from "../UI/AuthModal/AuthModal";
+import { MdAdd } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
 
 export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,32 +25,104 @@ export default function Navigation() {
 
   return (
     <div>
-      <Navbar className="navigation-bar" variant="light">
+      <Navbar expand="lg" className="navigation-bar" variant="light">
         <Navbar.Brand style={{ marginLeft: "2rem" }} href="/">
           <img src={logo} width="150" height="40" alt="logo" />
         </Navbar.Brand>
-        <Nav.Item style={{ marginLeft: "2rem" }}>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav style={{ marginLeft: "2rem" }}>
+            <Nav.Link style={{ marginRight: "40px" }} href="./books">
+              Books
+            </Nav.Link>
+            <Nav.Link style={{ marginRight: "40px" }} href="./furniture">
+              Furniture
+            </Nav.Link>
+            <Nav.Link style={{ marginRight: "40px" }} href="./electronics">
+              Electronics
+            </Nav.Link>
+            <Nav.Link style={{ marginRight: "40px" }} href="./other">
+              Other
+            </Nav.Link>
+            <Nav.Link style={{ marginRight: "40px" }} href="/about">
+              About Team
+            </Nav.Link>
+          </Nav>
+          <Nav.Item className="ml-auto" style={{ marginLeft: "1rem" }}>
           <Searchbox />
         </Nav.Item>
-        {isLoggedIn ? (
+        {/*{isLoggedIn ? (*/}
+        {/*  <Nav className="ml-auto">*/}
+        {/*    <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">*/}
+        {/*      Create Listing*/}
+        {/*    </Nav.Link>*/}
+        {/*    <Nav.Link style={{ marginRight: "2rem" }} href="/dashboard">*/}
+        {/*      DashBoard*/}
+        {/*    </Nav.Link>*/}
+        {/*    /!* <Nav.Link style={{ marginRight: "2rem" }} onClick={handleLogout}>*/}
+        {/*      Logout*/}
+        {/*    </Nav.Link> *!/*/}
+        {/*  </Nav>*/}
+        {/*) : (*/}
+        {/*  <Nav className="ml-auto">*/}
+        {/*    <Nav.Link style={{ marginRight: "40px" }} href="/login">*/}
+        {/*      Login*/}
+        {/*    </Nav.Link>*/}
+        {/*  </Nav>*/}
+        {/*)}*/}
+
           <Nav className="ml-auto">
-            <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">
-              Create Listing
+            <Nav.Link style={{ marginRight: "1rem" }} href="/newListing">
+              <OverlayTrigger
+                  key="bottom"
+                  placement="bottom"
+                  overlay={
+                    <Tooltip>
+                      Create a Listing
+                    </Tooltip>
+                  }
+              >
+                <MdAdd size="2rem" color="grey"/>
+              </OverlayTrigger>
             </Nav.Link>
-            <Nav.Link style={{ marginRight: "2rem" }} href="/dashboard">
-              DashBoard
-            </Nav.Link>
-            {/* <Nav.Link style={{ marginRight: "2rem" }} onClick={handleLogout}>
-              Logout
-            </Nav.Link> */}
+            {isLoggedIn ? (
+                    <Nav.Link
+                        style={{marginRight: "40px"}}
+                        href="/dashboard"
+                    >
+                      <OverlayTrigger
+                          key="bottom"
+                          placement="bottom"
+                          overlay={
+                            <Tooltip>
+                              My Dashboard
+                            </Tooltip>
+                          }
+                      >
+                        <MdAccountCircle size="2rem" style={{color: "#8943f6"}}/>
+                      </OverlayTrigger>
+                    </Nav.Link>
+                ) : (
+                <Nav.Link
+                    style={{marginRight: "40px"}}
+                    href="/login"
+                >
+                  <OverlayTrigger
+                      key="bottom"
+                      placement="bottom"
+                      overlay={
+                        <Tooltip>
+                          Log in / Sign up
+                        </Tooltip>
+                      }
+                  >
+                    <MdAccountCircle size="2rem" color="grey"/>
+                  </OverlayTrigger>
+                </Nav.Link>
+            )}
           </Nav>
-        ) : (
-          <Nav className="ml-auto">
-            <Nav.Link style={{ marginRight: "40px" }} href="/login">
-              Login
-            </Nav.Link>
-          </Nav>
-        )}
+        </Navbar.Collapse>
+
 
         {/* <Nav className="ml-auto">
           <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">
@@ -61,8 +136,11 @@ export default function Navigation() {
           </Nav.Link>
         </Nav> */}
       </Navbar>
-      <Navbar style={{ marginLeft: "50px", paddingTop: "0px" }}>
+
+      {/* <Navbar expand="lg" style={{ marginLeft: "50px", paddingTop: "0px" }}>
         <Nav className="mr-auto">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
           <Nav.Link style={{ marginRight: "40px" }} href="./books">
             Books
           </Nav.Link>
@@ -78,48 +156,10 @@ export default function Navigation() {
           <Nav.Link style={{ marginRight: "40px" }} href="/about">
             About Team
           </Nav.Link>
+          </Navbar.Collapse>
         </Nav>
       </Navbar>
+      <AuthModal modal={modalShow} />; */}
     </div>
-
-    //     <Nav class="navbar navbar-expand-lg navbar-light bg-light">
-    //   <a class="navbar-brand" href="#">Navbar</a>
-    //   <Button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-    //     <span class="navbar-toggler-icon"></span>
-    //   </Button>
-
-    //   <div class="collapse navbar-collapse" id="navbarColor03">
-    //     <ul class="navbar-nav mr-auto">
-    //       <li class="nav-item active">
-    //         <a class="nav-link" href="#">Home
-    //           <span class="sr-only">(current)</span>
-    //         </a>
-    //       </li>
-    //       <li class="nav-item">
-    //         <a class="nav-link" href="#">Features</a>
-    //       </li>
-    //       <li class="nav-item">
-    //         <a class="nav-link" href="#">Pricing</a>
-    //       </li>
-    //       <li class="nav-item">
-    //         <a class="nav-link" href="#">About</a>
-    //       </li>
-    //       <li class="nav-item dropdown">
-    //         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-    //         <div class="dropdown-menu">
-    //           <a class="dropdown-item" href="#">Action</a>
-    //           <a class="dropdown-item" href="#">Another action</a>
-    //           <a class="dropdown-item" href="#">Something else here</a>
-    //           <div class="dropdown-divider"></div>
-    //           <a class="dropdown-item" href="#">Separated link</a>
-    //         </div>
-    //       </li>
-    //     </ul>
-    //     <Form class="form-inline my-2 my-lg-0">
-    //       <Form class="form-control mr-sm-2" type="text" placeholder="Search" />
-    //       <Button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</Button>
-    //     </Form>
-    //   </div>
-    // </Nav>
   );
 }

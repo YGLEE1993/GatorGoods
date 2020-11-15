@@ -62,10 +62,11 @@ export default function Searchbox() {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group inline style={{ width: "20rem" }}>
+        <Form.Group inline style={{ width: "15rem" }}>
           <FormControl
             placeholder="Search.."
             className="mr-sm-2"
+            maxLength="30"
             value={searchTerm}
             onChange={handleInputChange}
           />
