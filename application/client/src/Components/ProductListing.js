@@ -6,7 +6,7 @@ import {
   Col,
   Row,
   Button,
-  Form,
+  Form, Card,
 } from "react-bootstrap";
 import "./ProductListing.css";
 
@@ -17,7 +17,9 @@ export default function ProductListing(props) {
   const [productListing, setProductListing] = useState(
     props.location.state.productListing
   );
-
+  const newImage = new Buffer.from(props.location.state.productListing.image_blob.data).toString(
+      "base64"
+  );
   console.log(props.location.state.productListing);
 
   return (
@@ -25,7 +27,8 @@ export default function ProductListing(props) {
       <Container style={{ margin: "5rem" }}>
         <Row>
           <Col lg={6}>
-            <Image src="holder.js/100px160" roundedCircle />
+            {/*<Image src="holder.js/100px160" roundedCircle />*/}
+            <Image src={`data:image/jpeg;base64, ${newImage}`} alt="image not found" style={{maxWidth: "450px", maxHeight: "450px"}}/>
           </Col>
           <Col lg={6}>
             <h3>{productListing.title}</h3>

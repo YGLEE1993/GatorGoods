@@ -10,7 +10,8 @@ import others from "./assets/others.jpeg";
 export default function Featured(props) {
   const history = useHistory();
 
-  function handleBook() {
+  function handleBook(e) {
+    e.preventDefault()
     history.push("/books")
   }
   function handleFurniture() {

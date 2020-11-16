@@ -5,11 +5,17 @@ import { useHistory } from "react-router-dom";
 
 export default function ListingCard(props) {
   const history = useHistory();
-  function handleClick() {
+  function handleClick(e) {
+    e.preventDefault()
     history.push("/productlisting", {
-      productListing: props,
+      productListing: props
     });
   }
+
+  // console.log(props)
+  const newImage = new Buffer.from(props.image_blob.data).toString(
+      "base64"
+    );
 
   return (
     <Card
@@ -17,7 +23,8 @@ export default function ListingCard(props) {
       className="listingcard"
       style={{ height: "30rem", width: "15rem" }}
     >
-      <Card.Img variant="top" src="holder.js/100px160" />
+      {/*<Card.Img variant="top" src="holder.js/100px160" />*/}
+      <Card.Img variant="top" src={`data:image/jpeg;base64, ${newImage}`} alt="image not found" />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
@@ -30,3 +37,4 @@ export default function ListingCard(props) {
     </Card>
   );
 }
+

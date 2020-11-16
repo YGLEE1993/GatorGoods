@@ -11,20 +11,31 @@ import "../../Category.css";
 import Filter from "../../Filter";
 import Featured from "../../Featured";
 import ListingCard from "../../ListingCard";
+import axios from "axios";
 
 export default function SearchResults(props) {
   const [productListings, setProductListings] = useState([]);
+  console.log(props.location.state.productListings)
 
   useEffect(() => {
-    setProductListings(props.location.state.productListings);
-    // props.location.state.productListings.map((productListing) => {
-    //   const newImage = new Buffer.from(productListing.image.data).toString(
+    axios
+        .post("/api/search/searchProducts", {
+          searchTerm: props.location.state.searchTerm,
+          category: props.location.state.category,
+        })
+        .then((response) => {
+          // console.log(response.data);
+          setProductListings(response.data);
+        });
+    // setProductListings(props.location.state.productListings);
+    // // props.location.state.productListings.map((productListing) => {
+    //   const newImage = new Buffer.from(productListing.image_blob.data).toString(
     //     "base64"
     //   );
     //   productListing.image.data = newImage;
     //   return console.log(productListings);
     // });
-  }, [props.location.state.productListings, productListings]);
+  }, [props]);
 
   function categoryRender() {
     let cat;
