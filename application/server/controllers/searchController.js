@@ -28,6 +28,18 @@ exports.searchProducts = (req, res) => {
                  category="${category}" AND
                  visible="1"
                LIMIT 0, 4`;
+  } else if (searchTerm === "" && category === "" ) {
+    query = `SELECT
+                 gatorgoods.Product_Listing.*,
+                 gatorgoods.Image.image_blob
+               FROM
+                 gatorgoods.Product_Listing
+               INNER JOIN
+                 gatorgoods.Image
+               ON
+                 gatorgoods.Product_Listing.product_id=gatorgoods.Image.product
+               WHERE
+                 visible="1"`;
   } else if (searchTerm === "" && category !== "") {
     // query = `SELECT * FROM gatorgoods.Product_Listing WHERE category="${category}" AND visible="1"`;
     query = `SELECT

@@ -11,21 +11,21 @@ export default function Searchbox() {
   const [productListings, setProductListings] = useState([]);
   const history = useHistory();
 
-  useEffect(() => {
-    const getListings = () => {
-      axios
-        .post("/api/search/searchProducts", {
-          searchTerm: searchTerm,
-          category: category,
-        })
-        .then((response) => {
-          // console.log(response.data);
-          setProductListings(response.data);
-        });
-    };
-    getListings();
-    // console.log(searchTerm);
-  }, [searchTerm, category]);
+  // useEffect(() => {
+  //   const getListings = () => {
+  //     axios
+  //       .post("/api/search/searchProducts", {
+  //         searchTerm: searchTerm,
+  //         category: category,
+  //       })
+  //       .then((response) => {
+  //         // console.log(response.data);
+  //         setProductListings(response.data);
+  //       });
+  //   };
+  //   getListings();
+  //   // console.log(searchTerm);
+  // }, [searchTerm, category]);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -38,7 +38,7 @@ export default function Searchbox() {
   // onSearch -> redirect to result page
   const onSearch = () => {
     history.push("/searchresults", {
-      productListings: productListings,
+      // productListings: productListings,
       category: category.valueOf(),
       searchTerm: searchTerm,
     });
