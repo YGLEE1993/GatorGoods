@@ -14,17 +14,18 @@ import ListingCard from "../../ListingCard";
 
 export default function SearchResults(props) {
   const [productListings, setProductListings] = useState([]);
+  console.log(props.location.state.productListings)
 
-  useEffect(() => {
-    setProductListings(props.location.state.productListings);
-    // props.location.state.productListings.map((productListing) => {
-    //   const newImage = new Buffer.from(productListing.image.data).toString(
-    //     "base64"
-    //   );
-    //   productListing.image.data = newImage;
-    //   return console.log(productListings);
-    // });
-  }, [props.location.state.productListings, productListings]);
+  // useEffect(() => {
+  //   setProductListings(props.location.state.productListings);
+  //   // // props.location.state.productListings.map((productListing) => {
+  //   //   const newImage = new Buffer.from(productListing.image_blob.data).toString(
+  //   //     "base64"
+  //   //   );
+  //   //   productListing.image.data = newImage;
+  //   //   return console.log(productListings);
+  //   // });
+  // }, [props.location.state.productListings, productListings]);
 
   function categoryRender() {
     let cat;
