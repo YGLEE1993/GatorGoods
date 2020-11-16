@@ -26,6 +26,9 @@ export default function NewListing(props) {
   };
 
   console.log(image);
+  console.log(condition);
+  console.log(location);
+
   const submitListing = () => {
     axios
       .post("/api/product/createProduct", {
@@ -81,10 +84,10 @@ export default function NewListing(props) {
               value={category}
               onChange={handleInputChange}
             >
-              <option>Choose</option>
-              <option>Book</option>
-              <option>Furniture</option>
-              <option>Electronic</option>
+              <option value={""}>Choose</option>
+              <option value={"1"}>Book</option>
+              <option value={"2"}>Furniture</option>
+              <option value={"3"}>Electronic</option>
             </Form.Control>
           </Form.Group>
 
@@ -108,6 +111,7 @@ export default function NewListing(props) {
             <Form.Label>
               Condition
             </Form.Label>
+            {/*<Form.Control onChange={handleInputChange} value={condition} />*/}
             <InputGroup className="mb-2">
               <Form.Check
                   inline
@@ -115,6 +119,7 @@ export default function NewListing(props) {
                   label="Like New"
                   name="formHorizontalRadios"
                   id="condition-like-new"
+                  value="Like New"
               />
               <Form.Check
                   inline
@@ -122,6 +127,7 @@ export default function NewListing(props) {
                   label="Very Good"
                   name="formHorizontalRadios"
                   id="condition-very-good"
+                  value="Very Good"
               />
               <Form.Check
                   inline
@@ -129,6 +135,7 @@ export default function NewListing(props) {
                   label="Good"
                   name="formHorizontalRadios"
                   id="condition-good"
+                  value="Good"
               />
               <Form.Check
                   inline
@@ -136,17 +143,19 @@ export default function NewListing(props) {
                   label="Acceptable"
                   name="formHorizontalRadios"
                   id="condition-acceptable"
+                  value="Acceptable"
               />
             </InputGroup>
           </Form.Group>
 
           <Form.Group>
+            {/*<Form.Control onChange={handleInputChange()} value={location}/>*/}
             <Form.Label>Transaction Location</Form.Label>
             <InputGroup className="mb-2">
-              <Form.Check inline label="Library" />
-              <Form.Check inline label="Building 1" />
-              <Form.Check inline label="Building 2" />
-              <Form.Check inline label="Building 3" />
+              <Form.Check value="Library" inline label="Library" />
+              <Form.Check value="The Village" inline label="The Village" />
+              <Form.Check value="C. Chavez" inline label="C. Chavez" />
+              <Form.Check value="Thornton Hall" inline label="Thornton Hall" />
             </InputGroup>
           </Form.Group>
 

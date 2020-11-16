@@ -18,14 +18,13 @@ exports.createProduct = (req, res) => {
   const approval = 0;
   const time = new time();
   const query =
-    "INSERT INTO  gatorgoods.Product_Listing(product_id, title, price, description, image, category, condition, location, time, visible, approval) VALUES ?";
+    "INSERT INTO  gatorgoods.Product_Listing(product_id, title, price, description, category, condition, location, time, visible, approval) VALUES ?";
   const values = [
     [
       product_id,
       title,
       price,
       description,
-      image,
       category,
       condition,
       location,
@@ -43,4 +42,16 @@ exports.createProduct = (req, res) => {
       res.send(result);
     }
   });
+
+  // const image_id = 0;
+  // const image_blob = req.body.image;
+  // const query2 =
+  //   "INSERT INTO  gatorgoods.Image(image_id, image_blob, product) VALUES ?";
+  // const values2 = [
+  //   [
+  //     image_id,
+  //     image_blob,
+  //     product_id,
+  //   ],
+  // ];
 };
