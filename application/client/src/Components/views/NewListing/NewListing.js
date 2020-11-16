@@ -27,7 +27,17 @@ export default function NewListing(props) {
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
-  
+
+  // function encodeImageFileAsURL(element) {
+  //   let file = element.files[0];
+  //   let reader = new FileReader();
+  //   reader.onloadend = function() {
+  //     console.log('RESULT', reader.result)
+  //   }
+  //   reader.readAsDataURL(file);
+  //   handleInputChange();
+  // }
+
   console.log(image);
   console.log(condition);
   console.log(location);
@@ -62,6 +72,7 @@ export default function NewListing(props) {
               name="image"
               value={image}
               onChange={handleInputChange}
+              //   onChange={encodeImageFileAsURL(this)}
             />
           </Form.Group>
 
