@@ -11,6 +11,10 @@ export default function ListingCard(props) {
     });
   }
 
+  // const newImage = new Buffer.from(props.image.data).toString(
+  //     "base64"
+  //   );
+
   return (
     <Card
       onClick={handleClick}
@@ -18,6 +22,7 @@ export default function ListingCard(props) {
       style={{ height: "30rem", width: "15rem" }}
     >
       <Card.Img variant="top" src="holder.js/100px160" />
+      {/*<Card.Img variant="top" src={`data:image/jpeg;base64, ${newImage}`} alt="image not found" />*/}
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
