@@ -5,7 +5,6 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-
 // This renders the div id="root" on index.html after pulling the template from App.js
 ReactDOM.render(
   <React.StrictMode>

@@ -11,19 +11,23 @@
     font-size: 1.5rem;
 }
 
-.category-container {
-    margin-top: 2rem;
-    padding-left: 0;
-    padding-right: 0;
+.featured-category-container {
+    padding-top: 1rem;
 }
 
 .card-container {
     margin-top: 2rem;
-    padding-bottom: 1rem;
-}
-
-.vertical-center .row {
+    padding-bottom: 3rem;
     display: flex;
     align-items: center;
-  }
+    justify-content: center;
+}
 
+.category-title {
+    margin-top: 3rem;
+    text-align: left;
+}
+
+.h2-link {
+    color: #444;
+}
