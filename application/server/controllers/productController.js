@@ -1,5 +1,6 @@
 // const productModel = require("../models/productModel");
 // import {time} from "systeminformation";
+
 const express = require("express");
 const connection = require("../models/dbconnection");
 
@@ -13,22 +14,36 @@ exports.createProduct = (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const price = req.body.price;
-  // const category = req.body.category;
-  // const condition = req.body.condition;
-  // const location = req.body.location;
   const category = req.body.category;
   const condition = req.body.condition;
   const location = req.body.location;
   const visible = 0;
   const approval = 0;
-  // const image_id = 0;
+  // const time = time().current;
+  // const image_id = 50;
   const image = req.body.image;
+  // function encode (input) {
+  //   let file = input.target.files[0];
+  //   let reader = new FileReader();
+  //   let returnImage;
+  //   reader.readAsDataURL(file);
+  //   reader.onload = function (e) {
+  //     // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
+  //     returnImage = e.target.result.replace(/^data:.+;base64,/, '');
+  //     // console.log(blob); //-> "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="
+  //     return new Blob([returnImage]);
+  //   }
+  // }
+  // const image2 = encode(image);
+  // const blob = new Blob(image);
   const user = req.session.user;
   const sql =
       `INSERT INTO gatorgoods.Product_Listing SET ?`;
 
-  const value = {title: title, price: price, description: description,
-    condition: condition, category: category, user: user, location: location, visible: visible, approval: approval};
+  const value = {
+    title: title, price: price, description: description,
+    condition: condition, category: category, user: user, location: location, visible: visible, approval: approval
+  };
 
   const sql3 =
       `INSERT INTO gatorgoods.Image SET ?`;
@@ -53,6 +68,7 @@ exports.createProduct = (req, res) => {
     connection.query(sql, value, function(err, result) {
       if (err) {
         connection.rollback(function() {
+          console.log(err);
           throw err;
         });
       }
@@ -60,6 +76,7 @@ exports.createProduct = (req, res) => {
       connection.query(sql2, function(err, result2) {
         if (err) {
           connection.rollback(function() {
+            console.log(err);
             throw err;
           });
         }
@@ -68,6 +85,7 @@ exports.createProduct = (req, res) => {
         connection.query(sql3, value3, function(err, result3) {
           if (err) {
             connection.rollback(function() {
+              console.log(err);
               throw err;
             });
           }
@@ -75,6 +93,7 @@ exports.createProduct = (req, res) => {
         connection.commit(function(err) {
           if (err) {
             connection.rollback(function() {
+              console.log(err);
               throw err;
             });
           }
@@ -85,3 +104,4 @@ exports.createProduct = (req, res) => {
     });
   });
 })};
+// }

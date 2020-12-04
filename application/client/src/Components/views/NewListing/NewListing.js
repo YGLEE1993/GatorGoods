@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Form, Row, Col, Button, Container, InputGroup } from "react-bootstrap";
 // import Dropzone from 'react-dropzone';
 import axios from "axios";
-import uploadFileToBlob from "axios"
+// import uploadFileToBlob from "axios"
+
+
 
 export default function NewListing(props) {
   const initialInputState = {
@@ -28,19 +30,27 @@ export default function NewListing(props) {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
 
-  // function encodeImageFileAsURL(element) {
-  //   let file = element.files[0];
-  //   let reader = new FileReader();
-  //   reader.onloadend = function() {
-  //     console.log('RESULT', reader.result)
-  //   }
-  //   reader.readAsDataURL(file);
-  //   handleInputChange();
-  // }
-
+  console.log(title);
   console.log(image);
+  console.log(category);
+  console.log(price);
   console.log(condition);
   console.log(location);
+  console.log(description);
+
+  // function encode (input) {
+  //   let file = input.target.files[0];
+  //   let reader = new FileReader();
+  //   let returnImage;
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = function () {
+  //     // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
+  //     returnImage = reader.result.replace(/^data:.+;base64,/, '');
+  //     const blob = new Blob([returnImage]);
+  //     console.log(blob); //-> "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="
+  //     return blob;
+  //   }
+  // }
 
   const submitListing = () => {
     axios
@@ -58,12 +68,17 @@ export default function NewListing(props) {
       });
   };
 
+  const fileSelectedHandler = ev => {
+    console.log(ev.target.files[0]);
+  }
+
   return (
     <div style={{ marginTop: "50px" }}>
       <Container style={{ width: "800px" }}>
         <h3>Create a Listing</h3>
         <br />
 
+        {/*<Form method="POST" enctype="multipart/form-data">*/}
         <Form>
           <Form.Group>
             <Form.File
@@ -71,8 +86,24 @@ export default function NewListing(props) {
               label="Image"
               name="image"
               value={image}
-              onChange={handleInputChange}
-              //   onChange={encodeImageFileAsURL(this)}
+              onChange={fileSelectedHandler}
+              // onChange={handleInputChange}
+              // onChange={
+              //   function encode (input) {
+              //     let file = input.target.files[0];
+              //     let reader = new FileReader();
+              //     let i64 = '';
+              //     reader.readAsDataURL(file);
+              //     reader.onloadend = function () {
+              //       // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
+              //       i64 = reader.result.replace(/^data:.+;base64,/, '');
+              //       // image = reader.result;
+              //       console.log(i64); //-> "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="
+              //       return i64;
+              //     };
+              //     // handleInputChange(image);
+              //   }
+              // }
             />
           </Form.Group>
 
