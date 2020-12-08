@@ -10,17 +10,45 @@ import {
 } from "react-bootstrap";
 import "./ProductListing.css";
 
+
+/**
+ * File name: ProductListing.js
+ * Purpose: This is the resultant view after a user clicks on an individual product listing card on a view which homes
+ *          multiple cards (home, books, furniture, etc.). It receives the data from that unique card as props, and then
+ *          parses the values contained in props into elements of the product listing. Users who are registered and
+ *          logged in may contact the listing user of a product listing from this view.
+ * Authors: YG, Trenton (functions) | Joy (styling)
+ */
+
 export default function ProductListing(props) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  const [show, setShow] = useState(false); // state for displaying/hiding the "contact seller" modal
+  const handleClose = () => setShow(false); // hides modal (default)
+  const handleShow = () => setShow(true); // displays modal
+
+  /*
+   Allows us to refer to the data passed through props as simply our productListing.
+   We do not implement setProductListing (updates state) currently as there is no current need to update its state once
+   the user is already on this page; however, it will remain in case there is a future need.
+  */
   const [productListing, setProductListing] = useState(
     props.location.state.productListing
   );
-  const newImage = new Buffer.from(props.location.state.productListing.image_blob.data).toString(
-      "base64"
-  );
-  console.log(props.location.state.productListing);
+
+  /*
+   newImage and newImage2 are how we render either binary or b64 data received from our props, as images. We need to
+   create state (below) and update the src of our <Image> with the value of either of these on an error rendering.
+   We only store images as binary (manual uploading into database through workbench) and b64 (through app createListing)
+   so we do not need any further rendering options other than these two.
+  */
+  const newImage = new Buffer.from(props.location.state.productListing.image_blob.data).toString();
+  const newImage2 = new Buffer.from(props.location.state.productListing.image_blob.data).toString("base64");
+
+  const [img, setImg] = useState(newImage2); // state for img (see above)
+  const [flag, setFlag] = useState(true); // state for flag - HAVE to update state or else the app will crash..
+                                                    // ..due to excessive re-rendering
+
+  // console.log(props.location.state.productListing);
 
   return (
     <div>
@@ -28,7 +56,10 @@ export default function ProductListing(props) {
         <Row>
           <Col lg={6}>
             {/*<Image src="holder.js/100px160" roundedCircle />*/}
-            <Image src={`data:image/jpeg;base64, ${newImage}`} alt="image not found" style={{maxWidth: "450px", maxHeight: "450px"}}/>
+            <Image src={`data:image/jpeg;charset=utf-8;base64, ${img}`}
+                   onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}
+                   alt="image not found"
+                   style={{maxWidth: "450px", maxHeight: "450px"}}/>
           </Col>
           <Col lg={6}>
             <h3>{productListing.title}</h3>
@@ -51,8 +82,8 @@ export default function ProductListing(props) {
               <i class="far fa-comment-dots"></i> &nbsp; Contact seller
             </Button>{" "}
 
-            {/*CONTACT  /  MESSAGE MODAL*/}
 
+            {/*CONTACT  /  MESSAGE MODAL*/}
             <Modal
               show={show}
               onHide={handleClose}

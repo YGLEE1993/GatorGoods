@@ -1,22 +1,38 @@
-import React, { useState } from "react";
-import { Form, Row, Col, Button, Container, InputGroup } from "react-bootstrap";
-// import Dropzone from 'react-dropzone';
+import React, {useState} from "react";
+import {Button, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import axios from "axios";
 
+
+/**
+ * File name: NewListing.js
+ * Purpose: This is the form where our users can submit their product listing into the database.
+ *          It works by taking the form fields and updating their respective values' states on submit,
+ *          then appending those values onto a FormData package. It then makes an axios.post request to
+ *          productController.js for processing the mysql passed from FormData.
+ * Authors: Trenton, YG (functions) | Joy (styling)
+ */
+
+// const imageThumbnail = require('image-thumbnail'); // potentially for converting b64 into thumbnails - pkg broke atm
+
 export default function NewListing(props) {
+
+  /*
+   The initialInputState lists our variables (minus image which is updated separately) to be passed to the db.
+   These are updated by calling setEachEntry() inside handleInputChange() which is itself called during onChange events.
+  */
   const initialInputState = {
     title: "",
     description: "",
     category: "",
-    image: "",
     price: "",
+    condition: "",
+    location: "",
   };
   const [eachEntry, setEachEntry] = useState(initialInputState);
   const {
     title,
     description,
     category,
-    image,
     price,
     condition,
     location,
@@ -25,21 +41,72 @@ export default function NewListing(props) {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
 
-  console.log(image);
-  console.log(condition);
-  console.log(location);
+  /*
+   Image is used in the same capacity as the variables above, but needs to be handled separately due to its conversion
+   from file to b64 data String.
+  */
+  const [image, setImage] = useState();
+
+  /*
+   For testing
+  */
+  // console.log(title);
+  // console.log(image);
+  // console.log(category);
+  // console.log(price);
+  // console.log(condition);
+  // console.log(location);
+  // console.log(description);
+
+  /*
+   Our main variable for transmitting our data package to the backend through an axios.post request sent to
+   productController.js.
+   All form fields are appended to formData as key/value pairs prior to sending the axios.post request. (below)
+  */
+  const formData = new FormData();
 
   const submitListing = () => {
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('condition', condition);
+    formData.append('location', location);
+    formData.append('image', image);
+
+    /*
+     Possible implementation for thumbnail conversion if we can get the package to work.
+    */
+    // let options = { percentage: 25}
+    // try {
+    //   const thumbnail = imageThumbnail(formData.get('image'), options);
+    //   console.log(thumbnail);
+    //   formData.append('thumbnail', thumbnail);
+    // } catch (err) {
+    //   console.error(err);
+    // }
+
+    /*
+     The following is where we transmit our data package to the backend via /api/product/createProduct which is loc. in
+     productController.js.
+     This should contain all our formData key/value pairs. We will parse these values in productController before
+     uploading to the db.
+    */
     axios
       .post("/api/product/createProduct", {
-        title: title,
-        description: description,
-        price: price,
-        category: category,
-        image: image,
-        condition: condition,
-        location: location,
-      })
+        body: {
+          title: formData.get('title'),
+          description: formData.get('description'),
+          price: formData.get('price'),
+          category: formData.get('category'),
+          condition: formData.get('condition'),
+          location: formData.get('location'),
+        },
+        data: {
+          headers: {'Content-Type': `multipart/form-data; boundary=${image.boundary}`},
+          file: formData.get('image'),
+          // thumbnail: formData.get('thumbnail'), // not currently implemented, but we would include thumbnail imgs here
+        }})
       .then(() => {
         alert("successfully created.");
       });
@@ -51,14 +118,23 @@ export default function NewListing(props) {
         <h3>Create a Listing</h3>
         <br />
 
+        {/*<Form method="POST" enctype="multipart/form-data">*/} {/*FOR FIREFOX ONLY: firefox will crash w/o this format*/}
         <Form>
           <Form.Group>
             <Form.File
               id="exampleFormControlFile1"
               label="Image"
               name="image"
-              value={image}
-              onChange={handleInputChange}
+                onChange={(e) => {
+                  console.log(e.target.files[0]); // picking our file
+                  let reader = new FileReader(); // used to read our new file as data
+                  reader.readAsDataURL(e.target.files[0]); // reading the file
+                  reader.onloadend = function () { // after finished read, setImage()
+                    setImage(
+                        reader.result.replace(/^data:.+;base64,/, '') // update 'image' as a string of b64 data
+                    );
+                  };
+                }}
             />
           </Form.Group>
 
@@ -84,10 +160,11 @@ export default function NewListing(props) {
               value={category}
               onChange={handleInputChange}
             >
-              <option value={""}>Choose</option>
-              <option value={"1"}>Book</option>
+              <option>Choose</option>
+              <option value={"1"}>Books</option>
               <option value={"2"}>Furniture</option>
-              <option value={"3"}>Electronic</option>
+              <option value={"3"}>Electronics</option>
+              <option value={"4"}>Other</option>
             </Form.Control>
           </Form.Group>
 
@@ -111,51 +188,37 @@ export default function NewListing(props) {
             <Form.Label>
               Condition
             </Form.Label>
-            {/*<Form.Control onChange={handleInputChange} value={condition} />*/}
             <InputGroup className="mb-2">
-              <Form.Check
-                  inline
-                  type="radio"
-                  label="Like New"
-                  name="formHorizontalRadios"
-                  id="condition-like-new"
-                  value="Like New"
-              />
-              <Form.Check
-                  inline
-                  type="radio"
-                  label="Very Good"
-                  name="formHorizontalRadios"
-                  id="condition-very-good"
-                  value="Very Good"
-              />
-              <Form.Check
-                  inline
-                  type="radio"
-                  label="Good"
-                  name="formHorizontalRadios"
-                  id="condition-good"
-                  value="Good"
-              />
-              <Form.Check
-                  inline
-                  type="radio"
-                  label="Acceptable"
-                  name="formHorizontalRadios"
-                  id="condition-acceptable"
-                  value="Acceptable"
-              />
+              <Form.Control
+                  as="select"
+                  name="condition"
+                  value={condition}
+                  onChange={handleInputChange}
+              >
+                <option>Choose</option>
+                <option value={"Like New"}>Like New</option>
+                <option value={"Very Good"}>Very Good</option>
+                <option value={"Good"}>Good</option>
+                <option value={"Acceptable"}>Acceptable</option>
+              </Form.Control>
             </InputGroup>
           </Form.Group>
 
           <Form.Group>
-            {/*<Form.Control onChange={handleInputChange()} value={location}/>*/}
             <Form.Label>Transaction Location</Form.Label>
             <InputGroup className="mb-2">
-              <Form.Check value="Library" inline label="Library" />
-              <Form.Check value="The Village" inline label="The Village" />
-              <Form.Check value="C. Chavez" inline label="C. Chavez" />
-              <Form.Check value="Thornton Hall" inline label="Thornton Hall" />
+              <Form.Control
+                  as="select"
+                  name="location"
+                  value={location}
+                  onChange={handleInputChange}
+              >
+                <option>Choose</option>
+                <option value={"Library"}>Library</option>
+                <option value={"The Village"}>The Village</option>
+                <option value={"C. Chavez"}>C. Chavez</option>
+                <option value={"Thornton Hall"}>Thornton Hall</option>
+              </Form.Control>
             </InputGroup>
           </Form.Group>
 
