@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import { Form, Row, Col, Button, Container, InputGroup } from "react-bootstrap";
-// import Dropzone from 'react-dropzone';
+import React, {useState} from "react";
+import {Button, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import axios from "axios";
-// import uploadFileToBlob from "axios"
 
 
+/**
+ * File name: NewListing.js
+ * Purpose: This is the form where our users can submit their product listing into the database.
+ *          It works by taking the form fields and updating their respective values' states on submit,
+ *          then appending those values onto a FormData package. It then makes an axios.post request to
+ *          productController.js for processing the mysql passed from FormData.
+ * Authors: Trenton, YG (functions) | Joy (styling)
+ */
+
+// const imageThumbnail = require('image-thumbnail'); // potentially for converting b64 into thumbnails - pkg broke atm
 
 export default function NewListing(props) {
+
+  /*
+   The initialInputState lists our variables (minus image which is updated separately) to be passed to the db.
+   These are updated by calling setEachEntry() inside handleInputChange() which is itself called during onChange events.
+  */
   const initialInputState = {
     title: "",
     description: "",
     category: "",
-    image: "",
     price: "",
     condition: "",
     location: "",
@@ -21,7 +33,6 @@ export default function NewListing(props) {
     title,
     description,
     category,
-    image,
     price,
     condition,
     location,
@@ -30,47 +41,76 @@ export default function NewListing(props) {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
 
-  console.log(title);
-  console.log(image);
-  console.log(category);
-  console.log(price);
-  console.log(condition);
-  console.log(location);
-  console.log(description);
+  /*
+   Image is used in the same capacity as the variables above, but needs to be handled separately due to its conversion
+   from file to b64 data String.
+  */
+  const [image, setImage] = useState();
 
-  // function encode (input) {
-  //   let file = input.target.files[0];
-  //   let reader = new FileReader();
-  //   let returnImage;
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = function () {
-  //     // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
-  //     returnImage = reader.result.replace(/^data:.+;base64,/, '');
-  //     const blob = new Blob([returnImage]);
-  //     console.log(blob); //-> "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="
-  //     return blob;
-  //   }
-  // }
+  /*
+   For testing
+  */
+  // console.log(title);
+  // console.log(image);
+  // console.log(category);
+  // console.log(price);
+  // console.log(condition);
+  // console.log(location);
+  // console.log(description);
+
+  /*
+   Our main variable for transmitting our data package to the backend through an axios.post request sent to
+   productController.js.
+   All form fields are appended to formData as key/value pairs prior to sending the axios.post request. (below)
+  */
+  const formData = new FormData();
 
   const submitListing = () => {
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('condition', condition);
+    formData.append('location', location);
+    formData.append('image', image);
+
+    /*
+     Possible implementation for thumbnail conversion if we can get the package to work.
+    */
+    // let options = { percentage: 25}
+    // try {
+    //   const thumbnail = imageThumbnail(formData.get('image'), options);
+    //   console.log(thumbnail);
+    //   formData.append('thumbnail', thumbnail);
+    // } catch (err) {
+    //   console.error(err);
+    // }
+
+    /*
+     The following is where we transmit our data package to the backend via /api/product/createProduct which is loc. in
+     productController.js.
+     This should contain all our formData key/value pairs. We will parse these values in productController before
+     uploading to the db.
+    */
     axios
       .post("/api/product/createProduct", {
-        title: title,
-        description: description,
-        price: price,
-        category: category,
-        image: image,
-        condition: condition,
-        location: location,
-      })
+        body: {
+          title: formData.get('title'),
+          description: formData.get('description'),
+          price: formData.get('price'),
+          category: formData.get('category'),
+          condition: formData.get('condition'),
+          location: formData.get('location'),
+        },
+        data: {
+          headers: {'Content-Type': `multipart/form-data; boundary=${image.boundary}`},
+          file: formData.get('image'),
+          // thumbnail: formData.get('thumbnail'), // not currently implemented, but we would include thumbnail imgs here
+        }})
       .then(() => {
         alert("successfully created.");
       });
   };
-
-  const fileSelectedHandler = ev => {
-    console.log(ev.target.files[0]);
-  }
 
   return (
     <div style={{ marginTop: "50px" }}>
@@ -78,32 +118,23 @@ export default function NewListing(props) {
         <h3>Create a Listing</h3>
         <br />
 
-        {/*<Form method="POST" enctype="multipart/form-data">*/}
+        {/*<Form method="POST" enctype="multipart/form-data">*/} {/*FOR FIREFOX ONLY: firefox will crash w/o this format*/}
         <Form>
           <Form.Group>
             <Form.File
               id="exampleFormControlFile1"
               label="Image"
               name="image"
-              value={image}
-              onChange={fileSelectedHandler}
-              // onChange={handleInputChange}
-              // onChange={
-              //   function encode (input) {
-              //     let file = input.target.files[0];
-              //     let reader = new FileReader();
-              //     let i64 = '';
-              //     reader.readAsDataURL(file);
-              //     reader.onloadend = function () {
-              //       // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
-              //       i64 = reader.result.replace(/^data:.+;base64,/, '');
-              //       // image = reader.result;
-              //       console.log(i64); //-> "R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs="
-              //       return i64;
-              //     };
-              //     // handleInputChange(image);
-              //   }
-              // }
+                onChange={(e) => {
+                  console.log(e.target.files[0]); // picking our file
+                  let reader = new FileReader(); // used to read our new file as data
+                  reader.readAsDataURL(e.target.files[0]); // reading the file
+                  reader.onloadend = function () { // after finished read, setImage()
+                    setImage(
+                        reader.result.replace(/^data:.+;base64,/, '') // update 'image' as a string of b64 data
+                    );
+                  };
+                }}
             />
           </Form.Group>
 
@@ -157,7 +188,6 @@ export default function NewListing(props) {
             <Form.Label>
               Condition
             </Form.Label>
-            {/*<Form.Control onChange={handleInputChange} value={condition} />*/}
             <InputGroup className="mb-2">
               <Form.Control
                   as="select"
@@ -170,51 +200,13 @@ export default function NewListing(props) {
                 <option value={"Very Good"}>Very Good</option>
                 <option value={"Good"}>Good</option>
                 <option value={"Acceptable"}>Acceptable</option>
-              {/*<Form.Check*/}
-              {/*    inline*/}
-              {/*    type="radio"*/}
-              {/*    label="Like New"*/}
-              {/*    name="formHorizontalRadios"*/}
-              {/*    id="condition-like-new"*/}
-              {/*    value="Like New"*/}
-              {/*/>*/}
-              {/*<Form.Check*/}
-              {/*    inline*/}
-              {/*    type="radio"*/}
-              {/*    label="Very Good"*/}
-              {/*    name="formHorizontalRadios"*/}
-              {/*    id="condition-very-good"*/}
-              {/*    value="Very Good"*/}
-              {/*/>*/}
-              {/*<Form.Check*/}
-              {/*    inline*/}
-              {/*    type="radio"*/}
-              {/*    label="Good"*/}
-              {/*    name="formHorizontalRadios"*/}
-              {/*    id="condition-good"*/}
-              {/*    value="Good"*/}
-              {/*/>*/}
-              {/*<Form.Check*/}
-              {/*    inline*/}
-              {/*    type="radio"*/}
-              {/*    label="Acceptable"*/}
-              {/*    name="formHorizontalRadios"*/}
-              {/*    id="condition-acceptable"*/}
-              {/*    value="Acceptable"*/}
-              {/*/>*/}
               </Form.Control>
             </InputGroup>
           </Form.Group>
 
           <Form.Group>
-            {/*<Form.Control onChange={handleInputChange()} value={location}/>*/}
             <Form.Label>Transaction Location</Form.Label>
             <InputGroup className="mb-2">
-              {/*<Form.Control onChange={handleInputChange} value={location} />*/}
-              {/*<Form.Check value="Library" inline label="Library" />*/}
-              {/*<Form.Check value="The Village" inline label="The Village" />*/}
-              {/*<Form.Check value="C. Chavez" inline label="C. Chavez" />*/}
-              {/*<Form.Check value="Thornton Hall" inline label="Thornton Hall" />*/}
               <Form.Control
                   as="select"
                   name="location"
