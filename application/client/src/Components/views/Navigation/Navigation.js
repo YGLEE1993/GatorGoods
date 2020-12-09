@@ -1,7 +1,7 @@
 /**
- * Title: Navigation
+ * File name: Navigation
+ * Purpose: Render the navigation including logo, search, memu and log in
  * Author: Joy
- * Updated Date: 12/3
  */
 
 import React, { useState, useEffect } from "react";
@@ -17,7 +17,13 @@ import Searchbox from "../../Searchbox";
 import logo from "../../assets/logo.png";
 import axios from "axios";
 import AuthModal from "../UI/AuthModal/AuthModal";
-import { MdAdd, MdInfoOutline, MdAccountCircle } from "react-icons/md";
+import {
+  MdAdd,
+  MdAddCircle,
+  MdAddCircleOutline,
+  MdInfoOutline,
+  MdAccountCircle,
+} from "react-icons/md";
 
 export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,47 +54,31 @@ export default function Navigation() {
           <Nav.Item style={{ marginLeft: "4rem" }}>
             <Searchbox />
           </Nav.Item>
-          {/*{isLoggedIn ? (*/}
-          {/*  <Nav className="ml-auto">*/}
-          {/*    <Nav.Link style={{ marginRight: "2rem" }} href="/newListing">*/}
-          {/*      Create Listing*/}
-          {/*    </Nav.Link>*/}
-          {/*    <Nav.Link style={{ marginRight: "2rem" }} href="/dashboard">*/}
-          {/*      DashBoard*/}
-          {/*    </Nav.Link>*/}
-          {/*    /!* <Nav.Link style={{ marginRight: "2rem" }} onClick={handleLogout}>*/}
-          {/*      Logout*/}
-          {/*    </Nav.Link> *!/*/}
-          {/*  </Nav>*/}
-          {/*) : (*/}
-          {/*  <Nav className="ml-auto">*/}
-          {/*    <Nav.Link style={{ marginRight: "40px" }} href="/login">*/}
-          {/*      Login*/}
-          {/*    </Nav.Link>*/}
-          {/*  </Nav>*/}
-          {/*)}*/}
+          {isLoggedIn ? (
+            <Nav className="ml-auto">
+              <Nav.Link style={{ marginRight: "1rem" }} href="/about">
+                <OverlayTrigger
+                  key="bottom"
+                  placement="bottom"
+                  overlay={<Tooltip>About Team</Tooltip>}
+                >
+                  <MdInfoOutline size="2rem" style={{ color: "#8943f6" }} />
+                </OverlayTrigger>
+              </Nav.Link>
 
-          <Nav className="ml-auto">
-            <Nav.Link style={{ marginRight: "1rem" }} href="/about">
-              <OverlayTrigger
-                key="bottom"
-                placement="bottom"
-                overlay={<Tooltip>About Team</Tooltip>}
-              >
-                <MdInfoOutline size="2rem" color="grey" />
-              </OverlayTrigger>
-            </Nav.Link>
-            <Nav.Link style={{ marginRight: "1rem" }} href="/newListing">
-              <OverlayTrigger
-                key="bottom"
-                placement="bottom"
-                overlay={<Tooltip>Post Item</Tooltip>}
-              >
-                <MdAdd size="2rem" color="grey" />
-              </OverlayTrigger>
-            </Nav.Link>
-            {isLoggedIn ? (
-              <Nav.Link style={{ marginRight: "40px" }} href="/dashboard">
+              <Nav.Link style={{ marginRight: "1rem" }} href="/newListing">
+                <OverlayTrigger
+                  key="bottom"
+                  placement="bottom"
+                  overlay={<Tooltip>Post Item</Tooltip>}
+                >
+                  <MdAddCircleOutline
+                    size="2rem"
+                    style={{ color: "#8943f6" }}
+                  />
+                </OverlayTrigger>
+              </Nav.Link>
+              <Nav.Link style={{ marginRight: "3rem" }} href="/dashboard">
                 <OverlayTrigger
                   key="bottom"
                   placement="bottom"
@@ -97,8 +87,23 @@ export default function Navigation() {
                   <MdAccountCircle size="2rem" style={{ color: "#8943f6" }} />
                 </OverlayTrigger>
               </Nav.Link>
-            ) : (
-              <Nav.Link style={{ marginRight: "40px" }} href="/login">
+              {/* <Nav.Link style={{ marginRight: "2rem" }} onClick={handleLogout}>
+                Logout
+              </Nav.Link> */}
+            </Nav>
+          ) : (
+            <Nav className="ml-auto">
+              <Nav.Link style={{ marginRight: "1rem" }} href="/about">
+                <OverlayTrigger
+                  key="bottom"
+                  placement="bottom"
+                  overlay={<Tooltip>About Team</Tooltip>}
+                >
+                  <MdInfoOutline size="2rem" color="grey" />
+                </OverlayTrigger>
+              </Nav.Link>
+
+              <Nav.Link style={{ marginRight: "3rem" }} href="/login">
                 <OverlayTrigger
                   key="bottom"
                   placement="bottom"
@@ -107,8 +112,8 @@ export default function Navigation() {
                   <MdAccountCircle size="2rem" color="grey" />
                 </OverlayTrigger>
               </Nav.Link>
-            )}
-          </Nav>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Navbar>
       <Navbar>
