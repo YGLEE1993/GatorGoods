@@ -65,7 +65,7 @@ export default function Searchbox() {
           <FormControl
             placeholder="Search.."
             className="mr-sm-2"
-            maxLength="30"
+            maxLength="40"
             value={searchTerm}
             onChange={handleInputChange}
           />
