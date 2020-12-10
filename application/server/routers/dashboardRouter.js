@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getMyProducts,
   //   updateMyProduct,
-  //   deleteMyProduct,
+    deleteMyProduct,
 } = require("../controllers/dashboardController");
 
 //===========================================
@@ -12,6 +12,6 @@ const {
 
 router.post("/getMyProducts", getMyProducts);
 // router.post("/updateMyProduct", updateMyProduct);
-// router.post("/deleteMyProduct", deleteMyProduct);
+router.post("/deleteMyProduct", deleteMyProduct);
 
 module.exports = router;

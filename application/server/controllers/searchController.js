@@ -77,8 +77,8 @@ exports.searchProducts = (req, res) => {
                ON
                  gatorgoods.Product_Listing.product_id=gatorgoods.Image.product
                WHERE 
-                title LIKE '%${searchTerm}%' AND category LIKE '%${category}%' AND visible="1"`;
-
+                title LIKE '%${searchTerm}%' AND category LIKE '%${category}%' AND visible="1"
+               OR description LIKE '%${searchTerm}%' AND category LIKE '%${category}%' AND visible="1"`
   } // 6. TEXT SEARCH - user HAS NOT selected a category but HAS entered text -> return ANY listings matching text - if
     //                  no matches, return SAMPLING (default matches any listings with 'a' in title)
   else if (searchTerm !== "" && category === "") {
@@ -92,7 +92,8 @@ exports.searchProducts = (req, res) => {
                ON
                  gatorgoods.Product_Listing.product_id=gatorgoods.Image.product
                WHERE 
-                 title LIKE '%${searchTerm}%' AND visible="1" 
+                 title LIKE '%${searchTerm}%' AND visible="1"
+                 OR description LIKE '%${searchTerm}%' AND visible="1"
                UNION ALL
                SELECT
                  gatorgoods.Product_Listing.*,
@@ -105,13 +106,14 @@ exports.searchProducts = (req, res) => {
                  gatorgoods.Product_Listing.product_id=gatorgoods.Image.product
                  WHERE title LIKE '%a%' AND visible="1" 
                AND NOT EXISTS (
-                SELECT 1 
+                SELECT 1
                 FROM gatorgoods.Product_Listing 
                 INNER JOIN
                  gatorgoods.Image
                 ON
                  gatorgoods.Product_Listing.product_id=gatorgoods.Image.product
                 WHERE title LIKE '%${searchTerm}%'
+                OR description LIKE '%${searchTerm}%'
                 )`;
   }
   connection.query(query, (err, result) => {

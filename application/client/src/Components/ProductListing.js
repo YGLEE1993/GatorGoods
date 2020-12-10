@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   Image,
   Container,
@@ -9,6 +9,7 @@ import {
   Form, Card,
 } from "react-bootstrap";
 import "./ProductListing.css";
+import axios from "axios";
 
 
 /**
@@ -25,15 +26,37 @@ export default function ProductListing(props) {
   const [show, setShow] = useState(false); // state for displaying/hiding the "contact seller" modal
   const handleClose = () => setShow(false); // hides modal (default)
   const handleShow = () => setShow(true); // displays modal
+  const [condition, setCondition] = useState("");
+
+
+  /**
+   * **/
+  const [productListing, setProductListing] = useState(
+      window.opener.productlisting
+  );
+
+  useEffect(() => {
+    console.log(productListing.condition);
+    if(productListing.condition === '1'){
+      setCondition(" Like New");
+      // console.log(condition);
+    }else if (productListing.condition === '2'){
+      setCondition(" Very Good")
+    }else if (productListing.condition === '3'){
+      setCondition(" Good")
+    }else if (productListing.condition === '4'){
+      setCondition(" Acceptable")
+    }
+  }, [props, condition]);
 
   /*
    Allows us to refer to the data passed through props as simply our productListing.
    We do not implement setProductListing (updates state) currently as there is no current need to update its state once
    the user is already on this page; however, it will remain in case there is a future need.
   */
-  const [productListing, setProductListing] = useState(
-    props.location.state.productListing
-  );
+  // const [productListing, setProductListing] = useState(
+  //   props.location.state.productListing
+  // );
 
   /*
    newImage and newImage2 are how we render either binary or b64 data received from our props, as images. We need to
@@ -41,12 +64,12 @@ export default function ProductListing(props) {
    We only store images as binary (manual uploading into database through workbench) and b64 (through app createListing)
    so we do not need any further rendering options other than these two.
   */
-  const newImage = new Buffer.from(props.location.state.productListing.image_blob.data).toString();
-  const newImage2 = new Buffer.from(props.location.state.productListing.image_blob.data).toString("base64");
+  // const newImage = new Buffer.from(props.location.state.productListing.image_blob.data).toString();
+  // const newImage2 = new Buffer.from(props.location.state.productListing.image_blob.data).toString("base64");
 
-  const [img, setImg] = useState(newImage2); // state for img (see above)
-  const [flag, setFlag] = useState(true); // state for flag - HAVE to update state or else the app will crash..
-                                                    // ..due to excessive re-rendering
+  // const [img, setImg] = useState(newImage2); // state for img (see above)
+  // const [flag, setFlag] = useState(true); // state for flag - HAVE to update state or else the app will crash..
+  //                                                   // ..due to excessive re-rendering
 
   // console.log(props.location.state.productListing);
 
@@ -56,8 +79,8 @@ export default function ProductListing(props) {
         <Row>
           <Col lg={6}>
             {/*<Image src="holder.js/100px160" roundedCircle />*/}
-            <Image src={`data:image/jpeg;charset=utf-8;base64, ${img}`}
-                   onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}
+            <Image src={`data:image/jpeg;charset=utf-8;base64, ${window.opener.newImage}`}
+                   // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}
                    alt="image not found"
                    style={{maxWidth: "450px", maxHeight: "450px"}}/>
           </Col>
@@ -66,8 +89,8 @@ export default function ProductListing(props) {
             <h2 className="price">${productListing.price}</h2>
             <Container className="container-description">
               <p>
-                <i class="fas fa-history"></i> &nbsp; Condition:{" "}
-                {productListing.condition}
+                <i class="fas fa-history"></i> &nbsp; Condition:{condition}
+                {/*{(e) => {if(productListing.condition === 1){}}}*/}
               </p>
               <p>
                 <i class="fas fa-map-marker-alt"></i> &nbsp; Transaction

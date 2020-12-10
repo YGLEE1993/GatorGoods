@@ -32,46 +32,62 @@ export default function Other() {
             });
     }, []);
 
+    const [sortOption, setSortOption] = useState()
+    const handleSortOption = (sort) => {
+        axios
+            .post("/api/search/sortProducts", {
+                searchTerm: "",
+                category: 4,
+                // searchTerm: props.location.state.searchTerm,
+                // category: props.location.state.category,
+                sortOption: sort
+            })
+            .then((response) => {
+                // console.log(response.data);
+                setOtherListings(response.data);
+            });
+    }
+
     return (
         <div>
-            <Featured />
+            {/*<Featured />*/}
             <Container style={{ marginTop: "2rem" }}>
                 <Col>
                     <Row>
                         <Col>
                             <h2>Other</h2>
                         </Col>
-                        <Col lg={6}>
-                            <p>{otherListings.length} listings in this category</p>
+                        <Col md="auto" style={{paddingTop: "7px"}}>
+                            <p>{otherListings.length} listings found</p>
                         </Col>
-                        <Col className="text-right">
+                        <Col xs lg="2" style={{marginRight: "-4.3rem"}}>
                             <DropdownButton
                                 id="dropdown-basic-button"
                                 variant="secondary"
                                 title="Sort by"
+                                key={sortOption}
                             >
-                                <Dropdown.Item href="#/action-2">Latest</Dropdown.Item>
-                                <Dropdown.Item href="#/action-1">
+                                <Dropdown.Item eventKey="1" onClick={() => {setSortOption('1');handleSortOption(1)}}>
+                                    Condition: best to worst
+                                </Dropdown.Item>
+                                <Dropdown.Item eventKey="2" onClick={() => {setSortOption('2');handleSortOption(2)}}>
                                     Price: low to high
                                 </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">
+                                <Dropdown.Item eventKey="3" onClick={() => {setSortOption('3');handleSortOption(3)}}>
                                     Price: high to low
                                 </Dropdown.Item>
                             </DropdownButton>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col className="filter">
-                            <Filter />
-                        </Col>
-                        <Col lg={9}>
-                            <CardColumns className="row">
-                                    {otherListings.map((otherListing, i) => (
-                                        <ListingCard key={i} {...otherListing} />
-                                    ))}
+                    <Container>
+                        <Row>
+                            <CardColumns className="row" style={{margin: "1.5rem"}}>
+                                {otherListings.map((otherListing, i) => (
+                                    <ListingCard key={i} {...otherListing} />
+                                ))}
                             </CardColumns>
-                        </Col>
-                    </Row>
+                        </Row>
+                    </Container>
                 </Col>
             </Container>
         </div>
