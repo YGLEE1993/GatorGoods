@@ -3,14 +3,29 @@ import { Card, Col, Row, Button, Modal } from "react-bootstrap";
 import "./Dashboard.css";
 import axios from "axios";
 
+
+/**
+ * File name: DashboardListingCard.js
+ * Purpose: This is the card used to populate a user's dashboard with their unique product listings. It is rendered by
+ *          way of DashboardListings.js, which houses an initial post request to the db where we then return the results
+ *          to this component for rendering. We need to also create additional state for handling a user request to
+ *          delete a listing, in which case we will make a post request to change the visibility of the listing, then
+ *          refresh the view.
+ * Authors: YG, Trenton (functions) | Joy (styling)
+ */
+
 export default function DashboardListingCard(props) {
+  /*
+   State and handles for responding to listing card deletion requests from the user.
+  */
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   let newImage = new Buffer.from(props.image_blob.data).toString(); //renders base64 data
   let newImage2 = new Buffer.from(props.image_blob.data).toString("base64"); //renders binary data
 
-  console.log(props);
+  // console.log(props);
 
   /*
    If we implement thumbnails, we will use these instead of the above values, as we will pull from the image_thumb col
@@ -35,7 +50,12 @@ export default function DashboardListingCard(props) {
     }
   }, [props, img]);
 
-
+  /*
+   On user request to delete a listing, this post request is sent to dashboardController.js where a query is made to
+   change the listing's visibility to 0 (false). The listing will still be populated in the db, and will need to be
+   manually deleted by admins during garbage collection tasks; however, on view refresh the listing will no longer be
+   available to users.
+  */
   const handleDelete = () => {
     axios
         .post("/api/dashboard/deleteMyProduct", {
@@ -46,10 +66,7 @@ export default function DashboardListingCard(props) {
           window.location.reload()
         });
   }
-
-
-
-
+  
   return (
     <div>
       <Card style={{ width: "18rem" }} className="dashboard-listing-card">

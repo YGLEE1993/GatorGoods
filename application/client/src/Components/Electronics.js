@@ -1,27 +1,37 @@
 import React, {useEffect, useState} from "react";
 import {
     Container,
-    CardDeck,
-    CardGroup,
-    Card,
     Col,
     Row,
     DropdownButton,
     Dropdown,
-    Button,
-    Form, CardColumns
+    CardColumns,
 } from "react-bootstrap";
 import "./Category.css"
-import Filter from "./Filter";
-import Featured from "./Featured"
 import ListingCard from "./ListingCard"
 import axios from "axios";
+// import Filter from "./Filter"; // legacy feature
+// import Featured from "./Featured" // legacy feature
 
+
+/**
+ * File name: Electronics.js
+ * Purpose: Books.js, Furniture.js, Electronics.js, and Other.js are all implemented the same way. They are views
+ *          specific to each category in the db (current as of 12/10/2020), and are navigated to by a user's selection
+ *          of a "featured" category (NOT the result of a searchbar search). They are implemented by making an initial
+ *          post request prior to loading, rendering all the visible product listings matching their specific category.
+ *          On a sort request from the user, the product listings are repopulated by a separate post request, and then
+ *          the window is reloaded with the new listings. This means that should any listings be deleted or added to the
+ *          db (matching the category of the view), then the resulting listings will be loaded with those changes.
+ *
+ * Authors: YG, Trenton (functions) | Joy (styling)
+ */
 
 export default function Electronics() {
-    const [electronicsListings, setElectronicsListings] = useState([]);
+    const [electronicsListings, setElectronicsListings] = useState([]); // state for populating listing cards
+
+    // This is the initial post request which pulls data from the database prior to the view loading
     useEffect(() => {
-        // const getListings = () => {
         axios
             .post("/api/search/searchProducts", {
                 searchTerm: "",
@@ -33,14 +43,15 @@ export default function Electronics() {
     }, []);
 
 
-    const [sortOption, setSortOption] = useState()
+    const [sortOption, setSortOption] = useState() // state for sorting options - user selected
+
+    // This is the post request for sorting listings *Note: Resultant listings are returned from the database
+    // ALREADY ordered. No re-ordering is done on the client-side
     const handleSortOption = (sort) => {
         axios
             .post("/api/search/sortProducts", {
                 searchTerm: "",
                 category: 3,
-                // searchTerm: props.location.state.searchTerm,
-                // category: props.location.state.category,
                 sortOption: sort
             })
             .then((response) => {

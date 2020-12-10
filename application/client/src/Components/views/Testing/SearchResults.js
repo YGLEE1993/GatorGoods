@@ -8,15 +8,32 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import "../../Category.css";
-import Filter from "../../Filter";
-import Featured from "../../Featured";
 import ListingCard from "../../ListingCard";
 import axios from "axios";
+import Filter from "../../Filter"; // legacy feature
+import Featured from "../../Featured"; // legacy feature
+
+
+/**
+ * File name: SearchResults.js
+ * Purpose: This is the resultant view after a user uses the searchbar (Searchbox.js) to search for products. It is
+ *          connected to both the searchController and sortController, the former being for loading and reloading
+ *          product listings on page loads, and the latter being for sorting those results. It should be noted that on
+ *          sorts, the product listings are actually repopulated from a new query, and are not the initial cards on page
+ *          load. This means that any addition or negation from the database during the time between load and sort call
+ *          will include the changed results.
+ * Authors: YG, Trenton (functions) | Joy (styling)
+ */
 
 export default function SearchResults(props) {
-  const [productListings, setProductListings] = useState([]);
+  const [productListings, setProductListings] = useState([]); // state for rendering product listings
   // console.log(props.location.state.productListings)
 
+  /*
+   This is called on first load of the page, as well as subsequent reloads after sorting. Unlike handleSortOption which
+   is called on user selection, useEffect is triggered automatically prior to loading the rendering the page so that we
+   can render the product listings based on whatever searchTerm and category were given by the user, if any.
+   */
   useEffect(() => {
     setSearchTerm(props.location.state.searchTerm);
     setCategory(props.location.state.category);
@@ -31,17 +48,23 @@ export default function SearchResults(props) {
         });
   }, [props]);
 
+  /*
+   Our state for making the handleSortOption calls on sort.
+  */
   const [sortOption, setSortOption] = useState()
   const [searchTerm, setSearchTerm] = useState(props.location.state.searchTerm)
   const [category, setCategory] = useState(props.location.state.category);
 
+  /*
+   This function is called after a user selects a sort option from the dropdown menu. We pass the pre-existing params
+   for the searchTerm and category which we received on first load of the page (since we arrived here through the use of
+   the searchbar), then pass the sort option after setting its state based on the dropdown selection by the user.
+  */
   const handleSortOption = (sort) => {
     axios
         .post("/api/search/sortProducts", {
           searchTerm: searchTerm,
           category: category,
-          // searchTerm: props.location.state.searchTerm,
-          // category: props.location.state.category,
           sortOption: sort
         })
         .then((response) => {
@@ -50,14 +73,11 @@ export default function SearchResults(props) {
         });
   }
 
-
-
-
-
-
+  /*
+   This is used to render the name of the category specific to the user's search.
+  */
   function categoryRender() {
     let cat;
-    // switch (props.location.state.category) {
     switch (category) {
       case "1":
         cat = "Books";
@@ -83,7 +103,6 @@ export default function SearchResults(props) {
             <Col>
               <h2>
                 <span style={{ color: "#e67a00" }}>
-                  {/*{categoryRender()} {props.location.state.searchTerm}{" "}*/}
                   {categoryRender()} {searchTerm}{" "}
                 </span>
                 Results

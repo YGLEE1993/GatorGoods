@@ -6,10 +6,9 @@ import {
   Col,
   Row,
   Button,
-  Form, Card,
+  Form,
 } from "react-bootstrap";
 import "./ProductListing.css";
-import axios from "axios";
 
 
 /**
@@ -17,8 +16,11 @@ import axios from "axios";
  * Purpose: This is the resultant view after a user clicks on an individual product listing card on a view which homes
  *          multiple cards (home, books, furniture, etc.). It receives the data from that unique card as props, and then
  *          parses the values contained in props into elements of the product listing. Users who are registered and
- *          logged in may contact the listing user of a product listing from this view.
+ *          logged in may contact the listing user of a product listing from this view. *Note: This file has two working
+ *          versions dependent on the chosen feature -> current implementation is with onCLick events triggering a new
+ *          window load. The commented implementation is for triggering a same window load.
  * Authors: YG, Trenton (functions) | Joy (styling)
+ * Notes: Still needs to implement a proper modal with preloaded values, and messaging functionality.
  */
 
 export default function ProductListing(props) {
@@ -26,15 +28,23 @@ export default function ProductListing(props) {
   const [show, setShow] = useState(false); // state for displaying/hiding the "contact seller" modal
   const handleClose = () => setShow(false); // hides modal (default)
   const handleShow = () => setShow(true); // displays modal
-  const [condition, setCondition] = useState("");
-
 
   /**
-   * **/
+   * ---BEGIN NEW WINDOW LOAD---
+   */
+  /*
+   We only need to pull the initial data passed to the window as our state, as we are not performing any reloads or
+   sorts on this view afterwards, and therefore have no need to change the intial state.
+  */
   const [productListing, setProductListing] = useState(
       window.opener.productlisting
   );
 
+  /*
+   State and useEffect for converting condition values (small ints in db) to their corresponding strings -
+   initial spaces are for formatting purposes
+  */
+  const [condition, setCondition] = useState("");
   useEffect(() => {
     console.log(productListing.condition);
     if(productListing.condition === '1'){
@@ -48,7 +58,14 @@ export default function ProductListing(props) {
       setCondition(" Acceptable")
     }
   }, [props, condition]);
+  /**
+   * ---END NEW WINDOW LOAD---
+   */
 
+
+  /**
+   * ---BEGIN SAME WINDOW LOAD---
+   */
   /*
    Allows us to refer to the data passed through props as simply our productListing.
    We do not implement setProductListing (updates state) currently as there is no current need to update its state once
@@ -72,6 +89,9 @@ export default function ProductListing(props) {
   //                                                   // ..due to excessive re-rendering
 
   // console.log(props.location.state.productListing);
+  /**
+   * ---END SAME WINDOW LOAD---
+   */
 
   return (
     <div>
@@ -80,7 +100,7 @@ export default function ProductListing(props) {
           <Col lg={6}>
             {/*<Image src="holder.js/100px160" roundedCircle />*/}
             <Image src={`data:image/jpeg;charset=utf-8;base64, ${window.opener.newImage}`}
-                   // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}
+                   // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}} // same window implementation
                    alt="image not found"
                    style={{maxWidth: "450px", maxHeight: "450px"}}/>
           </Col>
@@ -90,7 +110,6 @@ export default function ProductListing(props) {
             <Container className="container-description">
               <p>
                 <i class="fas fa-history"></i> &nbsp; Condition:{condition}
-                {/*{(e) => {if(productListing.condition === 1){}}}*/}
               </p>
               <p>
                 <i class="fas fa-map-marker-alt"></i> &nbsp; Transaction
@@ -104,7 +123,6 @@ export default function ProductListing(props) {
             <Button variant="primary" size="lg" onClick={handleShow}>
               <i class="far fa-comment-dots"></i> &nbsp; Contact seller
             </Button>{" "}
-
 
             {/*CONTACT  /  MESSAGE MODAL*/}
             <Modal

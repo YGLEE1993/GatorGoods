@@ -3,7 +3,10 @@ const connection = require("../models/dbconnection");
 
 /**
  * File name: sortController.js
- * Purpose: ---
+ * Purpose: This is the controller for sort selections made by the user on either the category views, or the search
+ *          results view. The sortOption is received from the axios.post request, and is initially given a value of 1,2,
+ *          or 3 dependent on a user's selection. Note: We cannot inject the querySort variable into the final sort
+ *          query due to the use of a UNION ALL condition; therefore, we need to manually type the sort option.
  * Authors: YG, Trenton
  */
 
@@ -19,7 +22,6 @@ exports.sortProducts = (req, res) => {
     let query;
     let querySort;
     if(sortOption === 1) {
-        // querySort = `ORDER BY FIELD(gatorgoods.Product_Listing.condition, 'Like New', 'Very Good', 'Good', 'Acceptable')`;
         querySort = `ORDER BY gatorgoods.Product_Listing.condition ASC`;
     }else if(sortOption === 2){
         querySort = `ORDER BY gatorgoods.Product_Listing.price ASC`;
@@ -78,6 +80,8 @@ exports.sortProducts = (req, res) => {
                OR description LIKE '%${searchTerm}%' AND category LIKE '%${category}%' AND visible="1" ${querySort}`;
     } // 6. TEXT SEARCH - user HAS NOT selected a category but HAS entered text -> return ANY listings matching text - if
       //                  no matches, return SAMPLING (default matches any listings with 'a' in title)
+      //                  *Note: This query needs to be performed with explicit declaration of the ORDER BY call, as we
+      //                  cannot inject a variable here due to the UNION ALL condition
     else if (searchTerm !== "" && category === "") {
         if(sortOption === 1) {
             query = `SELECT

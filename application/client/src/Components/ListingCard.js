@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import "./ListingCard.css";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom"; // legacy implementation - useful for reference
 
 
 /**
@@ -16,9 +16,10 @@ import { useHistory } from "react-router-dom";
 
 export default function ListingCard(props) {
 
-  const history = useHistory(); // for sending and receiving data between views
+  // const history = useHistory(); // for sending and receiving data between views
 
-  function handleClick(e) { // for routing to a unique productListing view after onClick event for specific card
+  // for routing to a unique productListing view after onClick event for specific card
+  function handleClick(e) {
     e.preventDefault()
     // history.push("/productlisting", {
     //   productListing: props
@@ -72,7 +73,7 @@ export default function ListingCard(props) {
       {/*<Card.Img variant="top" src="holder.js/100px160" />*/  /*replaced with below, keeping for legacy reference*/}
       <Card.Img variant="top"
                 src={`data:image/jpeg;charset=utf-8;base64, ${img}`}
-                // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}   /*updates src via change in state*/
+                // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}   /*keeping for reference*/
                 alt="image not found"
                 classname="img-thumbnail"
                 style={{maxWidth: "15rem", maxHeight: "20rem"}}    /*needed if using thumbnails, otherwise no impact*/
