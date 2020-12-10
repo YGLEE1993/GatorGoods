@@ -196,10 +196,10 @@ export default function NewListing(props) {
                   onChange={handleInputChange}
               >
                 <option>Choose</option>
-                <option value={"Like New"}>Like New</option>
-                <option value={"Very Good"}>Very Good</option>
-                <option value={"Good"}>Good</option>
-                <option value={"Acceptable"}>Acceptable</option>
+                <option value={"1"}>Like New</option>
+                <option value={"2"}>Very Good</option>
+                <option value={"3"}>Good</option>
+                <option value={"4"}>Acceptable</option>
               </Form.Control>
             </InputGroup>
           </Form.Group>
