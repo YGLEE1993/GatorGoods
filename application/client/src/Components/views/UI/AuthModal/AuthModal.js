@@ -133,7 +133,7 @@ export default function AuthModal() {
                   onChange={handleInputChange}
                 />
                 <Form.Text className="text-muted">
-                  {/* <a href="#">forgot your password?</a> */}
+                  <a href="#">forgot your password?</a>
                 </Form.Text>
               </Form.Group>
               <div className="text-right">
