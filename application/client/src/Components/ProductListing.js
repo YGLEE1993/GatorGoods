@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Container,
@@ -9,8 +9,7 @@ import {
   Form,
 } from "react-bootstrap";
 import "./ProductListing.css";
-
-
+import { useHistory } from "react-router-dom";
 /**
  * File name: ProductListing.js
  * Purpose: This is the resultant view after a user clicks on an individual product listing card on a view which homes
@@ -24,10 +23,11 @@ import "./ProductListing.css";
  */
 
 export default function ProductListing(props) {
+  const history = useHistory();
 
-  const [show, setShow] = useState(false); // state for displaying/hiding the "contact seller" modal
-  const handleClose = () => setShow(false); // hides modal (default)
-  const handleShow = () => setShow(true); // displays modal
+  // const [show, setShow] = useState(false); // state for displaying/hiding the "contact seller" modal
+  // const handleClose = () => setShow(false); // hides modal (default)
+  // const handleShow = () => setShow(true); // displays modal
 
   /**
    * ---BEGIN NEW WINDOW LOAD---
@@ -37,7 +37,7 @@ export default function ProductListing(props) {
    sorts on this view afterwards, and therefore have no need to change the intial state.
   */
   const [productListing, setProductListing] = useState(
-      window.opener.productlisting
+    window.opener.productlisting
   );
 
   /*
@@ -47,21 +47,28 @@ export default function ProductListing(props) {
   const [condition, setCondition] = useState("");
   useEffect(() => {
     console.log(productListing.condition);
-    if(productListing.condition === '1'){
+    if (productListing.condition === "1") {
       setCondition(" Like New");
       // console.log(condition);
-    }else if (productListing.condition === '2'){
-      setCondition(" Very Good")
-    }else if (productListing.condition === '3'){
-      setCondition(" Good")
-    }else if (productListing.condition === '4'){
-      setCondition(" Acceptable")
+    } else if (productListing.condition === "2") {
+      setCondition(" Very Good");
+    } else if (productListing.condition === "3") {
+      setCondition(" Good");
+    } else if (productListing.condition === "4") {
+      setCondition(" Acceptable");
     }
   }, [props, condition]);
+
+  const onContactSeller = () => {
+    history.push("/message", {
+      title: productListing.title,
+      product_id: productListing.product_id,
+      seller: productListing.user,
+    });
+  };
   /**
    * ---END NEW WINDOW LOAD---
    */
-
 
   /**
    * ---BEGIN SAME WINDOW LOAD---
@@ -99,10 +106,12 @@ export default function ProductListing(props) {
         <Row>
           <Col lg={6}>
             {/*<Image src="holder.js/100px160" roundedCircle />*/}
-            <Image src={`data:image/jpeg;charset=utf-8;base64, ${window.opener.newImage}`}
-                   // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}} // same window implementation
-                   alt="image not found"
-                   style={{maxWidth: "450px", maxHeight: "450px"}}/>
+            <Image
+              src={`data:image/jpeg;charset=utf-8;base64, ${window.opener.newImage}`}
+              // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}} // same window implementation
+              alt="image not found"
+              style={{ maxWidth: "450px", maxHeight: "450px" }}
+            />
           </Col>
           <Col lg={6}>
             <h3>{productListing.title}</h3>
@@ -120,12 +129,11 @@ export default function ProductListing(props) {
                 {productListing.description}
               </p>
             </Container>
-            <Button variant="primary" size="lg" onClick={handleShow}>
+            <Button variant="primary" size="lg" onClick={onContactSeller}>
               <i class="far fa-comment-dots"></i> &nbsp; Contact seller
             </Button>{" "}
-
             {/*CONTACT  /  MESSAGE MODAL*/}
-            <Modal
+            {/* <Modal
               show={show}
               onHide={handleClose}
               backdrop="static"
@@ -162,7 +170,7 @@ export default function ProductListing(props) {
                 </Button>
                 <Button variant="primary">Send Message</Button>
               </Modal.Footer>
-            </Modal>
+            </Modal> */}
           </Col>
         </Row>
       </Container>
