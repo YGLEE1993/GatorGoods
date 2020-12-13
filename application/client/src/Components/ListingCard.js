@@ -48,8 +48,8 @@ export default function ListingCard(props) {
   // let newImage2 = new Buffer.from(props.image_thumb.data).toString("base64");
 
   const [img, setImg] = useState(newImage2); // state for img (see above)
-  const [flag, setFlag] = useState(true); // state for flag - HAVE to update state or else the app will crash..
-                                                   // ..due to excessive re-rendering
+  // const [flag, setFlag] = useState(true); // state for flag - legacy implementation
+  const [cond, setCond] = useState("");
 
   /*
    This useEffect is for rendering images tailored to specific product_listings. For product_id's < 33, we render the
@@ -62,7 +62,17 @@ export default function ListingCard(props) {
     } else {
       setImg(newImage);
     }
-  }, [props, img]);
+    if (props.condition === "1") {
+      setCond("Like New")
+    } else if ( props.condition === "2") {
+      setCond("Very Good")
+    } else if ( props.condition === "3") {
+      setCond("Good")
+    } else if ( props.condition === "4") {
+      setCond("Acceptable")
+    }
+  }, [props, img, cond]);
+
 
   return (
     <Card
@@ -82,7 +92,8 @@ export default function ListingCard(props) {
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
           <Row className="price-condition">
-            <Col>${props.price}</Col>
+            <Col style={{marginLeft: "-40px", marginRight: "-10px", paddingLeft: "0", paddingRight: "0"}}>${props.price}</Col>
+            <Col style={{marginLeft: "-60px"}}> | Condition: {cond}</Col>
           </Row>
         </Card.Text>
         <Card.Text>{props.description}</Card.Text>
