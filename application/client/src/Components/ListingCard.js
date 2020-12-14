@@ -50,7 +50,7 @@ export default function ListingCard(props) {
   const [img, setImg] = useState(newImage2); // state for img (see above)
   // const [flag, setFlag] = useState(true); // state for flag - legacy implementation
   const [cond, setCond] = useState("");
-
+  const [desc, setDesc] = useState("");
   /*
    This useEffect is for rendering images tailored to specific product_listings. For product_id's < 33, we render the
    binary data which we manually input into the database for initial testing; and thereafter, we set our image to render
@@ -71,7 +71,12 @@ export default function ListingCard(props) {
     } else if ( props.condition === "4") {
       setCond("Acceptable")
     }
-  }, [props, img, cond]);
+    if (props.description.length > 90) {
+      setDesc(props.description.substring(0,90) + "...")
+    } else {
+      setDesc(props.description)
+    }
+  }, [props, img, cond, desc]);
 
 
   return (
@@ -86,7 +91,8 @@ export default function ListingCard(props) {
                 // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}   /*keeping for reference*/
                 alt="image not found"
                 classname="img-thumbnail"
-                style={{maxWidth: "15rem", maxHeight: "20rem"}}    /*needed if using thumbnails, otherwise no impact*/
+                style={{maxWidth: "15rem", maxHeight: "20rem", borderBottom: "solid", borderBottomColor: "#efefef",
+                  borderWidth: "1px", marginBottom: "-10px"}}
                  />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
@@ -96,7 +102,7 @@ export default function ListingCard(props) {
             <Col style={{marginLeft: "-60px"}}> | Condition: {cond}</Col>
           </Row>
         </Card.Text>
-        <Card.Text>{props.description}</Card.Text>
+        <Card.Text>{desc}</Card.Text>
       </Card.Body>
     </Card>
   );
