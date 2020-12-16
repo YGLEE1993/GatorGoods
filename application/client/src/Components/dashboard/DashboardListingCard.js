@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row, Button, Modal } from "react-bootstrap";
+import { Card, Col, Row, Button, Modal, Badge } from "react-bootstrap";
 import "./Dashboard.css";
 import axios from "axios";
 
@@ -79,7 +79,13 @@ export default function DashboardListingCard(props) {
         <Card.Body>
           <Card.Title>{props.title}</Card.Title>
           <Card.Text>{props.description}</Card.Text>
-          <Card.Text>{props.price}</Card.Text>
+          <Card.Text
+            style={{
+              fontSize: "15pt",
+            }}
+          >
+            <Badge variant="light">${props.price}</Badge>
+          </Card.Text>
           <Row className="justify-content-lg-center">
             {/* EDIT Button (below) is not currently supported */}
             {/*<Col lg={5}>*/}

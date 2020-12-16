@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, InputGroup, FormControl, Form } from "react-bootstrap";
 
-
 /**
  * File name: Searchbox.js
  * Purpose: This is the searchbar component which is rendered inside the navbar (Navigation.js). It is not itself
@@ -67,7 +66,11 @@ export default function Searchbox() {
 
         <Form.Group>
           <InputGroup.Append>
-            <Button variant="outline-secondary" onClick={onSearch}>
+            <Button
+              variant="outline-secondary"
+              onClick={onSearch}
+              style={{ width: "8rem" }}
+            >
               Search
             </Button>
           </InputGroup.Append>
