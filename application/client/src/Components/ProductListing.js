@@ -14,7 +14,6 @@ import "./ProductListing.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-
 /**
  * File name: ProductListing.js
  * Purpose: This is the resultant view after a user clicks on an individual product listing card on a view which homes
@@ -151,12 +150,12 @@ export default function ProductListing(props) {
    If a user IS NOT logged in, they will be directed to log in before being able to access the message modal
   */
   const popover = (
-      <Popover id="popover-basic">
-        <Popover.Title as="h3">Please Log In!</Popover.Title>
-        <Popover.Content>
-          Uh oh! You're not logged in! Please log in to continue!
-        </Popover.Content>
-      </Popover>
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Please Log In!</Popover.Title>
+      <Popover.Content>
+        Uh oh! You're not logged in! Please log in to continue!
+      </Popover.Content>
+    </Popover>
   );
 
   /*
@@ -164,25 +163,28 @@ export default function ProductListing(props) {
   */
   const handleSend = () => {
     console.log(product);
-    if(message.length < 1) {
+    if (message.length < 1) {
       console.log("No message has been entered");
-      alert("Please enter your message.")
-    } else if (contact.length < 6) { // minimum length is either a phone number (10 digits) or email w/ "_@_.__" (6 chars)
+      alert("Please enter your message.");
+    } else if (contact.length < 6) {
+      // minimum length is either a phone number (10 digits) or email w/ "_@_.__" (6 chars)
       console.log("No contact information has been entered");
-      alert("Please enter your contact information.\nIt should be either a 10 digit phone number, or valid email address")
+      alert(
+        "Please enter your contact information.\nIt should be either a 10 digit phone number, or valid email address"
+      );
     } else {
       axios
-          .post("/api/message/sendMessage", {
-            title: title,
-            message: message,
-            contact: contact,
-            product: product,
-            seller: seller,
-          })
-          .then(() => {
-            alert("Your message has been sent!");
-            // console.log("message sent")
-          });
+        .post("/api/message/sendMessage", {
+          title: title,
+          message: message,
+          contact: contact,
+          product: product,
+          seller: seller,
+        })
+        .then(() => {
+          alert("Your message has been sent!");
+          // console.log("message sent")
+        });
       setShow(false);
     }
   };
@@ -193,7 +195,12 @@ export default function ProductListing(props) {
   return (
     <div>
       {/* CONTACT SELLER MODAL */}
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Contact the seller</Modal.Title>
         </Modal.Header>
@@ -206,22 +213,22 @@ export default function ProductListing(props) {
             <Form.Group controlId="formContact">
               <Form.Label>How would you like to be contacted?</Form.Label>
               <Form.Control
-                  type="contact"
-                  name="contact"
-                  placeholder="Enter your email or phone number"
-                  value={contact}
-                  onChange={handleInputChange}
+                type="contact"
+                name="contact"
+                placeholder="Enter your email or phone number"
+                value={contact}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group controlId="formMessage">
               <Form.Label>Message</Form.Label>
               <Form.Control
-                  name="message"
-                  type="message"
-                  value={message}
-                  onChange={handleInputChange}
-                  as="textarea"
-                  rows={4}
+                name="message"
+                type="message"
+                value={message}
+                onChange={handleInputChange}
+                as="textarea"
+                rows={4}
               />
             </Form.Group>
           </Form>
@@ -249,7 +256,14 @@ export default function ProductListing(props) {
           </Col>
           <Col lg={6}>
             <h3>{productListing.title}</h3>
-            <h2 className="price">${productListing.price}</h2>
+            <h2
+              className="price"
+              style={{
+                marginTop: "1rem",
+              }}
+            >
+              ${productListing.price}
+            </h2>
             <Container className="container-description">
               <p>
                 <i class="fas fa-history"></i> &nbsp; Condition:{condition}
@@ -264,27 +278,37 @@ export default function ProductListing(props) {
               </p>
             </Container>
             {isLoggedIn ? (
-            <Button variant="primary" size="lg" onClick={handleShow}>
-              <i class="far fa-comment-dots"></i> &nbsp; Contact seller
-            </Button>
-              ):(
-                <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                  <Button variant="primary" size="lg"><i class="far fa-comment-dots"></i> &nbsp;Contact seller</Button>
-                </OverlayTrigger>
-              )}
+              <Button variant="primary" size="lg" onClick={handleShow}>
+                <i class="far fa-comment-dots"></i> &nbsp; Contact seller
+              </Button>
+            ) : (
+              <OverlayTrigger
+                trigger="click"
+                placement="right"
+                overlay={popover}
+              >
+                <Button variant="primary" size="lg">
+                  <i class="far fa-comment-dots"></i> &nbsp;Contact seller
+                </Button>
+              </OverlayTrigger>
+            )}
+            <p
+              style={{
+                marginTop: "1rem",
+                color: "grey",
+                fontSize: "9pt",
+              }}
+            >
+              Beware of scams and frauds.
+            </p>
           </Col>
         </Row>
       </Container>
-      <Container className="container-footer">
-        {/*<Row style={{ margin: "1rem" }}>*/}
-        {/*  <Col lg="auto">Seller: {productListing.user}</Col>*/}
-        {/*  <Col lg="auto">Posted: 2 hours ago</Col>*/}
-        {/*  <Col lg="auto">Updated: 1 hour ago</Col>*/}
-        {/*</Row>*/}
-        <Row style={{ margin: "1rem" }}>
-          <Col lg="auto">Beware of scams and frauds!</Col>
-        </Row>
-      </Container>
+      {/* <Row style={{ margin: "1rem" }}>*/}
+      {/*  <Col lg="auto">Seller: {productListing.user}</Col>*/}
+      {/*  <Col lg="auto">Posted: 2 hours ago</Col>*/}
+      {/*  <Col lg="auto">Updated: 1 hour ago</Col>*/}
+      {/*</Row> */}
     </div>
   );
 }
