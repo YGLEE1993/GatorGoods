@@ -1,9 +1,18 @@
-import React, {useEffect, useState} from "react";
-import {Card, Col, Row, Button, Popover, Modal, Form, OverlayTrigger} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  Col,
+  Row,
+  Button,
+  Popover,
+  Modal,
+  Form,
+  OverlayTrigger,
+  Badge,
+} from "react-bootstrap";
 import "./ListingCard.css";
 import axios from "axios";
 // import { useHistory } from "react-router-dom"; // for same tab openings
-
 
 /**
  * File name: ListingCard.js
@@ -20,12 +29,11 @@ import axios from "axios";
  */
 
 export default function ListingCard(props) {
-
   // const history = useHistory(); // for sending and receiving data between views
 
   // for routing to a unique productListing view after onClick event for specific card
   function handleClick(e) {
-    e.preventDefault()
+    e.preventDefault();
     // history.push("/productlisting", {
     //   productListing: props
     // });
@@ -57,9 +65,9 @@ export default function ListingCard(props) {
   const route = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      setShow(true)
+      setShow(true);
     }
-  }
+  };
   /**
    * --- end Logic for hover 'contact seller' button---
    */
@@ -95,12 +103,12 @@ export default function ListingCard(props) {
    If a user IS NOT logged in, they will be directed to log in before being able to access the message modal
   */
   const popover = (
-      <Popover id="popover-basic">
-        <Popover.Title as="h3">Please Log In!</Popover.Title>
-        <Popover.Content>
-          Uh oh! You're not logged in! Please log in to continue!
-        </Popover.Content>
-      </Popover>
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Please Log In!</Popover.Title>
+      <Popover.Content>
+        Uh oh! You're not logged in! Please log in to continue!
+      </Popover.Content>
+    </Popover>
   );
 
   /*
@@ -108,25 +116,28 @@ export default function ListingCard(props) {
   */
   const handleSend = () => {
     console.log(product);
-    if(message.length < 1) {
+    if (message.length < 1) {
       console.log("No message has been entered");
-      alert("Please enter your message.")
-    } else if (contact.length < 6) { // minimum length is either a phone number (10 digits) or email w/ "_@_.__" (6 chars)
+      alert("Please enter your message.");
+    } else if (contact.length < 6) {
+      // minimum length is either a phone number (10 digits) or email w/ "_@_.__" (6 chars)
       console.log("No contact information has been entered");
-      alert("Please enter your contact information.\nIt should be either a 10 digit phone number, or valid email address")
+      alert(
+        "Please enter your contact information.\nIt should be either a 10 digit phone number, or valid email address"
+      );
     } else {
       axios
-          .post("/api/message/sendMessage", {
-            title: title,
-            message: message,
-            contact: contact,
-            product: product,
-            seller: seller,
-          })
-          .then(() => {
-            alert("Your message has been sent!");
-            // console.log("message sent")
-          });
+        .post("/api/message/sendMessage", {
+          title: title,
+          message: message,
+          contact: contact,
+          product: product,
+          seller: seller,
+        })
+        .then(() => {
+          alert("Your message has been sent!");
+          // console.log("message sent")
+        });
       setShow(false);
     }
   };
@@ -157,6 +168,7 @@ export default function ListingCard(props) {
   // const [flag, setFlag] = useState(true); // state for flag - legacy implementation
   const [cond, setCond] = useState("");
   const [desc, setDesc] = useState("");
+  const [conditionColor, setConditionColor] = useState(""); // state for the color of the badge
   /*
    This useEffect is for rendering images tailored to specific product_listings. For product_id's < 33, we render the
    binary data which we manually input into the database for initial testing; and thereafter, we set our image to render
@@ -169,116 +181,168 @@ export default function ListingCard(props) {
       setImg(newImage);
     }
     if (props.condition === "1") {
-      setCond("Like New")
-    } else if ( props.condition === "2") {
-      setCond("Very Good")
-    } else if ( props.condition === "3") {
-      setCond("Good")
-    } else if ( props.condition === "4") {
-      setCond("Acceptable")
+      setCond("Like New");
+      setConditionColor("success");
+    } else if (props.condition === "2") {
+      setCond("Very Good");
+      setConditionColor("warning");
+    } else if (props.condition === "3") {
+      setCond("Good");
+      setConditionColor("info");
+    } else if (props.condition === "4") {
+      setCond("Acceptable");
+      setConditionColor("light");
     }
     if (props.description.length > 90) {
-      setDesc(props.description.substring(0,90) + "...")
+      setDesc(props.description.substring(0, 90) + "...");
     } else {
-      setDesc(props.description)
+      setDesc(props.description);
     }
   }, [props, img, cond, desc]);
 
-
   return (
-  <div>
-  <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-    <Modal.Header closeButton>
-      <Modal.Title>Contact the seller</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <Form>
-        <Form.Group controlId="formProductName">
-          <Form.Label>What are you interested in?</Form.Label>
-          <h2>{title}</h2>
-        </Form.Group>
-        <Form.Group controlId="formContact">
-          <Form.Label>How would you like to be contacted?</Form.Label>
-          <Form.Control
-              type="contact"
-              name="contact"
-              placeholder="Enter your email or phone number"
-              value={contact}
-              onChange={handleInputChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formMessage">
-          <Form.Label>Message</Form.Label>
-          <Form.Control
-              name="message"
-              type="message"
-              value={message}
-              onChange={handleInputChange}
-              as="textarea"
-              rows={4}
-          />
-        </Form.Group>
-      </Form>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
-        Close
-      </Button>
-      <Button variant="primary" onClick={handleSend}>
-        Send Message
-      </Button>
-    </Modal.Footer>
-  </Modal>
+    <div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Contact the seller</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formProductName">
+              <Form.Label>What are you interested in?</Form.Label>
+              <h2>{title}</h2>
+            </Form.Group>
+            <Form.Group controlId="formContact">
+              <Form.Label>How would you like to be contacted?</Form.Label>
+              <Form.Control
+                type="contact"
+                name="contact"
+                placeholder="Enter your email or phone number"
+                value={contact}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formMessage">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                name="message"
+                type="message"
+                value={message}
+                onChange={handleInputChange}
+                as="textarea"
+                rows={4}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSend}>
+            Send Message
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-
-
-    <Card
-      onClick={(e)=>{if(!onButton){handleClick(e)}}}
-      onMouseEnter={()=>{setButtonShow(true)}}
-      onMouseLeave={()=>{setButtonShow(false)}}
-      className="listingcard"
-      style={{ height: "30rem", width: "15rem" }}
-    >
-      {/*<Card.Img variant="top" src="holder.js/100px160" />*/  /*replaced with below, keeping for legacy reference*/}
-      {buttonShow ? (
+      <Card
+        onClick={(e) => {
+          if (!onButton) {
+            handleClick(e);
+          }
+        }}
+        onMouseEnter={() => {
+          setButtonShow(true);
+        }}
+        onMouseLeave={() => {
+          setButtonShow(false);
+        }}
+        className="listingcard"
+        style={{ height: "30rem", width: "15rem" }}
+      >
+        {/*<Card.Img variant="top" src="holder.js/100px160" />*/
+        /*replaced with below, keeping for legacy reference*/}
+        {buttonShow ? (
           isLoggedIn ? (
-            <Col style={{alignItems: "end"}}>
-            <Button onClick={route} onMouseEnter={()=>{setOnButton(true)}}
-                    onMouseLeave={()=>{setOnButton(false)}}
-                    style={{position: "absolute"}}>Contact Seller
-            </Button>
+            <Col style={{ alignItems: "end" }}>
+              <Button
+                onClick={route}
+                onMouseEnter={() => {
+                  setOnButton(true);
+                }}
+                onMouseLeave={() => {
+                  setOnButton(false);
+                }}
+                style={{ position: "absolute" }}
+              >
+                Contact Seller
+              </Button>
             </Col>
           ) : (
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-              <Col style={{alignItems: "end"}}>
-                <Button onClick={route} onMouseEnter={()=>{setOnButton(true)}}
-                        onMouseLeave={()=>{setOnButton(false)}}
-                        style={{position: "absolute"}}>Contact Seller
+              <Col style={{ alignItems: "end" }}>
+                <Button
+                  onClick={route}
+                  onMouseEnter={() => {
+                    setOnButton(true);
+                  }}
+                  onMouseLeave={() => {
+                    setOnButton(false);
+                  }}
+                  style={{ position: "absolute" }}
+                >
+                  Contact Seller
                 </Button>
               </Col>
             </OverlayTrigger>
           )
-      ) : (<span></span>)}
-      <Card.Img variant="top"
-                src={`data:image/jpeg;charset=utf-8;base64, ${img}`}
-                // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}   /*keeping for reference*/
-                alt="image not found"
-                classname="img-thumbnail"
-                style={{maxWidth: "15rem", maxHeight: "20rem", borderBottom: "solid", borderBottomColor: "#efefef",
-                  borderWidth: "1px", marginBottom: "-10px"}}
-                 />
-      <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Text>
-          <Row className="price-condition">
-            <Col style={{marginLeft: "-40px", marginRight: "-10px", paddingLeft: "0", paddingRight: "0"}}>${props.price}</Col>
-            <Col style={{marginLeft: "-60px"}}> | Condition: {cond}</Col>
-          </Row>
-        </Card.Text>
-        <Card.Text>{desc}</Card.Text>
-      </Card.Body>
-    </Card>
-  </div>
+        ) : (
+          <span></span>
+        )}
+        <Card.Img
+          variant="top"
+          src={`data:image/jpeg;charset=utf-8;base64, ${img}`}
+          // onError={(e)=>{if(flag){setFlag(false);setImg(newImage)}}}   /*keeping for reference*/
+          alt="image not found"
+          classname="img-thumbnail"
+          style={{
+            maxWidth: "15rem",
+            maxHeight: "20rem",
+            borderBottom: "solid",
+            borderBottomColor: "#efefef",
+            borderWidth: "1px",
+            marginBottom: "-10px",
+          }}
+        />
+        <Card.Body>
+          <Card.Title>{props.title}</Card.Title>
+          <Card.Text>
+            <Row className="price-condition">
+              <Col
+                style={{
+                  marginLeft: "-40px",
+                  marginRight: "-10px",
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  fontSize: "13pt",
+                }}
+                lg={11}
+              >
+                <Badge variant="primary">${props.price}</Badge>
+              </Col>
+              <Col style={{ marginLeft: "-60px", fontSize: "13pt" }} lg={1}>
+                <Badge variant={conditionColor}>{cond}</Badge>
+              </Col>
+            </Row>
+          </Card.Text>
+          <Card.Text>{desc}</Card.Text>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
-
