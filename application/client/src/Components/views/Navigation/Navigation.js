@@ -36,6 +36,10 @@ export default function Navigation() {
   // state which is used to hide or display buttons for accessing features that require a user to be logged-in
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [logoutModalShow, setLogoutModalShow] = useState(false);
+  const handleLogoutModalClose = () => setLogoutModalShow(false);
+  const handleLogoutModalShow = () => setLogoutModalShow(true);
+
   /*
    Automatically detects if a user is logged in by way of a get request to the database on load. This is what we use to
    conditionally render features.
@@ -389,7 +393,7 @@ export default function Navigation() {
                 >
                   <MdAddCircleOutline
                     size="2rem"
-                    style={{ color: "#8943f6" }}
+                    style={{ color: "#6f42c1" }}
                   />
                 </OverlayTrigger>
               </Nav.Link>
@@ -402,21 +406,35 @@ export default function Navigation() {
                   placement="bottom"
                   overlay={<Tooltip>My Dashboard</Tooltip>}
                 >
-                  <FaHome size="2rem" style={{ color: "#8943f6" }} />
+                  <FaHome size="2rem" style={{ color: "#6f42c1" }} />
                 </OverlayTrigger>
               </Nav.Link>
               <Nav.Link
                 style={{ marginRight: "2rem", marginTop: "-10px" }}
-                onClick={handleLogout}
+                onClick={handleLogoutModalShow}
               >
                 <OverlayTrigger
                   key="bottom"
                   placement="bottom"
                   overlay={<Tooltip>Logout</Tooltip>}
                 >
-                  <MdAccountCircle size="2rem" style={{ color: "#8943f6" }} />
+                  <MdAccountCircle size="2rem" style={{ color: "#6f42c1" }} />
                 </OverlayTrigger>
               </Nav.Link>
+              <Modal show={logoutModalShow} onHide={handleLogoutModalClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Log out</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to log out?</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleLogout}>
+                    Yes, log me out
+                  </Button>
+                  <Button variant="primary" onClick={handleLogoutModalClose}>
+                    No, keep me log in
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </Nav>
           ) : (
             <Nav className="ml-auto">
