@@ -3,7 +3,6 @@ import { CardDeck } from "react-bootstrap";
 import DashboardListingCard from "./DashboardListingCard";
 import axios from "axios";
 
-
 /**
  * File name: DashboardListings.js
  * Purpose: This component is called in Dashboard.js in order to populate the product listings of a specific user in
@@ -31,10 +30,15 @@ export default function DashboardListings(props) {
    Returns a prebuilt CardDeck comprised of the listings returned above. The deck will be rendered in Dashboard.js.
   */
   return (
-    <CardDeck style={{ padding: "2.5rem" }}>
-      {productListings.map((productListing, i) => (
-        <DashboardListingCard key={i} {...productListing} />
-      ))}
-    </CardDeck>
+    <div>
+      <h4 style={{ paddingTop: "3rem", paddingLeft: "3rem" }}>
+        You have {productListings.length} listings
+      </h4>
+      <CardDeck style={{ padding: "2.5rem" }}>
+        {productListings.map((productListing, i) => (
+          <DashboardListingCard key={i} {...productListing} />
+        ))}
+      </CardDeck>
+    </div>
   );
 }
