@@ -425,13 +425,15 @@ export default function Navigation() {
                 <Modal.Header closeButton>
                   <Modal.Title>Log out</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to log out?</Modal.Body>
+                <Modal.Body>
+                  Are you sure you want to log out from your GatorGoods account?
+                </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleLogout}>
-                    Yes, log me out
+                  <Button variant="secondary" onClick={handleLogoutModalClose}>
+                    Cancel
                   </Button>
-                  <Button variant="primary" onClick={handleLogoutModalClose}>
-                    No, keep me log in
+                  <Button variant="primary" onClick={handleLogout}>
+                    Yes, log me out
                   </Button>
                 </Modal.Footer>
               </Modal>
