@@ -154,7 +154,7 @@ export default function ProductListing(props) {
       <Popover id="popover-basic">
         <Popover.Title as="h3">Please Log In!</Popover.Title>
         <Popover.Content>
-          Uh oh! You're not logged in! Please log in <a href="/login">here</a> to continue!
+          Uh oh! You're not logged in! Please log in to continue!
         </Popover.Content>
       </Popover>
   );
@@ -164,19 +164,27 @@ export default function ProductListing(props) {
   */
   const handleSend = () => {
     console.log(product);
-    axios
-        .post("/api/message/sendMessage", {
-          title: title,
-          message: message,
-          contact: contact,
-          product: product,
-          seller: seller,
-        })
-        .then(() => {
-          alert("Your message has been sent!");
-          // console.log("message sent")
-        });
-    setShow(false);
+    if(message.length < 1) {
+      console.log("No message has been entered");
+      alert("Please enter your message.")
+    } else if (contact.length < 6) { // minimum length is either a phone number (10 digits) or email w/ "_@_.__" (6 chars)
+      console.log("No contact information has been entered");
+      alert("Please enter your contact information.\nIt should be either a 10 digit phone number, or valid email address")
+    } else {
+      axios
+          .post("/api/message/sendMessage", {
+            title: title,
+            message: message,
+            contact: contact,
+            product: product,
+            seller: seller,
+          })
+          .then(() => {
+            alert("Your message has been sent!");
+            // console.log("message sent")
+          });
+      setShow(false);
+    }
   };
   /**
    * ---END MODAL LOGIC---

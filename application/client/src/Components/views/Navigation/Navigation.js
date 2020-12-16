@@ -190,7 +190,7 @@ export default function Navigation() {
           onHide={() => setModalShow(false)}
         >
           <Modal.Title id="contained-modal-title-vcenter">
-            Please login or join us to continue our service!
+            Please login or register to continue!
           </Modal.Title>
         </Modal.Header>
         <Modal.Body
