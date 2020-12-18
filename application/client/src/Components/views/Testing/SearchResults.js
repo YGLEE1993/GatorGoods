@@ -13,7 +13,6 @@ import axios from "axios";
 import Filter from "../../Filter"; // legacy feature
 import Featured from "../../Featured"; // legacy feature
 
-
 /**
  * File name: SearchResults.js
  * Purpose: This is the resultant view after a user uses the searchbar (Searchbox.js) to search for products. It is
@@ -28,7 +27,7 @@ import Featured from "../../Featured"; // legacy feature
 export default function SearchResults(props) {
   const [productListings, setProductListings] = useState([]); // state for rendering product listings
   // console.log(props.location.state.productListings)
-
+  const [loading, setLoading] = useState(true);
   /*
    This is called on first load of the page, as well as subsequent reloads after sorting. Unlike handleSortOption which
    is called on user selection, useEffect is triggered automatically prior to loading the rendering the page so that we
@@ -38,21 +37,22 @@ export default function SearchResults(props) {
     setSearchTerm(props.location.state.searchTerm);
     setCategory(props.location.state.category);
     axios
-        .post("/api/search/searchProducts", {
-          searchTerm: props.location.state.searchTerm,
-          category: props.location.state.category,
-        })
-        .then((response) => {
-          // console.log(response.data);
-          setProductListings(response.data);
-        });
+      .post("/api/search/searchProducts", {
+        searchTerm: props.location.state.searchTerm,
+        category: props.location.state.category,
+      })
+      .then((response) => {
+        // console.log(response.data);
+        setProductListings(response.data);
+        setLoading(false);
+      });
   }, [props]);
 
   /*
    Our state for making the handleSortOption calls on sort.
   */
-  const [sortOption, setSortOption] = useState()
-  const [searchTerm, setSearchTerm] = useState(props.location.state.searchTerm)
+  const [sortOption, setSortOption] = useState();
+  const [searchTerm, setSearchTerm] = useState(props.location.state.searchTerm);
   const [category, setCategory] = useState(props.location.state.category);
 
   /*
@@ -62,16 +62,16 @@ export default function SearchResults(props) {
   */
   const handleSortOption = (sort) => {
     axios
-        .post("/api/search/sortProducts", {
-          searchTerm: searchTerm,
-          category: category,
-          sortOption: sort
-        })
-        .then((response) => {
-          // console.log(response.data);
-          setProductListings(response.data);
-        });
-  }
+      .post("/api/search/sortProducts", {
+        searchTerm: searchTerm,
+        category: category,
+        sortOption: sort,
+      })
+      .then((response) => {
+        // console.log(response.data);
+        setProductListings(response.data);
+      });
+  };
 
   /*
    This is used to render the name of the category specific to the user's search.
@@ -102,42 +102,66 @@ export default function SearchResults(props) {
           <Row>
             <Col>
               <h2>
-                <span style={{ color: "#e67a00" }}>
-                  {categoryRender()} {searchTerm}{" "}
+                Results for &nbsp;
+                <span style={{ color: "#6610f2", fontWeight: "bold" }}>
+                  "{categoryRender()} {searchTerm} "
                 </span>
-                Results
               </h2>
             </Col>
-            <Col md="auto" style={{paddingTop: "7px"}}>
+            <Col md="auto" style={{ paddingTop: "7px" }}>
               <p>{productListings.length} listings found</p>
             </Col>
-            <Col xs lg="2" style={{marginRight: "-4.3rem"}}>
+            <Col xs lg="2" style={{ marginRight: "-4.3rem" }}>
               <DropdownButton
                 id="dropdown-basic-button"
                 variant="secondary"
                 title="Sort by"
                 key={sortOption}
               >
-                <Dropdown.Item eventKey="1" onClick={() => {setSortOption('1');handleSortOption(1)}}>
+                <Dropdown.Item
+                  eventKey="1"
+                  onClick={() => {
+                    setSortOption("1");
+                    handleSortOption(1);
+                  }}
+                >
                   Condition: best to worst
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="2" onClick={() => {setSortOption('2');handleSortOption(2)}}>
+                <Dropdown.Item
+                  eventKey="2"
+                  onClick={() => {
+                    setSortOption("2");
+                    handleSortOption(2);
+                  }}
+                >
                   Price: low to high
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="3" onClick={() => {setSortOption('3');handleSortOption(3)}}>
+                <Dropdown.Item
+                  eventKey="3"
+                  onClick={() => {
+                    setSortOption("3");
+                    handleSortOption(3);
+                  }}
+                >
                   Price: high to low
                 </Dropdown.Item>
               </DropdownButton>
             </Col>
           </Row>
           <Container>
-          <Row>
-              <CardColumns className="row" style={{margin: "1.5rem"}}>
-                {productListings.map((productListing, i) => (
-                  <ListingCard key={i} {...productListing} />
-                ))}
-              </CardColumns>
-          </Row>
+            {!loading ? (
+              <Row>
+                <CardColumns className="row" style={{ margin: "1.5rem" }}>
+                  {productListings.map((productListing, i) => (
+                    <ListingCard key={i} {...productListing} />
+                  ))}
+                </CardColumns>
+              </Row>
+            ) : (
+              <Row className="justify-content-md-center">
+                <h2 style={{ margin: "1.5rem", margin: "5rem" }}>Loading...</h2>
+              </Row>
+            )}
           </Container>
         </Col>
       </Container>

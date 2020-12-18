@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
-import { Card, Col, Row, Button, Modal } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Col, Row, Button, Modal, Badge } from "react-bootstrap";
 import "./Dashboard.css";
 import axios from "axios";
-
 
 /**
  * File name: DashboardListingCard.js
@@ -58,23 +57,35 @@ export default function DashboardListingCard(props) {
   */
   const handleDelete = () => {
     axios
-        .post("/api/dashboard/deleteMyProduct", {
-          product_id: props.product_id
-        })
-        .then((response) => {
-          setShow(false)
-          window.location.reload()
-        });
-  }
-  
+      .post("/api/dashboard/deleteMyProduct", {
+        product_id: props.product_id,
+      })
+      .then((response) => {
+        setShow(false);
+        window.location.reload();
+      });
+  };
+
   return (
     <div>
-      <Card style={{ width: "18rem" }} className="dashboard-listing-card">
-        <Card.Img variant="top" src={`data:image/jpeg;charset=utf-8;base64, ${img}`}/>
+      <Card
+        style={{ height: "33rem", width: "18rem" }}
+        className="dashboard-listing-card"
+      >
+        <Card.Img
+          variant="top"
+          src={`data:image/jpeg;charset=utf-8;base64, ${img}`}
+        />
         <Card.Body>
           <Card.Title>{props.title}</Card.Title>
           <Card.Text>{props.description}</Card.Text>
-          <Card.Text>{props.price}</Card.Text>
+          <Card.Text
+            style={{
+              fontSize: "15pt",
+            }}
+          >
+            <Badge variant="light">${props.price}</Badge>
+          </Card.Text>
           <Row className="justify-content-lg-center">
             {/* EDIT Button (below) is not currently supported */}
             {/*<Col lg={5}>*/}
@@ -116,7 +127,7 @@ export default function DashboardListingCard(props) {
         </Card.Body>
         {/* Time (below) is not currently supported */}
         {/*<Card.Footer>*/}
-          {/*<small className="text-muted">{props.time}</small>*/}
+        {/*<small className="text-muted">{props.time}</small>*/}
         {/*</Card.Footer>*/}
       </Card>
     </div>
