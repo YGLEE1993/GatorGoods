@@ -1,26 +1,6 @@
-# csc648 Repository
+# GatorGoods
 
-## Please when ready add your teams application URL or IP to the repository description. This will help with grading. Teams are expected to keep this value up to date.
+GatorGoods is a marketplace specifically for students, faculty, and staff at San Francisco State University. GatorGoods is developed by a global team of 4 students from San Francisco State University and 2 students from Fulda University of Applied Sciences, Germany. The project was developed from scratch to UI/UX design, front-end & back-end development, QA testing, and deployment.
 
-## Please do the following steps before completing Milestone 0.
+## URL: http://ec2-54-153-71-183.us-west-1.compute.amazonaws.com:5000/
 
-1. Change the name of the repository. All that needs to change is the NN to your respective team number. Team numbers whose value is less than 10, please pad with a 0. Ex team 1 is Team01 team 11 is Team11. Please make sure to also remove the username from the repository as well. Teams with incorrectly name repository will have points deducted from their milestone 0 grades.
-
-   - Please follow the naming convention assigned by your instructor.
-
-1. PLEASE REMOVE THE USERNAME FROM THE REPOSITORY NAME!!!
-
-1. Add ALL members of your team to this repository. For it to count, they must ACCEPT the invite.
-
-1. Fill out the table below
-
-|    Student Name    |     Student Email                  | GitHub Username |
-| :----------------: | :---------------------------------:| :-------------: |
-|   Keith Eastman    | keastman@mail.sfsu.edu             |     eastae      |
-| Yugyeong (YG) Lee  |  ylee14@mail.sfsu.edu              |    YGLEE1993    |
-| Zhuozhuo (Joy) Liu |  zliu15@mail.sfsu.edu              |     liuzz10     |
-|   Trenton Smith    | tsmith18@mail.sfsu.edu             |  Trenton-Smith  |
-|   Hesham Ahmed     |hesham.ahmed@informatik.hs-fulda.de |    etchsaleh    |
-|   Blin Varfi       |blin.varfi@informatik.hs-fulda.de   |    blinvarfi    |
-
-## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
